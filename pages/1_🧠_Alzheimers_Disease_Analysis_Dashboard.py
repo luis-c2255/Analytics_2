@@ -122,7 +122,6 @@ with st.container():
             marker_colors=['#2ecc71', '#e74c3c']
         )])
     fig.update_layout(height=400)
-    fig = apply_chart_theme(fig)
     st.plotly_chart(fig, width="stretch")
 
 st.markdown("---")
@@ -139,7 +138,6 @@ with st.container():
             nbinsx=20
         ))
     fig2.update_layout(barmode='overlay', height=400)
-    fig2 = apply_chart_theme(fig2)
     st.plotly_chart(fig2, width="stretch")
 
 st.markdown("---")
@@ -185,25 +183,25 @@ with st.container():
             barmode='group',
             height=400
         )
-        fig3 = apply_chart_theme(fig3)
         st.plotly_chart(fig3, width="stretch")
 
 st.markdown("---")    
 with st.container():
     age_diagnosis = df.groupby(['Age_Group', 'Diagnosis_Label']).size().unstack()
+    colors = Colors.CHART_COLORS
     fig4 = go.Figure()
     for diagnosis in age_diagnosis.columns:
         fig4.add_trace(go.Bar(
             name=diagnosis,
             x=age_diagnosis.index,
-            y=age_diagnosis[diagnosis]
+            y=age_diagnosis[diagnosis],
+            marker_colors=colors
         ))
     fig4.update_layout(
         title='Age Group Distribution by Diagnosis',
         barmode='group',
         height=400
     )
-    fig4 = apply_chart_theme(fig4)
     st.plotly_chart(fig4, width="stretch")
 # ============================================
 # FOOTER
