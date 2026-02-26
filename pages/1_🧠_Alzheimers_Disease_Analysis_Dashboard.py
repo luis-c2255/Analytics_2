@@ -122,6 +122,7 @@ with st.container():
             marker_colors=['#2ecc71', '#e74c3c']
         )])
     fig.update_layout(height=400)
+    fig = apply_chart_theme(fig)
     st.plotly_chart(fig, width="stretch")
 
 st.markdown("---")
@@ -138,6 +139,7 @@ with st.container():
             nbinsx=20
         ))
     fig2.update_layout(barmode='overlay', height=400)
+    fig2 = apply_chart_theme(fig2)
     st.plotly_chart(fig2, width="stretch")
 
 st.markdown("---")
@@ -183,6 +185,7 @@ with st.container():
             barmode='group',
             height=400
         )
+        fig3 = apply_chart_theme(fig3)
         st.plotly_chart(fig3, width="stretch")
 
 st.markdown("---")    
@@ -200,6 +203,7 @@ with st.container():
         barmode='group',
         height=400
     )
+    fig4 = apply_chart_theme(fig4)
     st.plotly_chart(fig4, width="stretch")
 # ============================================
 # FOOTER
