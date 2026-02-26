@@ -7,54 +7,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.markdown("""
-    <style>
-        /* Stylize the search input */
-        div[data-testid="stSidebarNavSearch"] input {
-            border: 1px solid #930606 !important;
-            border-radius: 5px;
-        }
-        /* Highlight the navigation links to look like buttons */
-        [data-testid="stSidebarNav"] ul {
-            padding-top: 2rem;
-        }
-        [data-testid="stSidebarNav"] li {
-            background-color: #1a2c42; /* Darker blue background */
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #4cc9a6; /* Your Mint Leaf color */
-            transition: 0.3s;
-        }
-        [data-testid="stSidebarNav"] li:hover {
-            background-color: #930606;
-            transform: translateX(5px);
-        }
-        [data-testid="stSidebarNav"] span {
-            color: white !important;
-            font-weight: bold;
-        }
-        .stLinkButton { 
-        border-radius: 18px; padding: 0; overflow: hidden;
-        background-color: #06b6d4;
-        background: rgba(6, 182, 212, 0.3); 
-        backdrop-filter: blur(12px); border: 1px solid rgba(6, 182, 212, 0.5); 
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
-        transition: transform 0.25s ease, 
-        box-shadow 0.25s ease, border-color 0.25s ease; cursor: pointer;
-        }
-        .stLinkButton:hover { 
-        transform: translateY(-6px) scale(1.02); 
-        box-shadow: 0 10px 28px rgba(0,0,0,0.35); 
-        border-color: rgba(0, 200, 255, 0.55); /* subtle cyan glow */ 
-        } 
-        .stLinkButton-title { 
-        padding: 14px; font-size: 1.15rem; 
-        font-weight: 600; text-align: center; 
-        color: white; 
-        } 
-        </style>
-        """, unsafe_allow_html=True)
-
 st.markdown(
     Components.page_header("📊 Multiple Analysis Dashboard"), unsafe_allow_html=True)
 
