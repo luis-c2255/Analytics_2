@@ -170,7 +170,7 @@ if analysis_type == "Demographics":
     st.subheader("👥 Demographic Analysis")
 
 with st.container():
-    gender_diagnosis = df..groupby(['Gender_Label', 'Diagnosis_Label'].size().unstack()
+    gender_diagnosis = df.groupby(['Gender_Label', 'Diagnosis_Label'].size().unstack()
     fig3 = go.Figure()
     for diagnosis in gender_diagnosis.columns:
         fig3 = go.Figure()
