@@ -45,7 +45,7 @@ class Components:
     def page_header(title:str) -> str:
         """Create a styled page header"""
         return f"""
-        <div style='background: linear-gradient(135deg, {Colors.BLUE_ENERGY} 0%, {Colors.PRUSSIAN_BLUE} 100%);
+        <div style='background: linear-gradient(135deg, {Colors.SUNSET_ORANGE} 0%, {Colors.CORAL_RED} 100%);
             padding: 2rem; border-radius: 10px; margin-bottom: 2rem;'>
             <h1 style='color: white; margin: 0; text-align: center; font-size: 2.5rem;'>{title}</h1>
         </div>
@@ -55,7 +55,7 @@ class Components:
         """Create a styled section header"""
         return f"""
         <div style='margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; 
-                    border-bottom: 2px solid {Colors.BLUE_ENERGY};'>
+                    border-bottom: 2px solid {Colors.SUNSET_ORANGE};'>
             <h2 style='color: {Colors.PLATINUM}; margin: 0; font-size: 1.8rem;'>
                 {icon} {title}
             </h2>
@@ -68,11 +68,11 @@ class Components:
         """Create a styled metric card"""
         # Color mapping
         colors = {
-            "primary": Colors.BLUE_ENERGY,
+            "info": Colors.BLUE_ENERGY,
             "success": Colors.MINT_LEAF,
             "warning": Colors.SUNSET_ORANGE,
-            "error": Colors.CORAL_RED,
-            "info": "#3498DB"
+            "error": Colors.CORAL_RED
+
         }
         border_color = colors.get(card_type, Colors.BLUE_ENERGY)
         delta_color = Colors.MINT_LEAF if delta_positive else Colors.CORAL_RED
