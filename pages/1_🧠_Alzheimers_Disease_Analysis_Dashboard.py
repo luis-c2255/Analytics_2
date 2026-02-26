@@ -188,14 +188,13 @@ with st.container():
 st.markdown("---")    
 with st.container():
     age_diagnosis = df.groupby(['Age_Group', 'Diagnosis_Label']).size().unstack()
-    colors = ['darkred', 'green']
     fig4 = go.Figure()
     for diagnosis in age_diagnosis.columns:
         fig4.add_trace(go.Bar(
             name=diagnosis,
             x=age_diagnosis.index,
             y=age_diagnosis[diagnosis],
-            color=diagnosis
+            color="diagnosis"
         ))
     fig4.update_layout(
         title='Age Group Distribution by Diagnosis',
