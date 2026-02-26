@@ -173,9 +173,7 @@ with st.container():
     gender_diagnosis = df.groupby(['Gender_Label', 'Diagnosis_Label']).size().unstack()
     fig3 = go.Figure()
     for diagnosis in gender_diagnosis.columns:
-        fig3 = go.Figure()
-        for diagnosis in gender_diagnosis.columns:
-            fig3.add_trace(go.Bar(
+        fig3.add_trace(go.Bar(
                 name=diagnosis,
                 x=gender_diagnosis.index,
                 y=gender_diagnosis[diagnosis]
