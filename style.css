@@ -137,7 +137,7 @@ div[data-testid="stSidebarNavSearch"] input {
     padding-top: 2rem;
 }
 [data-testid="stSidebarNav"] li {
-    background-color: #EB0A0A; /* Darker blue background */
+    background-color: #811818; /* Darker blue background */
     border-radius: 10px;
     margin-bottom: 10px;
     border: 1px solid #FF8D5C; /* Your Mint Leaf color */
