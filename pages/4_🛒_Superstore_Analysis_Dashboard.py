@@ -17,7 +17,7 @@ except FileNotFoundError:
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv('emp_att.csv')
+    df = pd.read_csv('global_superstore_2016.csv')
 
 
 # Title
