@@ -26,3 +26,15 @@ st.markdown(
         "🌡️ Weather NYC Analysis Dashboard"
     ), unsafe_allow_html=True
 )
+
+# ============================================
+# FOOTER
+# ============================================
+st.markdown("---")
+st.markdown("""
+<div style='text-align: center; color: #666;'>
+    <p><strong>🌡️ Weather NYC Analysis Dashboar</strong></p>
+    <p>Analysis of New York City weather dataset</p>
+    <p style='font-size: 0.9rem;'>Navigate using the sidebar to explore different datasets</p>
+</div>
+""", unsafe_allow_html=True)
