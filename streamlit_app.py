@@ -26,7 +26,7 @@ st.markdown("""
             transition: 0.3s;
         }
         [data-testid="stSidebarNav"] li:hover {
-            background-color: #4cc9a6;
+            background-color: #930606;
             transform: translateX(5px);
         }
         [data-testid="stSidebarNav"] span {
