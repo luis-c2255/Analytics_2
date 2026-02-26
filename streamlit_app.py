@@ -11,7 +11,7 @@ st.markdown("""
     <style>
         /* Stylize the search input */
         div[data-testid="stSidebarNavSearch"] input {
-            border: 1px solid #4cc9a6 !important;
+            border: 1px solid #930606 !important;
             border-radius: 5px;
         }
         /* Highlight the navigation links to look like buttons */
