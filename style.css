@@ -125,7 +125,7 @@ div[data-testid="stMetricValue"] {
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background-color: rgba(76, 201, 166, 0.15);
+    background-color: rgba(147, 6, 6, 0.85);
 }
 
 /* Download button */
