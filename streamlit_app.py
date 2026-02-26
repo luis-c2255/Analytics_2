@@ -89,7 +89,7 @@ with col4:
 with col5:
     st.link_button("Telco Customer Churn Analysis Dashboard", 
     "https://analytics2.streamlit.app/Telco_Customer_Churn_Analysis_Dashboard", 
-    icon="‍👩‍👦‍", icon_position="left", width="stretch"
+    icon="👥", icon_position="left", width="stretch"
     )
 
 
