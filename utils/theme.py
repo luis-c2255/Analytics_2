@@ -131,8 +131,6 @@ def apply_chart_theme(fig: go.Figure) -> go.Figure:
     """Apply consistent dark theme to Plotly charts"""
     
     fig.update_layout(
-        paper_bgcolor=Colors.PRUSSIAN_BLUE,
-        plot_bgcolor=Colors.PRUSSIAN_BLUE,
         font=dict(
             family="Roboto, sans-serif",
             size=12,
@@ -144,7 +142,6 @@ def apply_chart_theme(fig: go.Figure) -> go.Figure:
             xanchor='left'
         ),
         legend=dict(
-            bgcolor=Colors.CHARCOAL,
             bordercolor=Colors.SLATE_GRAY,
             borderwidth=1,
             font=dict(color=Colors.PLATINUM)
