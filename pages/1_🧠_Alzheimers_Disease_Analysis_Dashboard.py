@@ -195,7 +195,7 @@ with st.container():
             name=diagnosis,
             x=age_diagnosis.index,
             y=age_diagnosis[diagnosis],
-            marker_colors=colors
+            marker_color=colors
         ))
     fig4.update_layout(
         title='Age Group Distribution by Diagnosis',
