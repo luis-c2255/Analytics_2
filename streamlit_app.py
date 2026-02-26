@@ -59,23 +59,23 @@ st.markdown(
     Components.page_header("📊 Multiple Analysis Dashboard"), unsafe_allow_html=True)
 
 with st.container(height="content", width="stretch", horizontal_alignment="center"):    
-    st.image("image.svg")
+    st.image("utils/image.svg")
 
 col1, col2, col3 = st.columns(3)
 with col1:
     st.link_button("Alzheimers Disease Analysis Dashboard", 
-    "https://blank-app-ssh25yo5mc.streamlit.app/Alzheimers_Disease_Analysis_Dashboard",
+    "https://analytics2.streamlit.app/Alzheimers_Disease_Analysis_Dashboard",
     icon="🧠", icon_position="left", width="stretch"
     )
 
 with col2:
     st.link_button("Weather NYC Analysis Dashboard", 
-    "https://blank-app-ssh25yo5mc.streamlit.app/Weather_NYC_Analysis_Dashboard",
+    "https://analytics2.streamlit.app/Weather_NYC_Analysis_Dashboard",
     icon="🌡", icon_position="left", width="stretch"
     )
 with col3:
     st.link_button("Yahoo Stock Analysis Dashboard", 
-    "https://blank-app-ssh25yo5mc.streamlit.app/Yahoo_Stock_Analysis_Dashboard", 
+    "https://analytics2.streamlit.app/Yahoo_Stock_Analysis_Dashboard", 
     icon="🆙", icon_position="left", width="stretch"
     )
 st.markdown("---")
@@ -83,12 +83,12 @@ col4, col5 = st.columns(2)
 
 with col4:
     st.link_button("Superstore Analysis Dashboard", 
-    "https://blank-app-ssh25yo5mc.streamlit.app/Superstore_Analysis_Dashboard", 
+    "https://analytics2.streamlit.app/Superstore_Analysis_Dashboard", 
     icon="🛒", icon_position="left", width="stretch"
     )
 with col5:
     st.link_button("Telco Customer Churn Analysis Dashboard", 
-    "https://blank-app-ssh25yo5mc.streamlit.app/Telco_Customer_Churn_Analysis_Dashboard", 
+    "https://analytics2.streamlit.app/Telco_Customer_Churn_Analysis_Dashboard", 
     icon="‍👩‍👦‍", icon_position="left", width="stretch"
     )
 
