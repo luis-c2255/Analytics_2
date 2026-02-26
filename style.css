@@ -1,0 +1,138 @@
+/* Import Robot Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Remove Streamlit Branding */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Layout & Scrollbar */
+.main .block-container {padding-top: 1.5rem; max-width: 95%; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0A1A2F; }
+::-webkit-scrollbar-thumb { background: #5A6A7A; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #3A8DFF; }
+
+/* Custom Header / Navbar */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background-color: #1E1E1E;
+    border-bottom: 2px solid #3a8dff;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+/* Metric Cards */
+div[data-testid="stMetric"] {
+    background-color: #1E1E1E;
+    border: 1px solid #5A6A7A;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom Semantics Overrides - applied via Python injection */
+.metric-primary {border-top: 4px solid #3A8DFF !important;}
+.metric-success {border-top: 4px solid #4cc9a6 !important;}
+.metric-warning {border-top: 4px solid #ffb84d !important;}
+.metric-error {border-top: 4px solid #ff6b6b !important;}
+
+/* Text Styling within Metrics */
+div[data-testid="stMetricLabel"] {
+    font-size: 0.9rem !important;
+    color: #5A6A7A !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+div[data-testid="stMetricValue"] {
+    font-size: 1.8rem !important;
+    color: #f7f9fc !important;
+    font-weight: 700 !important;
+}
+
+/* Delta Styling */
+[data-testid="stMetricDelta"] {
+    font-weight: 600;
+}
+
+/* Insight Boxes */
+.insight-card {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 6px solid;
+    color: #f7f9fc;
+    text-align: center;
+}
+.insight-success {
+    background-color: rgba(76, 201, 166, 0.15);
+    border-left-color: #4cc9a6;
+    text-align: center;
+}
+.insight-info {
+    background-color: rgba(58, 141, 255, 0.15);
+    border-left-color: #3A8DFF;
+    text-align: center;
+}
+.insight-warning {
+    background-color: rgba(255, 184, 77, 0.15);
+    border-left-color: #ffb84d;
+}
+.insight-error {
+    background-color: rgba(255, 107, 107, 0.15);
+    border-left-color: #ff6b6b;
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(135deg, #3A8DFF 0%, #0A1A2F 100%);
+    color: white;
+    border: none;
+    padding: 0.5 rem 2rem;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.stButton > button:hover {
+    background: linear-gradient(135deg, #3A8DFF 0%, #1E1E1E 100%);
+    box-shadow: 0 5px 15px rgba(58, 141, 255, 0.4);
+}
+
+/* Dataframe styling */
+.dataframe {
+    font-size: 0.9rem;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: rgba(76, 201, 166, 0.15);
+    border-radius: 5px;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: rgba(76, 201, 166, 0.15);
+}
+
+/* Download button */
+.stDownloadButton > button {
+    background-color: #4cc9a6;
+    color: darkgreen;
+}
+.stDownloadButton > button:hover {
+    background-color: #3A8DFF;
+}
