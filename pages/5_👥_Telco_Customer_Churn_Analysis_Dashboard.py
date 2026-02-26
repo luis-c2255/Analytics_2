@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 
 from utils.theme import Components, Colors, apply_chart_theme, init_page
 
-init_page("Telco Customer Churn Analysis Dashboard", "👨‍👩‍👦‍👦")
+init_page("Telco Customer Churn Analysis Dashboard", "👥")
 
 # Load custom CSS
 try:
@@ -23,6 +23,6 @@ def load_data():
 # Title
 st.markdown(
     Components.page_header(
-        "👨‍👩‍👦‍👦 Telco Customer Churn Analysis Dashboard"
+        "👥 Telco Customer Churn Analysis Dashboard"
     ), unsafe_allow_html=True
 )
