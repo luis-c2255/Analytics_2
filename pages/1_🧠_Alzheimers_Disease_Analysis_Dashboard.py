@@ -73,8 +73,8 @@ st.markdown(
 )
 # Load data
 df = load_data()
-for col in df.columns: 
-    df[col] = pd.to_numeric(df[col], errors="ignore")
+for col in continuous_vars + symptom_cols:
+    df[col] = pd.to_numeric(df[col], errors="coerce")
 
 
 st.markdown(
@@ -270,10 +270,9 @@ if analysis_type == "Demographics":
     with col2:
         # Cognitive status
         cog_diagnosis = (
-            df.groupby(["Cognitive_Status", "Diagnosis_Label"]
+            df.groupby(["Cognitive_Status", "Diagnosis_Label"])
             .size()
             .unstack(fill_value=0)
-        )
         )
         fig = px.bar(
             cog_diagnosis,
