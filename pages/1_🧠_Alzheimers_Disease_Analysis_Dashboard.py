@@ -272,7 +272,8 @@ for marker in clinical_markers:
         'AD (Std)': f"{ad.std():.2f}"   
     })
     st.dataframe(pd.DataFrame(comparison_data), width="stretch")  
-    elif analysis_type == "Lifestyle Factors": 
+    elif: 
+        analysis_type == "Lifestyle Factors": 
         st.subheader("🏃 Lifestyle Factors Analysis")
         col1, col2 = st.columns(2)  
 # ============================================
