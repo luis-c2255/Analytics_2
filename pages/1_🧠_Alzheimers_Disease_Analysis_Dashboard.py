@@ -271,6 +271,7 @@ if analysis_type == "Demographics":
             .size()
             .unstack(fill_value=0)
         )
+        )
         fig = px.bar(
             cog_diagnosis,
             barmode='group',
