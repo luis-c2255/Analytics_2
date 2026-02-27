@@ -1013,6 +1013,7 @@ st.markdown(
         "💡 Clinical Recommendations"
     ), unsafe_allow_html=True
 )
+st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
