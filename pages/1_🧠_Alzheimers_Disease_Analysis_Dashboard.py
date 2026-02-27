@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd 
 import numpy as np 
 import plotly.graph_objects as go 
+import plotly.express as px
 from plotly.subplots import make_subplots 
 from sklearn.impute import SimpleImputer 
 from sklearn.model_selection import train_test_split, cross_val_score 
