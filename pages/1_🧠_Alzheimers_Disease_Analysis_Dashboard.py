@@ -193,8 +193,7 @@ with st.container():
         fig4.add_trace(go.Bar(
             name=diagnosis,
             x=age_diagnosis.index,
-            y=age_diagnosis[diagnosis],
-            color="diagnosis"
+            y=age_diagnosis[diagnosis]
         ))
     fig4.update_layout(
         title='Age Group Distribution by Diagnosis',
@@ -202,6 +201,80 @@ with st.container():
         height=400
     )
     st.plotly_chart(fig4, width="stretch")
+
+# Education &  Ethnicity
+# BMI categories
+st.markdown("---")
+with st.container():
+    bmi_diagnosis = df.groupby(['BMI_Category', 'Diagnosis_Label']).size().unstack() 
+    fig_bmi = px.bar(
+        bmi_diagnosis,
+        barmode='group',
+        title='BMI Category by Diagnosis')
+    fig_bmi.update_layout(height=400)
+    st.plotly_chart(fig_bmi, width="stretch")
+st.markdown("---")
+# Cognitive status
+with st.container():
+    cog_diagnosis = df.groupby(['Cognitive_Status', 'Diagnosis_Label']).size().unstack()
+    fig_cog = px,bar(
+        cog_diagnosis,
+        barmode='group',
+        title='Cognitive Status by Diagnosis')
+    fig_cog.update_layout(height=400)
+    st.plotly_chart(fig_cog, width="stretch")
+
+elif analysis_type == 'Clinical Markers':
+    st.subheader("🏥 Clinical Markers Analysis")  
+
+    # Select clinical markers
+    clinical_markers = st.multiselect(  
+        "Select Clinical Markers:",  
+        ['MMSE', 'FunctionalAssessment', 'ADL', 'SystolicBP', 'DiastolicBP',  
+        'CholesterolTotal', 'CholesterolLDL', 'CholesterolHDL', 'BMI'],  
+        default=['MMSE', 'FunctionalAssessment', 'ADL']  
+    )  
+# Box plots for selected markers  
+if clinical_markers:
+    cols = st.columns(min(len(clinical_markers),3))
+
+
+    for idx, marker in enumerate(clinical_markers):
+        with cols[idx % 3]:
+            fig_mark = go.Figure()
+            for diagnosis in df['Diagnosis_Label'].unique():
+                subset = df[df['Diagnosis_Label'] == diagnosis]
+            fig_mark.add_trace(go.Box(
+                y=subset[marker],
+                name=diagnosis,
+                boxmean='sd'
+            ))
+            fig_mark.update_layout(
+                title=f"{marker}Distribution",
+                height=350
+            )
+            st.plotly_chart(fig_mark, width="stretch")
+# Statistical comparison
+st.markdown("---")  
+st.subheader("📊 Statistical Comparison") 
+
+comparison_data = []
+for marker in clinical_markers:
+    no_ad = df[df['Diagnosis'] == 0][marker].dropna()
+    ad = df[df['Diagnosis'] == 1][marker].dropna()
+
+    comparison_data.append({
+        'Marker': marker,
+        'No AD (Mean)': f"{no_ad.mean():.2f}",
+        'AD (Mean)': f"{ad.mean():.2f}",
+        'Difference': f"{ad.mean() - no_add.mean():.2f}",
+        'No AD (Std)': f"{no_ad.std():.2f}", 
+        'AD (Std)': f"{ad.std():.2f}"   
+    })
+    st.dataframe(pd.DataFrame(comparison_data), width="stretch")  
+    elif analysis_type == "Lifestyle Factors": 
+        st.subheader("🏃 Lifestyle Factors Analysis")
+        col1, col2 = st.columns(2)  
 # ============================================
 # FOOTER
 # ============================================
