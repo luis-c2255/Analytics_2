@@ -1103,30 +1103,31 @@ with st.container(border=True):
             <ol style="margin: 0; padding-left: 20px;">
                 <li> <strong>High-risk patients:</strong> Quarterly assessments</li>
                 <li> <strong>Moderate-risk:</strong> Bi-annual assessments</li>
-                <li> <strong>Track progression using:</strong></li>
+                <li> <strong>Track progression using:</strong>
                 <ul>
                     <li>MMSE scores (change >3 points = significant)</li>
                     <li>Functional assessment</li>
                     <li>ADL capacity</li>
                     <li>Symptom emergence</li>
                 </ul>
-            </ol>
-            """,
-            "warning"
-        ), unsafe_allow_html=True
-    )
+            </li>
+        </ol>
+        """,
+        "warning"
+    ), unsafe_allow_html=True
+)
 st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
             "### 🏥 HEALTHCARE SYSTEM INTEGRATION:",
             """
-            <ul style="margin: 0; padding-left: 20px;">
-                <li value="1">Deploy predictive model in electronic health records</li>
-                <li value="2">Create automated alerts for high-risk patients</li>
-                <li value="3">Establish multidisciplinary care teams</li>
-                <li value="4">Implement patient education programs</li>
-            </ul>
+            <ol style="margin: 0; padding-left: 20px;">
+                <li>Deploy predictive model in electronic health records</li>
+                <li>Create automated alerts for high-risk patients</li>
+                <li>Establish multidisciplinary care teams</li>
+                <li>Implement patient education programs</li>
+            </ol>
             """,
             "info"
         ), unsafe_allow_html=True
