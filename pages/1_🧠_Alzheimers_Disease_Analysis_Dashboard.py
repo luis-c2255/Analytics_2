@@ -272,15 +272,15 @@ for marker in clinical_markers:
         'No AD (Std)': f"{no_ad.std():.2f}", 
         'AD (Std)': f"{ad.std():.2f}"   
     })
-    st.dataframe(pd.DataFrame(comparison_data), width="stretch")  
-    elif: 
-        analysis_type == "Lifestyle Factors": 
-        st.subheader("🏃 Lifestyle Factors Analysis")
+st.dataframe(pd.DataFrame(comparison_data), width="stretch")  
+elif: 
+    analysis_type == "Lifestyle Factors": 
+    st.subheader("🏃 Lifestyle Factors Analysis")
         
-        col1, col2 = st.columns(2) 
-    with col1:
-        fig_act = go.Figure()
-        for diagnosis in df['Diagnosis_Label'].unique():
+col1, col2 = st.columns(2) 
+with col1:
+    fig_act = go.Figure()
+    for diagnosis in df['Diagnosis_Label'].unique():
             subset = df[df['Diagnosis_Label'] == diagnosis]
             fig_act.add_trace(go.Violin(
                 y=subset['PhysicalActivity'],
