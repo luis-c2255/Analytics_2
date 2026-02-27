@@ -150,7 +150,7 @@ with st.container():
 st.markdown("---")
 
 # Dataset preview
-st.subheader("🔍 :orange[Dataset Preview]", divider="orange")
+st.subheader(":orange[🔍 Dataset Preview]", divider="orange")
 st.dataframe(df.head(100), height=300)
 
 # Download option
