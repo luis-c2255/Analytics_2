@@ -1027,8 +1027,6 @@ with st.container(border=True):
                         <li>Low functional assessment scores</li>
                         <li>Multiple cognitive symptoms (≥3)</li>
                         <li>Family history of Alzheimer's </li>
-                    </ul>
-                </li>
                 <br>
                 <li value="2"><strong>Monitor high-risk indicators:</strong>
                     <ul>
@@ -1038,9 +1036,11 @@ with st.container(border=True):
                     </ul>
                 </li>
             </ul>
-            """,
-            "error"
-        ), unsafe_allow_html=True
+        </li>
+    </ul>
+    """,
+        "error"
+    ), unsafe_allow_html=True
     )
 st.divider()
 with st.container(border=True):
