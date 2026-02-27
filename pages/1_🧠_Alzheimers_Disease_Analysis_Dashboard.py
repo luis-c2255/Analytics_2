@@ -356,7 +356,7 @@ elif analysis_type == "Clinical Markers":
 # ============================================
 
 elif analysis_type == "Lifestyle Factors": 
-    st.subheader("🏃 :grey[Lifestyle Factors Analysis]", divider="grey") 
+    st.subheader("🏃 :red[Lifestyle Factors Analysis]", divider="red") 
     
     col1, col2 = st.columns(2) 
     
@@ -942,7 +942,7 @@ with col1:
     """)
 
 with col2:
-    st.subheader(":grey[Model Highlights]", divider="grey")
+    st.subheader(":red[Model Highlights]", divider="red")
     st.markdown("""
     - Tree‑based models (Random Forest, Gradient Boosting) tend to outperform linear models. 
     - Logistic Regression provides interpretability for clinical decision support.
