@@ -899,7 +899,7 @@ with col4:
     )
 top_risk = fi.iloc[0] 
 top_protective = lr_coef[lr_coef["Coefficient"] < 0].iloc[0]
-
+st.divider()
 col1, col2, col3, col4 = st.columns(4, border=True)
 with col1:
     st.markdown(
