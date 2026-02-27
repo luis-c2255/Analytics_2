@@ -745,7 +745,7 @@ with col3:
 st.markdown("---")
 st.markdown(
     Components.page_header(
-        "🤖 Predictive Modeling"
+        "🔮 Predictive Modeling"
     ), unsafe_allow_html=True
 )
 
