@@ -673,7 +673,7 @@ st.markdown(
 )
 st.subheader("T‑Tests (Continuous Variables)")
 continuous_vars = [
-    "Age", "BMI", "MMSE", "FunctionalAssessment", "AlchoholConsumption", 
+    "Age", "BMI", "MMSE", "FunctionalAssessment", "AlcoholConsumption", 
     "PhysicalActivity", "DietQuality", "SleepQuality"
 ]
 for var in continuous_vars:
