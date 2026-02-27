@@ -75,7 +75,7 @@ st.markdown(
 df = load_data()
 
 st.markdown(
-    Components.section_header("Dataset Overview", "📋"), unsafe_allow_html=True
+    Components.section_header(":orange[Dataset Overview]", "📋"), unsafe_allow_html=True
 )
 
 col1, col2, col3, col4 = st.columns(4)
@@ -150,7 +150,7 @@ with st.container():
 st.markdown("---")
 
 # Dataset preview
-st.subheader(":orange[🔍 Dataset Preview]", divider="orange")
+st.subheader("🔍 :orange[Dataset Preview]", divider="orange")
 st.dataframe(df.head(100), height=300)
 
 # Download option
