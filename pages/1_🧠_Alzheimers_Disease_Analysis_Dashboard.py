@@ -1021,20 +1021,22 @@ with st.container(border=True):
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <ol>
-                <li value="1"><strong>Prioritize MMSE screening for patients over 65 with: </strong></li>
+                <li value="1"><strong>Prioritize MMSE screening for patients over 65 with: </strong>
                 </ol>
                     <ul>
                         <li>Low functional assessment scores</li>
                         <li>Multiple cognitive symptoms (≥3)</li>
                         <li>Family history of Alzheimer's </li>
                     </ul>
+                </li>
                 <br>
-                <li value="2"><strong>Monitor high-risk indicators:</strong></li>
+                <li value="2"><strong>Monitor high-risk indicators:</strong>
                     <ul>
                         <li>MMSE scores below 24 (mild cognitive impairment threshold)</li>
                         <li>Functional assessment scores below 5 </li>
                         <li>Presence of memory complaints + disorientation</li>
                     </ul>
+                </li>
             </ul>
             """,
             "error"
