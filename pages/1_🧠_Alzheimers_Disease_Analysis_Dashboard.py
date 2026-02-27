@@ -73,6 +73,8 @@ st.markdown(
 )
 # Load data
 df = load_data()
+for col in df.columns: 
+    df[col] = pd.to_numeric(df[col], errors="ignore")
 
 
 st.markdown(
