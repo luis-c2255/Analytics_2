@@ -1045,28 +1045,29 @@ with st.container(border=True):
         Components.insight_box(
             "🎯 PREVENTIVE INTERVENTIONS:",
             """
-            <ul style="margin: 0; padding-left: 20px;">
+            <ol style="margin: 0; padding-left: 20px;">
+                <li> <strong>Lifestyle Modifications (Modifiable Risk Factors):</strong>
                 <ul>
-                <li value="1"><strong>Lifestyle Modifications (Modifiable Risk Factors):</strong></li>
+                    <li>Increase physical activity (target: >7 hrs/week) </li>
+                    <li>Improve diet quality (Mediterranean diet recommended) </li>
+                    <li>Optimize sleep quality (7-9 hours/night) </li>
+                    <li>Reduce alcohol consumption (<14 drinks/week)</li>
+                    <li>Smoking cessation programs  </li>
                 </ul>
-                <li>- Increase physical activity (target: >7 hrs/week) </li>
-                <li>- Improve diet quality (Mediterranean diet recommended) </li>
-                <li>- Optimize sleep quality (7-9 hours/night) </li>
-                <li>- Reduce alcohol consumption (<14 drinks/week)</li>
-                <li>- Smoking cessation programs  </li>
-                <br>
+            </li>
+                <li> <strong>Medical Management:</strong>
                 <ul>
-                <li value="2"><strong>Medical Management:</strong></li>
+                    <li>Control hypertension (target: <130/80 mmHg) </li>
+                    <li>Manage cholesterol levels</li>
+                    <li>Screen and treat depression early</li>
+                    <li>Monitor and control diabetes</li>
                 </ul>
-                <li>- Control hypertension (target: <130/80 mmHg) </li>
-                <li>- Manage cholesterol levels</li>
-                <li>- Screen and treat depression early</li>
-                <li>- Monitor and control diabetes</li>
-            </ul>
-            """,
-            "success"
-        ), unsafe_allow_html=True
-    )
+            </li>
+        </ol>
+        """,
+        "success"
+    ), unsafe_allow_html=True
+)
 st.divider()
 with st.container(border=True):
     st.markdown(
