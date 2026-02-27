@@ -932,22 +932,30 @@ with col3:
         ), unsafe_allow_html=True
     )
 
-st.markdown(""" 
-### Clinical Highlights 
-- MMSE is the strongest differentiator between AD and non‑AD. 
-- Lifestyle risk score is consistently higher in AD patients. 
-- Symptom clusters (memory, confusion, disorientation) strongly correlate with diagnosis. 
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.subheader(":yellow[Clinical Highlights]", divider="yellow")
+    st.markdown("""
+    - MMSE is the strongest differentiator between AD and non‑AD. 
+    - Lifestyle risk score is consistently higher in AD patients. 
+    - Symptom clusters (memory, confusion, disorientation) strongly correlate with diagnosis.
+    """)
 
-### Model Highlights 
-- Tree‑based models (Random Forest, Gradient Boosting) tend to outperform linear models. 
-- Logistic Regression provides interpretability for clinical decision support. 
+with col2:
+    st.subheader(":grey[Model Highlights]", divider="grey")
+    st.markdown("""
+    - Tree‑based models (Random Forest, Gradient Boosting) tend to outperform linear models. 
+    - Logistic Regression provides interpretability for clinical decision support.
+    """)
 
-### Recommendations 
-- Prioritize cognitive screening for patients 65+ with multiple symptoms. 
-- Monitor high‑risk lifestyle factors and comorbidities. 
-- Use predictive probabilities for risk stratification in clinical workflows. 
+with col3:
+    st.subheader(":rainbow[Recommendation]", divider="rainbow")
+    st.markdown("""
+    - Prioritize cognitive screening for patients 65+ with multiple symptoms. 
+    - Monitor high‑risk lifestyle factors and comorbidities. 
+    - Use predictive probabilities for risk stratification in clinical workflows.
+    """)
 
-""")
 # ============================================
 # FOOTER
 # ============================================
