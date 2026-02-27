@@ -75,7 +75,7 @@ st.markdown(
 df = load_data()
 
 st.markdown(
-    Components.section_header(":orange[Dataset Overview]", "📋"), unsafe_allow_html=True
+    Components.section_header("Dataset Overview", "📋"), unsafe_allow_html=True
 )
 
 col1, col2, col3, col4 = st.columns(4)
