@@ -671,9 +671,9 @@ st.markdown(
         "📉 Statistical Tests"
     ), unsafe_allow_html=True
 )
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(2, border=True)
 with col1:
-    st.subheader("T‑Tests (Continuous Variables)")
+    st.subheader("T‑Tests (Continuous Variables)", divider=True)
     continuous_vars = [
         "Age", "BMI", "MMSE", "FunctionalAssessment", "AlcoholConsumption", 
         "PhysicalActivity", "DietQuality", "SleepQuality"
