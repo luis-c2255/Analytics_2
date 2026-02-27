@@ -73,9 +73,6 @@ st.markdown(
 )
 # Load data
 df = load_data()
-for col in continuous_vars + symptom_cols:
-    df[col] = pd.to_numeric(df[col], errors="coerce")
-
 
 st.markdown(
     Components.section_header("Dataset Overview", "📋"), unsafe_allow_html=True
