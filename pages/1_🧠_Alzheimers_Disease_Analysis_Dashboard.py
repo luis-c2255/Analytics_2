@@ -705,7 +705,7 @@ symptom_cols = [
         'MemoryComplaints','BehavioralProblems','Confusion','Disorientation', 
         'PersonalityChanges','DifficultyCompletingTasks','Forgetfulness' 
 ] 
-significan_symptoms = sum([
+significant_symptoms = sum([
     mannwhitneyu(df[df['Diagnosis'] == 0][sym], df[df['Diagnosis'] == 1][sym])[1] < 0.05
     for sym in symptom_cols
 ])
