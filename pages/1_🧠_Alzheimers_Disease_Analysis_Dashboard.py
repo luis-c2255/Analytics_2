@@ -575,6 +575,97 @@ elif analysis_type == "Correlation Analysis":
             st.dataframe(corr_df, width="stretch") 
         else: 
             st.info("Select at least two features to compute correlations.")
+st.markdown("---")
+ad = df[df["Diagnosis"]==1] 
+no_ad = df[df["Diagnosis"]==0]
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="MMSE (No AD)",
+            value=f"{no_ad['MMSE'].mean():.1f}",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="MMSE (AD)",
+            value=f"{ad['MMSE'].mean():.1f}",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="MMSE Gap",
+            value=f"{no_ad['MMSE'].mean() - ad['MMSE'].mean():.1f}",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+st.markdown("---")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Functional (No AD)",
+            value=f"{no_ad['FunctionalAssessment'].mean():.1f}",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Functional (AD)",
+            value=f"{ad['FunctionalAssessment'].mean():.1f}",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="ADL Gap",
+            value=f"{no_ad['ADL'].mean() - ad['ADL'].mean():.1f}",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+st.markdown("---")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Systolic BP (AD)",
+            value=f"{ad['SystolicBP'].mean():.1f}",
+            delta="",
+            card_type="success"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Diastolic BP (AD)",
+            value=f"{ad['DiastolicBP'].mean():.1f}",
+            delta="",
+            card_type="success"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="BMI (AD)",
+            value=f"{ad['BMI'].mean():.1f}",
+            delta="",
+            card_type="success"
+        ), unsafe_allow_html=True
+    )
+
 
 st.markdown("---")
 st.markdown(
@@ -796,6 +887,37 @@ st.markdown(
         "🩺 Key Insights"
     ), unsafe_allow_html=True
 )
+top_risk = fi.iloc[0] 
+top_protective = lr_coef[lr_coef["Coefficient"] < 0].iloc[0]
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Top Risk Factor",
+            value=f"{top_risk["Feature"]}",
+            delta="🔝",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Top Protective Factor",
+            value=f"{top_protective["Feature"]}",
+            delta="🔝",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="Lifestyle Risk Gap",
+            value=f"{ad['Lifestyle_Risk'].mean() - no_ad['Lifestyle_Risk'].mean():.2f}",
+            delta="⚠️",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
 
 st.markdown(""" 
 ### Clinical Highlights 
