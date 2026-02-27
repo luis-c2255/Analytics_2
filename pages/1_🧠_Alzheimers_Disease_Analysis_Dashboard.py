@@ -1028,7 +1028,9 @@ with st.container(border=True):
                         <li>Multiple cognitive symptoms (≥3)</li>
                         <li>Family history of Alzheimer's </li>
                 <br>
+                <ol>
                 <li value="2"><strong>Monitor high-risk indicators:</strong>
+                </ol>
                     <ul>
                         <li>MMSE scores below 24 (mild cognitive impairment threshold)</li>
                         <li>Functional assessment scores below 5 </li>
