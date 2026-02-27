@@ -683,7 +683,7 @@ for var in continuous_vars:
     st.write(f"**{var}** — p = {p:.4f}")
 
 st.subheader("Chi-Square Tests (Categorical)")
-categorical_var = [
+categorical_vars = [
     "Gender", "Smoking", "FamilyHistoryAlzheimers", "CardiovascularDisease",
     "Diabetes", "Depression", "Hypertension"
 ]
