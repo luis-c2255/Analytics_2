@@ -1019,30 +1019,25 @@ with st.container(border=True):
         Components.insight_box(
             "📋 RISK ASSESSMENT PROTOCOL:",
             """
-            <ul style="margin: 0; padding-left: 20px;">
-                <ol>
-                <li value="1"><strong>Prioritize MMSE screening for patients over 65 with: </strong>
-                </ol>
+            <ol style="margin: 0; padding-left: 20px;">
+                <li> <strong>Prioritize MMSE screening for patients over 65 with: </strong>
                     <ul>
                         <li>Low functional assessment scores</li>
                         <li>Multiple cognitive symptoms (≥3)</li>
                         <li>Family history of Alzheimer's </li>
-                <br>
-                <ol>
-                <li value="2"><strong>Monitor high-risk indicators:</strong>
-                </ol>
+                    </ul>
+                </li>
+                <li> <strong>Monitor high-risk indicators:</strong>
                     <ul>
                         <li>MMSE scores below 24 (mild cognitive impairment threshold)</li>
                         <li>Functional assessment scores below 5 </li>
                         <li>Presence of memory complaints + disorientation</li>
                     </ul>
                 </li>
-            </ul>
-        </li>
-    </ul>
-    """,
-        "error"
-    ), unsafe_allow_html=True
+            </ol>
+            """,
+                "error"
+            ), unsafe_allow_html=True
     )
 st.divider()
 with st.container(border=True):
