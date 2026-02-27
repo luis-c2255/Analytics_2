@@ -879,7 +879,7 @@ with col3:
     st.markdown(
         Components.metric_card(
             title="Best Accuracy",
-            value=f"{best['Accuracy']:.3f}",
+            value=f"{best['Accuracy']*100:.1f}%",
             delta="🧪",
             card_type="success"
         ), unsafe_allow_html=True
@@ -888,7 +888,7 @@ with col4:
     st.markdown(
         Components.metric_card(
             title="Best F1‑Score",
-            value=f"{best['F1']:.3f}",
+            value=f"{best['F1']*100:.1f}%",
             delta="🧫",
             card_type="error"
         ), unsafe_allow_html=True
