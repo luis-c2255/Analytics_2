@@ -870,7 +870,7 @@ with col2:
     st.markdown(
         Components.metric_card(
             title="Best AUC",
-            value=f"{best['AUC']:.3f}",
+            value=f"{best['AUC']*100:.1f}%",
             delta="📑",
             card_type="warning"
         ), unsafe_allow_html=True
@@ -909,7 +909,7 @@ with col1:
         Components.metric_card(
             title="Top Risk Factor",
             value=f"{top_risk["Feature"]}",
-            delta="🔝",
+            delta=f"Importance: 0.1792",
             card_type="warning"
         ), unsafe_allow_html=True
     )
@@ -918,7 +918,7 @@ with col2:
         Components.metric_card(
             title="Top Protective Factor",
             value=f"{top_protective["Feature"]}",
-            delta="🔝",
+            delta=f"Coefficient: -1.3180",
             card_type="warning"
         ), unsafe_allow_html=True
     )
