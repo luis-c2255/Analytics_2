@@ -904,7 +904,7 @@ col1, col2, col3, col4 = st.columns(4, border=True)
 with col1:
     st.markdown(
         Components.insight_box(
-            "🔴 :orange[TOP 5 RISK FACTORS (from feature importance):]",
+            "🔴 TOP 5 RISK FACTORS (from feature importance):",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Functional Assessment:</strong> Importance: 0.1792</li>
@@ -920,7 +920,7 @@ with col1:
 with col2:
     st.markdown(
         Components.insight_box(
-            "🟢 :green[TOP 5 PROTECTIVE FACTORS (from logistic regression):]",
+            "🟢 TOP 5 PROTECTIVE FACTORS (from logistic regression):",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Functional Assessment:</strong> Coefficient: -1.3180</li>
@@ -936,7 +936,7 @@ with col2:
 with col3:
     st.markdown(
         Components.insight_box(
-            "👥 :blue[DEMOGRAPHIC INSIGHTS:]",
+            "👥 DEMOGRAPHIC INSIGHTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Average age (No AD):</strong> 74.9 ± 8.9</li>
@@ -951,7 +951,7 @@ with col3:
 with col4:
     st.markdown(
         Components.insight_box(
-            "🧠 :blue[COGNITIVE MARKERS:]",
+            "🧠 COGNITIVE MARKERS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Avg MMSE (No AD):</strong> 16.27</li>
@@ -968,7 +968,7 @@ col1, col2, col3 = st.columns(3, border=True)
 with col1:
     st.markdown(
         Components.insight_box(
-            "🏃 :orange[LIFESTYLE IMPACT:]",
+            "🏃 LIFESTYLE IMPACT:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Avg Lifestyle Risk Score (No AD):</strong> 2.50</li>
@@ -982,7 +982,7 @@ with col1:
 with col2:
     st.markdown(
         Components.insight_box(
-            "⚠️ :blue[SYMPTOM PREVALENCE IN AD PATIENTS:]",
+            "⚠️ SYMPTOM PREVALENCE IN AD PATIENTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Memory Complaints:</strong> 37.6%</li>
@@ -998,7 +998,7 @@ with col2:
 with col3:
     st.markdown(
         Components.insight_box(
-            "🏥 :blue[MEDICAL COMORBIDITIES IN AD PATIENTS:]",
+            "🏥 MEDICAL COMORBIDITIES IN AD PATIENTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>- Hypertension:</strong> 16.6% (AD) vs 14.0% (No AD)</li>
@@ -1016,7 +1016,7 @@ st.markdown(
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "📋 :red[RISK ASSESSMENT PROTOCOL:]",
+            "📋 RISK ASSESSMENT PROTOCOL:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>1. Prioritize MMSE screening for patients over 65 with: </strong></li>
@@ -1037,7 +1037,7 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "🎯 :green[PREVENTIVE INTERVENTIONS:]",
+            "🎯 PREVENTIVE INTERVENTIONS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>1. Lifestyle Modifications (Modifiable Risk Factors):</strong></li>
@@ -1061,7 +1061,7 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "🔬 :green[EARLY DETECTION STRATEGY:]",
+            "🔬 EARLY DETECTION STRATEGY:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>1. Regular cognitive screening for at-risk populations</strong></li>
@@ -1082,7 +1082,7 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "### 📊 :orange[MONITORING & FOLLOW-UP:]",
+            "### 📊 MONITORING & FOLLOW-UP:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li><strong>1. High-risk patients:</strong> Quarterly assessments</li>
@@ -1101,7 +1101,7 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "### 🏥 :blue[HEALTHCARE SYSTEM INTEGRATION:]",
+            "### 🏥 HEALTHCARE SYSTEM INTEGRATION:",
             """
             <ul style="margin: 0; padding-left: 20px;">
                 <li>1. Deploy predictive model in electronic health records</li>
