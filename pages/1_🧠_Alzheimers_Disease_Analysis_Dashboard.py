@@ -119,7 +119,7 @@ with col4:
         ), unsafe_allow_html=True
     )
 st.markdown("---")
-st.subheader("📊 Diagnosis Distribution", divider=True)
+st.subheader("📊 Diagnosis Distribution", divider="blue")
 with st.container():
     fig = go.Figure(
         data=[go.Pie(
@@ -132,7 +132,7 @@ with st.container():
     st.plotly_chart(fig, width="stretch")
 
 st.markdown("---")
-st.subheader("👥 Age Distribution by Diagnosis", divider=True)
+st.subheader("👥 Age Distribution by Diagnosis", divider="green")
 with st.container():
     fig2 = go.Figure()
     for diagnosis in df['Diagnosis_Label'].unique():
@@ -150,7 +150,7 @@ with st.container():
 st.markdown("---")
 
 # Dataset preview
-st.subheader("🔍 Dataset Preview", divider=True)
+st.subheader("🔍 Dataset Preview", divider="orange")
 st.dataframe(df.head(100), height=300)
 
 # Download option
@@ -217,7 +217,7 @@ analysis_type = st.selectbox(
     ],
 )
 if analysis_type == "Demographics":
-    st.subheader("👥 Demographic Analysis", divider=True)
+    st.subheader("👥 Demographic Analysis", divider="red")
 
     col1, col2 = st.columns(2)
 
@@ -282,7 +282,7 @@ if analysis_type == "Demographics":
 # Clinical Markers
 # ============================================
 elif analysis_type == "Clinical Markers":
-    st.subheader("🏥 Clinical Markers Analysis", divider=True)
+    st.subheader("🏥 Clinical Markers Analysis", divider="violet")
 
     clinical_markers = st.multiselect(
         "Select Clinical Markers:",
@@ -326,7 +326,7 @@ elif analysis_type == "Clinical Markers":
 
         # Statistical comparison 
         st.markdown("---") 
-        st.subheader("📊 Statistical Comparison", divider=True)
+        st.subheader("📊 Statistical Comparison", divider="yellow")
 
         comparison_data = [] 
         for marker in clinical_markers: 
@@ -358,7 +358,7 @@ elif analysis_type == "Clinical Markers":
 # ============================================
 
 elif analysis_type == "Lifestyle Factors": 
-    st.subheader("🏃 Lifestyle Factors Analysis", divider=True) 
+    st.subheader("🏃 Lifestyle Factors Analysis", divider="grey") 
     
     col1, col2 = st.columns(2) 
     
@@ -430,7 +430,7 @@ elif analysis_type == "Lifestyle Factors":
 # Symptom Analysis
 # ============================================
 elif analysis_type == "Symptom Analysis": 
-    st.subheader("⚠️ Symptom Analysis", divider=True) 
+    st.subheader("⚠️ Symptom Analysis", divider="rainbow") 
     
     symptom_cols = [ 
         "MemoryComplaints", 
@@ -518,7 +518,7 @@ elif analysis_type == "Symptom Analysis":
 # Correlation Analysis 
 # ------------------------------------------------------------------- 
 elif analysis_type == "Correlation Analysis": 
-    st.subheader("🔗 Correlation Analysis", divider=True) 
+    st.subheader("🔗 Correlation Analysis", divider="blue") 
     
     numerical_features = df.select_dtypes(include=[np.number]).columns.tolist() 
     numerical_features = [f for f in numerical_features if f not in ["PatientID"]] 
@@ -560,7 +560,7 @@ elif analysis_type == "Correlation Analysis":
         # Top correlations with Diagnosis 
         if "Diagnosis" in selected_features: 
             st.markdown("---") 
-            st.subheader("Top correlations with Diagnosis") 
+            st.subheader("Top correlations with Diagnosis", divider="green") 
             
             corr_with_diag = ( 
                 correlation_matrix["Diagnosis"] 
@@ -673,7 +673,7 @@ st.markdown(
 )
 col1, col2 = st.columns(2, border=True)
 with col1:
-    st.subheader("T‑Tests (Continuous Variables)", divider=True)
+    st.subheader("T‑Tests (Continuous Variables)", divider="orange")
     continuous_vars = [
         "Age", "BMI", "MMSE", "FunctionalAssessment", "AlcoholConsumption", 
         "PhysicalActivity", "DietQuality", "SleepQuality"
@@ -685,7 +685,7 @@ with col1:
         st.write(f"**{var}** — p = {p:.4f}")
 
 with col2:
-    st.subheader("Chi-Square Tests (Categorical)", divider=True)
+    st.subheader("Chi-Square Tests (Categorical)", divider="red")
     categorical_vars = [
         "Gender", "Smoking", "FamilyHistoryAlzheimers", "CardiovascularDisease",
         "Diabetes", "Depression", "Hypertension"
@@ -847,7 +847,7 @@ for name, proba in preds.items():
     st.plotly_chart(fig, width="stretch") 
     
 # Feature importance (RF) 
-st.subheader("Top Features (Random Forest)", divider=True) 
+st.subheader("Top Features (Random Forest)", divider="violet") 
 fi = pd.DataFrame({ 
     "Feature": X.columns, 
     "Importance": rf.feature_importances_ 
