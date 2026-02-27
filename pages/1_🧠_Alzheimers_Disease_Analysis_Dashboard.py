@@ -907,11 +907,11 @@ with col1:
             "🔴 TOP 5 RISK FACTORS (from feature importance):",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Functional Assessment:</strong> Importance: 0.1792</li>
-                <li><strong>- ADL:</strong> Importance: 0.1623</li>
-                <li><strong>- MMSE:</strong> Importance: 0.1166</li>
-                <li><strong>- Memory Complaints:</strong> Importance: 0.0831</li>
-                <li><strong>- Behavioral Problems:</strong> Importance: 0.0413</li>
+                <li><strong>Functional Assessment:</strong> Importance: 0.1792</li>
+                <li><strong>ADL:</strong> Importance: 0.1623</li>
+                <li><strong>MMSE:</strong> Importance: 0.1166</li>
+                <li><strong>Memory Complaints:</strong> Importance: 0.0831</li>
+                <li><strong>Behavioral Problems:</strong> Importance: 0.0413</li>
             </ul>
             """,
             "warning"
@@ -923,11 +923,11 @@ with col2:
             "🟢 TOP 5 PROTECTIVE FACTORS (from logistic regression):",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Functional Assessment:</strong> Coefficient: -1.3180</li>
-                <li><strong>- ADL:</strong> Coefficient: -1.2692</li>
-                <li><strong>- MMSE:</strong> Coefficient: -0.8571</li>
-                <li><strong>- Personality Changes:</strong> Coefficient: -0.2000</li>
-                <li><strong>- Forgetfulness:</strong> Coefficient: -0.1911</li>
+                <li><strong>Functional Assessment:</strong> Coefficient: -1.3180</li>
+                <li><strong>ADL:</strong> Coefficient: -1.2692</li>
+                <li><strong>MMSE:</strong> Coefficient: -0.8571</li>
+                <li><strong>Personality Changes:</strong> Coefficient: -0.2000</li>
+                <li><strong>Forgetfulness:</strong> Coefficient: -0.1911</li>
             </ul>
             """,
             "success"
@@ -939,10 +939,10 @@ with col3:
             "👥 DEMOGRAPHIC INSIGHTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Average age (No AD):</strong> 74.9 ± 8.9</li>
-                <li><strong>- Average age (AD):</strong> 74.8 ± 9.1</li>
-                <li><strong>- AD Rate in Males:</strong> 36.4%</li>
-                <li><strong>- AD Rate in Females:</strong> 34.4%</li>
+                <li><strong>Average age (No AD):</strong> 74.9 ± 8.9</li>
+                <li><strong>Average age (AD):</strong> 74.8 ± 9.1</li>
+                <li><strong>AD Rate in Males:</strong> 36.4%</li>
+                <li><strong>AD Rate in Females:</strong> 34.4%</li>
             </ul>
             """,
             "info"
@@ -954,9 +954,9 @@ with col4:
             "🧠 COGNITIVE MARKERS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Avg MMSE (No AD):</strong> 16.27</li>
-                <li><strong>- Avg MMSE (AD):</strong> 11.99</li>
-                <li><strong>- Difference:</strong> 4.27 points</li>
+                <li><strong>Avg MMSE (No AD):</strong> 16.27</li>
+                <li><strong>Avg MMSE (AD):</strong> 11.99</li>
+                <li><strong>Difference:</strong> 4.27 points</li>
             </ul>
             """,
             "info"
@@ -971,9 +971,9 @@ with col1:
             "🏃 LIFESTYLE IMPACT:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Avg Lifestyle Risk Score (No AD):</strong> 2.50</li>
-                <li><strong>- Avg Lifestyle Risk Score (AD):</strong> 2.54</li>
-                <li><strong>- Higher scores indicate worse lifestyle habits</strong></li>
+                <li><strong>Avg Lifestyle Risk Score (No AD):</strong> 2.50</li>
+                <li><strong>Avg Lifestyle Risk Score (AD):</strong> 2.54</li>
+                <li><strong>Higher scores indicate worse lifestyle habits</strong></li>
             </ul>
             """,
             "warning"
@@ -985,11 +985,11 @@ with col2:
             "⚠️ SYMPTOM PREVALENCE IN AD PATIENTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Memory Complaints:</strong> 37.6%</li>
-                <li><strong>- Forgetfulness:</strong> 30.1%</li>
-                <li><strong>- Behavioral Problems:</strong> 26.7%</li>
-                <li><strong>- Confusion:</strong> 19.5%</li>
-                <li><strong>- Difficulty Completing Tasks:</strong> 16.3%</li>
+                <li><strong>Memory Complaints:</strong> 37.6%</li>
+                <li><strong>Forgetfulness:</strong> 30.1%</li>
+                <li><strong>Behavioral Problems:</strong> 26.7%</li>
+                <li><strong>Confusion:</strong> 19.5%</li>
+                <li><strong>Difficulty Completing Tasks:</strong> 16.3%</li>
             </ul>
             """,
             "info"
@@ -1001,7 +1001,7 @@ with col3:
             "🏥 MEDICAL COMORBIDITIES IN AD PATIENTS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>- Hypertension:</strong> 16.6% (AD) vs 14.0% (No AD)</li>
+                <li><strong>Hypertension:</strong> 16.6% (AD) vs 14.0% (No AD)</li>
             </ul>
             """,
             "info"
@@ -1020,15 +1020,19 @@ with st.container(border=True):
             "📋 RISK ASSESSMENT PROTOCOL:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>1. Prioritize MMSE screening for patients over 65 with: </strong></li>
-                <li>- Low functional assessment scores</li>
-                <li>- Multiple cognitive symptoms (≥3)</li>
-                <li>- Family history of Alzheimer's </li>
+                <ul>
+                <li value="1"><strong>Prioritize MMSE screening for patients over 65 with: </strong></li>
+                </ul>
+                <li>Low functional assessment scores</li>
+                <li>Multiple cognitive symptoms (≥3)</li>
+                <li>Family history of Alzheimer's </li>
                 <br>
-                <li><strong>2. Monitor high-risk indicators:</strong></li>
-                <li>- MMSE scores below 24 (mild cognitive impairment threshold)</li>
-                <li>- Functional assessment scores below 5 </li>
-                <li>- Presence of memory complaints + disorientation</li>
+                <ul>
+                <li value="2"><strong>Monitor high-risk indicators:</strong></li>
+                </ul>
+                <li>MMSE scores below 24 (mild cognitive impairment threshold)</li>
+                <li>Functional assessment scores below 5 </li>
+                <li>Presence of memory complaints + disorientation</li>
             </ul>
             """,
             "error"
@@ -1041,14 +1045,18 @@ with st.container(border=True):
             "🎯 PREVENTIVE INTERVENTIONS:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>1. Lifestyle Modifications (Modifiable Risk Factors):</strong></li>
+                <ul>
+                <li value="1"><strong>Lifestyle Modifications (Modifiable Risk Factors):</strong></li>
+                </ul>
                 <li>- Increase physical activity (target: >7 hrs/week) </li>
                 <li>- Improve diet quality (Mediterranean diet recommended) </li>
                 <li>- Optimize sleep quality (7-9 hours/night) </li>
                 <li>- Reduce alcohol consumption (<14 drinks/week)</li>
                 <li>- Smoking cessation programs  </li>
                 <br>
-                <li><strong>2. Medical Management:</strong></li>
+                <ul>
+                <li value="2"><strong>Medical Management:</strong></li>
+                </ul>
                 <li>- Control hypertension (target: <130/80 mmHg) </li>
                 <li>- Manage cholesterol levels</li>
                 <li>- Screen and treat depression early</li>
@@ -1065,12 +1073,16 @@ with st.container(border=True):
             "🔬 EARLY DETECTION STRATEGY:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>1. Regular cognitive screening for at-risk populations</strong></li>
+                <ul>
+                <li value="1"><strong>Regular cognitive screening for at-risk populations</strong></li>
+                </ul>
                 <li>- Age 65+ with family history</li>
                 <li>- Patients with multiple comorbidities</li>
                 <li>- Those reporting subjective cognitive decline</li>
                 <br>
-                <li><strong>2. Use predictive model for risk stratification:</strong></li>
+                <ul>
+                <li value="2"><strong>Use predictive model for risk stratification:</strong></li>
+                </ul>
                 <li><strong>High risk:</strong>Model probability >0.7 </li>
                 <li><strong>Moderate risk:</strong>Model probability 0.4-0.7 </li>
                 <li><strong>Low risk:</strong>Model probability <0.4 </li>
@@ -1086,13 +1098,15 @@ with st.container(border=True):
             "### 📊 MONITORING & FOLLOW-UP:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li><strong>1. High-risk patients:</strong> Quarterly assessments</li>
-                <li><strong>2. Moderate-risk:</strong> Bi-annual assessments</li>
-                <li><strong>3. Track progression using:</strong></li>
+                <li value="1"><strong>High-risk patients:</strong> Quarterly assessments</li>
+                <li value="2"><strong>Moderate-risk:</strong> Bi-annual assessments</li>
+                <li value="3"><strong>Track progression using:</strong></li>
+                <ul>
                 <li>- MMSE scores (change >3 points = significant)</li>
                 <li>- Functional assessment</li>
                 <li>- ADL capacity</li>
                 <li>- Symptom emergence</li>
+                </ul>
             </ul>
             """,
             "warning"
@@ -1105,10 +1119,10 @@ with st.container(border=True):
             "### 🏥 HEALTHCARE SYSTEM INTEGRATION:",
             """
             <ul style="margin: 0; padding-left: 20px;">
-                <li>1. Deploy predictive model in electronic health records</li>
-                <li>2. Create automated alerts for high-risk patients</li>
-                <li>3. Establish multidisciplinary care teams</li>
-                <li>4. Implement patient education programs</li>
+                <li value="1">Deploy predictive model in electronic health records</li>
+                <li value="2">Create automated alerts for high-risk patients</li>
+                <li value="3">Establish multidisciplinary care teams</li>
+                <li value="4">Implement patient education programs</li>
             </ul>
             """,
             "info"
