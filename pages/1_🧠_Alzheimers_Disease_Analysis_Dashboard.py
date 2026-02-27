@@ -779,12 +779,23 @@ results.append(["Logistic Regression",
                 lr.score(X_test_scaled,y_test), 
                 roc_auc_score(y_test,y_proba_lr), 
                 f1_score(y_test,y_pred_lr)]) 
-                
+
+lr_coef = pd.DataFrame({
+    "Feature": X.columns,
+    "Coefficient": lr.coef_[0],
+    "Abs_Coefficient": np.abs(lr.coef_[0])
+}).sort_values("Abs_Coefficient", ascending=False)
+               
 # Random Forest 
 rf = RandomForestClassifier(n_estimators=100) 
 rf.fit(X_train, y_train) 
 y_pred_rf = rf.predict(X_test) 
 y_proba_rf = rf.predict_proba(X_test)[:,1] 
+
+fi = pd.DataFrame({ 
+    "Feature": X.columns, 
+    "Importance": rf.feature_importances_ 
+}).sort_values("Importance", ascending=False)
 
 results.append(["Random Forest", 
                 rf.score(X_test,y_test), 
