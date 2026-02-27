@@ -184,7 +184,7 @@ def plot_grouped_bar_from_crosstab(crosstab_df, title, height=400):
     )
     st.plotly_chart(fig, width="stretch")
 
-def plot_violin_by_diagnosis(df, value_col_title, yaxis_title, height=400):
+def plot_violin_by_diagnosis(df, value_col, title, yaxis_title, height=400):
     fig = go.Figure()
     for diagnosis in df['Diagnosis_Label'].unique():
         subset = df[df['Diagnosis_Label'] == diagnosis]
