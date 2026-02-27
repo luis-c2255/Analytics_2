@@ -1020,7 +1020,9 @@ with st.container(border=True):
             "📋 RISK ASSESSMENT PROTOCOL:",
             """
             <ul style="margin: 0; padding-left: 20px;">
+                <ol>
                 <li value="1"><strong>Prioritize MMSE screening for patients over 65 with: </strong></li>
+                </ol>
                 <ul>
                 <li>Low functional assessment scores</li>
                 <li>Multiple cognitive symptoms (≥3)</li>
