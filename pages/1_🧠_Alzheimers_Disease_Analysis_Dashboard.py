@@ -687,7 +687,7 @@ categorical_vars = [
     "Gender", "Smoking", "FamilyHistoryAlzheimers", "CardiovascularDisease",
     "Diabetes", "Depression", "Hypertension"
 ]
-for var in categorical_var:
+for var in categorical_vars:
     table = pd.crosstab(df[var], df['Diagnosis'])
     chi2, p, dof, exp = chi2_contingency(table)
     st.write(f"**{var}** — p = {p:.4f}")
