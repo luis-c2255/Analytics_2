@@ -275,6 +275,7 @@ for marker in clinical_markers:
     elif: 
         analysis_type == "Lifestyle Factors": 
         st.subheader("🏃 Lifestyle Factors Analysis")
+        
         col1, col2 = st.columns(2)  
 # ============================================
 # FOOTER
