@@ -1098,19 +1098,19 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "### 📊 MONITORING & FOLLOW-UP:",
+            "📊 MONITORING & FOLLOW-UP:",
             """
-            <ul style="margin: 0; padding-left: 20px;">
-                <li value="1"><strong>High-risk patients:</strong> Quarterly assessments</li>
-                <li value="2"><strong>Moderate-risk:</strong> Bi-annual assessments</li>
-                <li value="3"><strong>Track progression using:</strong></li>
+            <ol style="margin: 0; padding-left: 20px;">
+                <li> <strong>High-risk patients:</strong> Quarterly assessments</li>
+                <li> <strong>Moderate-risk:</strong> Bi-annual assessments</li>
+                <li> <strong>Track progression using:</strong></li>
                 <ul>
-                <li>- MMSE scores (change >3 points = significant)</li>
-                <li>- Functional assessment</li>
-                <li>- ADL capacity</li>
-                <li>- Symptom emergence</li>
+                    <li>MMSE scores (change >3 points = significant)</li>
+                    <li>Functional assessment</li>
+                    <li>ADL capacity</li>
+                    <li>Symptom emergence</li>
                 </ul>
-            </ul>
+            </ol>
             """,
             "warning"
         ), unsafe_allow_html=True
