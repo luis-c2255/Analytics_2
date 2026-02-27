@@ -1120,7 +1120,7 @@ st.divider()
 with st.container(border=True):
     st.markdown(
         Components.insight_box(
-            "### 🏥 HEALTHCARE SYSTEM INTEGRATION:",
+            "🏥 HEALTHCARE SYSTEM INTEGRATION:",
             """
             <ol style="margin: 0; padding-left: 20px;">
                 <li>Deploy predictive model in electronic health records</li>
