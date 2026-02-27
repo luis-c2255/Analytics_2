@@ -1074,25 +1074,26 @@ with st.container(border=True):
         Components.insight_box(
             "🔬 EARLY DETECTION STRATEGY:",
             """
-            <ul style="margin: 0; padding-left: 20px;">
+            <ol style="margin: 0; padding-left: 20px;">
+                <li> <strong>Regular cognitive screening for at-risk populations</strong>
                 <ul>
-                <li value="1"><strong>Regular cognitive screening for at-risk populations</strong></li>
+                    <li>Age 65+ with family history</li>
+                    <li>Patients with multiple comorbidities</li>
+                    <li>Those reporting subjective cognitive decline</li>
                 </ul>
-                <li>- Age 65+ with family history</li>
-                <li>- Patients with multiple comorbidities</li>
-                <li>- Those reporting subjective cognitive decline</li>
-                <br>
+            </li>
+                <li> <strong>Use predictive model for risk stratification:</strong>
                 <ul>
-                <li value="2"><strong>Use predictive model for risk stratification:</strong></li>
+                    <li><strong>High risk:</strong>Model probability >0.7 </li>
+                    <li><strong>Moderate risk:</strong>Model probability 0.4-0.7 </li>
+                    <li><strong>Low risk:</strong>Model probability <0.4 </li>
                 </ul>
-                <li><strong>High risk:</strong>Model probability >0.7 </li>
-                <li><strong>Moderate risk:</strong>Model probability 0.4-0.7 </li>
-                <li><strong>Low risk:</strong>Model probability <0.4 </li>
-            </ul>
-            """,
-            "success"
-        ), unsafe_allow_html=True
-    )
+            </li>
+        </ol>
+        """,
+        "success"
+    ), unsafe_allow_html=True
+)
 st.divider()
 with st.container(border=True):
     st.markdown(
