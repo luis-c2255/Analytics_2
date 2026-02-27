@@ -701,7 +701,10 @@ significant_chi = sum([
     chi2_contingency(pd.crosstab(df[var], df['Diagnosis']))[1] < 0.05
     for var in categorical_vars
 ])
-
+symptom_cols = [ 
+        'MemoryComplaints','BehavioralProblems','Confusion','Disorientation', 
+        'PersonalityChanges','DifficultyCompletingTasks','Forgetfulness' 
+] 
 significan_symptoms = sum([
     mannwhitneyu(df[df['Diagnosis'] == 0][sym], df[df['Diagnosis'] == 1][sym])[1] < 0.05
     for sym in symptom_cols
