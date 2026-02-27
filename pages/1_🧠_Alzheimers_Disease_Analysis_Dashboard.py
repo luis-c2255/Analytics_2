@@ -276,7 +276,23 @@ for marker in clinical_markers:
         analysis_type == "Lifestyle Factors": 
         st.subheader("🏃 Lifestyle Factors Analysis")
         
-        col1, col2 = st.columns(2)  
+        col1, col2 = st.columns(2) 
+    with col1:
+        fig_act = go.Figure()
+        for diagnosis in df['Diagnosis_Label'].unique():
+            subset = df[df['Diagnosis_Label'] == diagnosis]
+            fig_act.add_trace(go.Violin(
+                y=subset['PhysicalActivity'],
+                name=diagnosis,
+                box_visible=True,
+                meanline_visible=True
+            ))
+            fig_act.update_layout(
+                title="Physical Activity by Diagnosis",
+                yaxis_title="Hours per Week",
+                height=400
+            )
+            st.plotly_chart(fig_act, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
