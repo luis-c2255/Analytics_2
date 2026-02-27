@@ -671,26 +671,29 @@ st.markdown(
         "📉 Statistical Tests"
     ), unsafe_allow_html=True
 )
-st.subheader("T‑Tests (Continuous Variables)")
-continuous_vars = [
-    "Age", "BMI", "MMSE", "FunctionalAssessment", "AlcoholConsumption", 
-    "PhysicalActivity", "DietQuality", "SleepQuality"
-]
-for var in continuous_vars:
-    g0 = df[df['Diagnosis'] ==0][var]
-    g1 = df[df['Diagnosis'] ==1][var]
-    t, p = ttest_ind(g0, g1)
-    st.write(f"**{var}** — p = {p:.4f}")
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("T‑Tests (Continuous Variables)")
+    continuous_vars = [
+        "Age", "BMI", "MMSE", "FunctionalAssessment", "AlcoholConsumption", 
+        "PhysicalActivity", "DietQuality", "SleepQuality"
+    ]
+    for var in continuous_vars:
+        g0 = df[df['Diagnosis'] ==0][var]
+        g1 = df[df['Diagnosis'] ==1][var]
+        t, p = ttest_ind(g0, g1)
+        st.write(f"**{var}** — p = {p:.4f}")
 
-st.subheader("Chi-Square Tests (Categorical)")
-categorical_vars = [
-    "Gender", "Smoking", "FamilyHistoryAlzheimers", "CardiovascularDisease",
-    "Diabetes", "Depression", "Hypertension"
-]
-for var in categorical_vars:
-    table = pd.crosstab(df[var], df['Diagnosis'])
-    chi2, p, dof, exp = chi2_contingency(table)
-    st.write(f"**{var}** — p = {p:.4f}")
+with col2:
+    st.subheader("Chi-Square Tests (Categorical)")
+    categorical_vars = [
+        "Gender", "Smoking", "FamilyHistoryAlzheimers", "CardiovascularDisease",
+        "Diabetes", "Depression", "Hypertension"
+    ]
+    for var in categorical_vars:
+        table = pd.crosstab(df[var], df['Diagnosis'])
+        chi2, p, dof, exp = chi2_contingency(table)
+        st.write(f"**{var}** — p = {p:.4f}")
 
 significant_t = sum([
     ttest_ind(df[df['Diagnosis']==0][var], df[df['Diagnosis'] == 1][var])[1] < 0.05
