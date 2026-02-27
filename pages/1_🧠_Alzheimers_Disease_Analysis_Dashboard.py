@@ -224,7 +224,8 @@ with st.container():
     fig_cog.update_layout(height=400)
     st.plotly_chart(fig_cog, width="stretch")
 
-elif analysis_type == 'Clinical Markers':
+elif: 
+    analysis_type == 'Clinical Markers':
     st.subheader("🏥 Clinical Markers Analysis")  
 
     # Select clinical markers
