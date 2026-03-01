@@ -706,7 +706,7 @@ mime='text/csv'
 
 # Footer with insights summary
 st.markdown("---")
-st.markdown("### 🎯 Key Takeaways from Analysis")
+st.subheader("🎯 :red[Key Takeaways from Analysis]", divider="red")
 
 col1, col2, col3 = st.columns(3)
 
@@ -728,18 +728,18 @@ with col2:
 
 with col3:
     st.markdown("#### Snow Summary")
-if filtered_df['snow fall'].sum() > 0:
-    snowiest_month = filtered_df.groupby('month_name')['snow fall'].sum().idxmax()
-    st.write(f"• Snowiest month: {snowiest_month}")
-    st.write(f"• Total snowfall: {filtered_df['snow fall'].sum():.2f}\"")
-    st.write(f"• Snowy days: {filtered_df['is_snowy'].sum()} days")
-else:
-	st.write("• No snow in selected period")
+    if filtered_df['snow fall'].sum() > 0:
+        snowiest_month = filtered_df.groupby('month_name')['snow fall'].sum().idxmax()
+        st.write(f"• Snowiest month: {snowiest_month}")
+        st.write(f"• Total snowfall: {filtered_df['snow fall'].sum():.2f}\"")
+        st.write(f"• Snowy days: {filtered_df['is_snowy'].sum()} days")
+    else:
+	    st.write("• No snow in selected period")
 
 # Sidebar - Additional Information
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📚 About This Dashboard")
-st.sidebar.info("""
+st.sidebar.markdown("""
 This interactive dashboard analyzes NYC weather data from 2016.
 
 Features:
