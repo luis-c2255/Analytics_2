@@ -1013,7 +1013,7 @@ st.markdown(
         "💡 Clinical Recommendations"
     ), unsafe_allow_html=True
 )
-st.divider()
+
 with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
     st.markdown("""
     **Prioritize MMSE screening for patients over 65 with:**
@@ -1026,9 +1026,7 @@ with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
     - Functional assessment scores below 5 
     - Presence of memory complaints + disorientation
     """)
-    
-st.divider()
-            
+               
 with st.expander("🎯 PREVENTIVE INTERVENTIONS"):
     st.markdown("""
     **Lifestyle Modifications (Modifiable Risk Factors):**
@@ -1045,7 +1043,6 @@ with st.expander("🎯 PREVENTIVE INTERVENTIONS"):
     - Monitor and control diabetes
     """)
 
-st.divider()
 with st.expander("🔬 EARLY DETECTION STRATEGY"):
     st.markdown("""
     **Regular cognitive screening for at-risk populations**
@@ -1059,7 +1056,6 @@ with st.expander("🔬 EARLY DETECTION STRATEGY"):
     - **Low risk:** Model probability <0.4 
     """)
 
-st.divider()
 with st.expander("📊 MONITORING & FOLLOW-UP"):
     st.markdown("""
     - **High-risk patients:** Quarterly assessments
@@ -1071,7 +1067,6 @@ with st.expander("📊 MONITORING & FOLLOW-UP"):
         - Symptom emergence
     """)
 
-st.divider()
 with st.expander("🏥 HEALTHCARE SYSTEM INTEGRATION"):
     st.markdown("""
     - Deploy predictive model in electronic health records
