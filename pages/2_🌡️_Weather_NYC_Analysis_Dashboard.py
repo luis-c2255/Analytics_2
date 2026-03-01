@@ -31,7 +31,7 @@ def load_data():
     df['temp_range'] = df['maximum temperature'] - df['minimum temperature']
     df['is_rainy'] = df['precipitation'] > 0
     df['is_snowy'] = df['snow fall'] > 0
-return df
+    return df
 df = load_data()
 
 
