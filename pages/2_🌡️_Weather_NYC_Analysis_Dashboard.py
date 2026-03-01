@@ -184,27 +184,27 @@ col1, col2 = st.columns(2)
 with col1:
     monthly_avg = filtered_df.groupby('month_name').agg({
             'average temperature': 'mean',
-                'maximum temperature': 'max',
-                    'minimum temperature': 'min'
-                    }).reindex([
-                            'January', 'February', 'March', 'April', 'May', 'June',
-                            'July', 'August', 'September', 'October', 'November', 'December'
-                        ])
-fig_monthly = go.Figure()
-fig_monthly.add_trace(go.Bar(
-    x=monthly_avg.index,
-    y=monthly_avg['average temperature'],
-    name='Avg Temperature',
-    marker_color='lightseagreen',
-    hovertemplate='%{x}Avg: %{y:.1f}°F'
-))
-fig_monthly.update_layout(
-    title="Average Temperature by Month",
-    xaxis_title="Month",
-    yaxis_title="Temperature (°F)",
-    height=400,
-)
-st.plotly_chart(fig_monthly, width="stretch")
+            'maximum temperature': 'max',
+            'minimum temperature': 'min'
+        }).reindex([
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ])
+            fig_monthly = go.Figure()
+            fig_monthly.add_trace(go.Bar(
+                x=monthly_avg.index,
+                y=monthly_avg['average temperature'],
+                name='Avg Temperature',
+                marker_color='lightseagreen'
+                hovertemplate='%{x}Avg: %{y:.1f}°F'
+            ))
+            fig_monthly.update_layout(
+                title="Average Temperature by Month",
+                xaxis_title="Month",
+                yaxis_title="Temperature (°F)",
+                height=400,
+            )
+            st.plotly_chart(fig_monthly, width="stretch")
 
 # Temperature distribution
 with col2:
