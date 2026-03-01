@@ -409,7 +409,7 @@ with col3:
         unsafe_allow_html=True
     )
 
-st.markdown("---")
+
 st.markdown(
     Components.page_header(
         "📊 Statistical Insights"
