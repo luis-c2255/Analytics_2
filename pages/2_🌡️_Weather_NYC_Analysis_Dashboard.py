@@ -602,7 +602,7 @@ with col6:
         ), unsafe_allow_html=True
     )
 
-
+st.divider()
 st.markdown(
     Components.page_header(
         "🔍 Custom Explorer"
