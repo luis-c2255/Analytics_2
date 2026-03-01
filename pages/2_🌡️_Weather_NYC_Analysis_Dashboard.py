@@ -22,6 +22,11 @@ def load_data():
     df = pd.read_csv('weather_data_nyc.csv')
     df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
     df = df.sort_values('date').reset_index(drop=True)
+    cols = ['precipitation', 'snow fall', 'snow depth']
+    df[cols] = (df[cols]
+    .replace("T", 0.005)
+    .astype(float)
+)
 
     # Feature engineering
     df['year'] = df['date'].dt.year
