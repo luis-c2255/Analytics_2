@@ -247,25 +247,59 @@ with st.container():
     )
     st.plotly_chart(fig_precip, width="stretch")
 st.markdown("---")
-with st.container():
-    st.subheader("📈 :red[Precipitation Stats]", divider="red")
+st.subheader("📈 :red[Precipitation Stats]", divider="red")
+col1, col2, col3, col4, col5 = st.columnns(5)
+with col1:
     rainy_df = filtered_df[filtered_df['precipitation'] > 0]
-    stats_data = {
-        "Metric": [
-            "Total Precipitation",
-            "Rainy Days",
-            "Avg per Rainy Day",
-            "Wettest Day",
-            "Dry Days"
-        ],
-        "Value": [
-            f"{filtered_df['precipitation'].sum():.2f}\"",
-            f"{len(rainy_df)} days",
-            f"{rainy_df['precipitation'].mean():.2f}\"" if len(rainy_df) > 0 else "N/A",
-            f"{filtered_df['precipitation'].max():.2f}\"",
-            f"{(filtered_df['precipitation'] == 0).sum()} days"
-        ]
-    }
+    st.markdown(
+        Components.metric_card(
+            title="Total Precipitation",
+            value=f"{filtered_df['precipitation'].sum():.2f}",
+            delta="🌦️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    rainy_df = filtered_df[filtered_df['precipitation'] > 0]
+    st.markdown(
+        Components.metric_card(
+            title="Rainy Days",
+            value=f"{len(rainy_df)} days",
+            delta="☔",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    rainy_df = filtered_df[filtered_df['precipitation'] > 0]
+    st.markdown(
+        Components.metric_card(
+            title="Avg per Rainy Day",
+            value=f"{rainy_df['precipitation'].mean():.2f}" if len(rainy_df) > 0 else "N/A",
+            delta="💧",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col4:
+    rainy_df = filtered_df[filtered_df['precipitation'] > 0]
+    st.markdown(
+        Components.metric_card(
+            title="Wettest Day",
+            value=f"{filtered_df['precipitation'].max():.2f}",
+            delta="⛈️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col5:
+    rainy_df = filtered_df[filtered_df['precipitation'] > 0]
+    st.markdown(
+        Components.metric_card(
+            title="Dry Days",
+            value=f"{(filtered_df['precipitation'] == 0).sum()} days",
+            delta="🌤️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+
     st.dataframe(
         pd.DataFrame(stats_data),
         hide_index=True,
