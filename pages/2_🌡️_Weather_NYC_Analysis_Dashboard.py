@@ -455,16 +455,16 @@ seasons = {
 
 seasonal_data = []
 for season, months in seasons.items():
-season_df = filtered_df[filtered_df['month'].isin(months)]
+    season_df = filtered_df[filtered_df['month'].isin(months)]
 if len(season_df) > 0:
-seasonal_data.append({
-'Season': season,
-'Avg Temperature (°F)': round(season_df['average temperature'].mean(), 1),
-'Total Precipitation (")': round(season_df['precipitation'].sum(), 2),
-'Total Snowfall (")': round(season_df['snow fall'].sum(), 2),
-'Rainy Days': season_df['is_rainy'].sum(),
-'Snowy Days': season_df['is_snowy'].sum()
-})
+    seasonal_data.append({
+    'Season': season,
+    'Avg Temperature (°F)': round(season_df['average temperature'].mean(), 1),
+    'Total Precipitation (")': round(season_df['precipitation'].sum(), 2),
+    'Total Snowfall (")': round(season_df['snow fall'].sum(), 2),
+    'Rainy Days': season_df['is_rainy'].sum(),
+    'Snowy Days': season_df['is_snowy'].sum()
+    })
 
 seasonal_df = pd.DataFrame(seasonal_data)
 
