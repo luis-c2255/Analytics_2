@@ -415,7 +415,7 @@ st.markdown(
         "📊 Statistical Insights"
     ), unsafe_allow_html=True
 )
-st.markdown("---")
+
 st.subheader(":rainbow[Advanced Statistical Analysis]", divider="rainbow")
 col1, col2 = st.columns(2)
 with col1:
