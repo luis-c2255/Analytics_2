@@ -316,7 +316,7 @@ fig_monthly_precip = px.bar(
 )
 fig_monthly_precip.update_layout(height=400)
 st.plotly_chart(fig_monthly_precip, width="stretch")
-st.markdown("---")
+
 st.markdown(
     Components.page_header(
         "❄️ Snow Patterns"
