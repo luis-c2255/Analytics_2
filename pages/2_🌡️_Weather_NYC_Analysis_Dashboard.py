@@ -384,7 +384,7 @@ with col3:
     if len(snowy_days) > 0:
         snowiest = snowy_days.loc[snowy_days['snow fall'].idxmax()]
         st.write(f"Snowiest Day:")
-        st.write(f"{snowiest['date'].strfdate('%B %d, %Y')}")
+        st.write(f"{snowiest['date'].strftime('%B %d, %Y')}")
         st.write(f"{snowiest['snow fall']:.2f}\" of snow")
         deepest = filtered_df.loc[filtered_df['snow depth'].idxmax()]
         st.write(f"Deepest Snow:")
