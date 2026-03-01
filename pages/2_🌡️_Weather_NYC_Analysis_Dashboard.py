@@ -659,11 +659,11 @@ else:
     title=f'{y_var} by {x_var}'
     )
 
-    fig_custom.update_layout(height=500, template='plotly_white')
+    fig_custom.update_layout(height=500)
     st.plotly_chart(fig_custom, width="stretch")
 
 # Data table explorer
-st.markdown("####📋 Raw Data Explorer")
+st.subheader("📋 :blue[Raw Data Explorer]", divider="blue")
 
 # Column selector
 display_cols = st.multiselect(
