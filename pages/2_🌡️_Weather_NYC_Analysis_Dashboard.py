@@ -223,13 +223,13 @@ with col2:
         height=400,
     )
     st.plotly_chart(fig_dist, width="stretch")
-st.markdown("---")
+
 st.markdown(
     Components.page_header(
         "🌧️ Precipitation Analysis"
     ), unsafe_allow_html=True
 )
-st.markdown("---")
+
 with st.container():
     fig_precip = go.Figure()
     fig_precip.add_trace(go.Bar(
