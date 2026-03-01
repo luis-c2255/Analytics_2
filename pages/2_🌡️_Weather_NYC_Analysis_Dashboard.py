@@ -763,8 +763,6 @@ st.sidebar.markdown("""
 5. Download filtered data for further analysis
 """)
 
-st.sidebar.markdown("---")
-st.sidebar.markdown("Built with ❤️ using Streamlit")
 # ============================================
 # FOOTER
 # ============================================
