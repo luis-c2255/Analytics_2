@@ -300,7 +300,7 @@ with col5:
         ), unsafe_allow_html=True
     )
 
-st.markdown("---")
+
 # Monthly precipitation totals
 monthly_precip = filtered_df.groupby('month_name')['precipitation'].sum().reindex([
     'January', 'February', 'March', 'April', 'May', 'June',
