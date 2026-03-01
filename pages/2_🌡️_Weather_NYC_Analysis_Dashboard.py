@@ -774,7 +774,7 @@ Features:
 Data Source: NYC Weather 2016
 Total Records: 366 days
 """)
-
+st.sidebar.markdown("---")
 st.sidebar.markdown("### 💡 Usage Tips")
 st.sidebar.markdown("""
 1. Use filters to focus on specific periods
