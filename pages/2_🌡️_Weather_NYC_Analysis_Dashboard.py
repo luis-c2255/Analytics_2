@@ -360,7 +360,7 @@ fig_snow.update_layout(
     hovermode='x unified'
 )
 st.plotly_chart(fig_snow, width="stretch")
-st.markdown("---")
+
 # Snow statistics
 col1, col2, col3 = st.columns(3)
 
