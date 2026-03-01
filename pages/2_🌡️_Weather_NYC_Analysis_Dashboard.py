@@ -487,7 +487,7 @@ with col3:
             card_type="warning"
         ), unsafe_allow_html=True
     )
-
+st.markdown("  ")
 # Seasonal comparison
 st.subheader("🍂 :orange[Seasonal Breakdown]", divider="orange")
 
