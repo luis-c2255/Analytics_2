@@ -1034,7 +1034,7 @@ with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
             </ol>
             """,
                 "error"
-            ), unsafe_allow_html=True
+            )
     
 st.divider()
 with st.container(border=True):
