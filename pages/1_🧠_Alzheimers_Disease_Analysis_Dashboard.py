@@ -900,7 +900,7 @@ with col4:
 top_risk = fi.iloc[0] 
 top_protective = lr_coef[lr_coef["Coefficient"] < 0].iloc[0]
 st.divider()
-col1, col2, col3, col4 = st.columns(4, border=True)
+col1, col2, col3 = st.columns(3, border=True)
 with col1:
     st.markdown(
         Components.insight_box(
@@ -948,7 +948,8 @@ with col3:
             "info"
         ), unsafe_allow_html=True
     )
-with col4:
+col1, col2 = st.columns(2, border=True)
+with col1:
     st.markdown(
         Components.insight_box(
             "🧠 COGNITIVE MARKERS:",
@@ -963,9 +964,7 @@ with col4:
         ), unsafe_allow_html=True
     )
 
-st.markdown("---")
-col1, col2, col3 = st.columns(3, border=True)
-with col1:
+with col2:
     st.markdown(
         Components.insight_box(
             "🏃 LIFESTYLE IMPACT:",
@@ -979,7 +978,8 @@ with col1:
             "warning"
         ), unsafe_allow_html=True
     )
-with col2:
+col1, col2 = st.columns(2, border=True)
+with col1:
     st.markdown(
         Components.insight_box(
             "⚠️ SYMPTOM PREVALENCE IN AD PATIENTS:",
@@ -995,7 +995,7 @@ with col2:
             "info"
         ), unsafe_allow_html=True
     )
-with col3:
+with col2:
     st.markdown(
         Components.insight_box(
             "🏥 MEDICAL COMORBIDITIES IN AD PATIENTS:",
@@ -1014,11 +1014,8 @@ st.markdown(
     ), unsafe_allow_html=True
 )
 st.divider()
-with st.container(border=True):
-    st.markdown(
-        Components.insight_box(
-            "📋 RISK ASSESSMENT PROTOCOL:",
-            """
+with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
+    st.markdown("""
             <ol style="margin: 0; padding-left: 20px;">
                 <li> <strong>Prioritize MMSE screening for patients over 65 with: </strong>
                     <ul>
