@@ -300,11 +300,6 @@ with col5:
         ), unsafe_allow_html=True
     )
 
-    st.dataframe(
-        pd.DataFrame(stats_data),
-        hide_index=True,
-        width="stretch"
-    )
 st.markdown("---")
 # Monthly precipitation totals
 monthly_precip = filtered_df.groupby('month_name')['precipitation'].sum().reindex([
