@@ -1062,7 +1062,7 @@ with st.expander("🔬 EARLY DETECTION STRATEGY"):
 st.divider()
 with st.expander("📊 MONITORING & FOLLOW-UP"):
     st.markdown("""
-q   - **High-risk patients:** Quarterly assessments
+    - **High-risk patients:** Quarterly assessments
     - **Moderate-risk:** Bi-annual assessments
     - **Track progression using:**
         - MMSE scores (change >3 points = significant)
