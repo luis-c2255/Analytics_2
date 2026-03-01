@@ -546,7 +546,7 @@ hovermode='x unified'
 
 st.plotly_chart(fig_seasonal, width="stretch")
 
-col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     st.markdown(
         Components.metric_card(
@@ -577,22 +577,13 @@ with col3:
 with col4:
     st.markdown(
         Components.metric_card(
-            title='Total Snowfall (")',
-            value=f"{round(season_df['snow fall'].sum(), 2)}",
-            delta="❄️",
-            card_type="info"
-        ), unsafe_allow_html=True
-    )
-with col5:
-    st.markdown(
-        Components.metric_card(
             title='Rainy Days', 
             value=f"{season_df['is_rainy'].sum()}",
             delta="💦",
             card_type="info"
         ), unsafe_allow_html=True
     )
-with col6:
+with col5:
     st.markdown(
         Components.metric_card(
             title='Snowy Days', 
