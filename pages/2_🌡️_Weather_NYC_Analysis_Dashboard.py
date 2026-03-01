@@ -256,7 +256,7 @@ with col1:
             title="Total Precipitation",
             value=f"{filtered_df['precipitation'].sum():.2f}",
             delta="🌦️",
-            card_type="info"
+            card_type="error"
         ), unsafe_allow_html=True
     )
 with col2:
@@ -266,7 +266,7 @@ with col2:
             title="Rainy Days",
             value=f"{len(rainy_df)} days",
             delta="☔",
-            card_type="info"
+            card_type="error"
         ), unsafe_allow_html=True
     )
 with col3:
@@ -276,7 +276,7 @@ with col3:
             title="Avg per Rainy Day",
             value=f"{rainy_df['precipitation'].mean():.2f}" if len(rainy_df) > 0 else "N/A",
             delta="💧",
-            card_type="info"
+            card_type="error"
         ), unsafe_allow_html=True
     )
 with col4:
@@ -286,7 +286,7 @@ with col4:
             title="Wettest Day",
             value=f"{filtered_df['precipitation'].max():.2f}",
             delta="⛈️",
-            card_type="info"
+            card_type="error"
         ), unsafe_allow_html=True
     )
 with col5:
@@ -296,7 +296,7 @@ with col5:
             title="Dry Days",
             value=f"{(filtered_df['precipitation'] == 0).sum()} days",
             delta="🌤️",
-            card_type="info"
+            card_type="error"
         ), unsafe_allow_html=True
     )
 
