@@ -246,7 +246,7 @@ with st.container():
         height=400,
     )
     st.plotly_chart(fig_precip, width="stretch")
-st.markdown("---")
+
 st.subheader("📈 :red[Precipitation Stats]", divider="red")
 col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
