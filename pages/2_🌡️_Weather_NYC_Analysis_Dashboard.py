@@ -546,7 +546,7 @@ hovermode='x unified'
 
 st.plotly_chart(fig_seasonal, width="stretch")
 
-col1, col2, col3, col4, col5, col6
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 with col1:
     st.markdown(
         Components.metric_card(
