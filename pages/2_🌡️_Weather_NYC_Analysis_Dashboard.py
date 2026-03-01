@@ -177,7 +177,7 @@ fig_temp.update_layout(
     template='plotly_white'
 )
 st.plotly_chart(fig_temp, width="stretch")
-st.markdown("---")
+
 # Monthly breakdown
 col1, col2 = st.columns(2)
 
@@ -458,7 +458,7 @@ with col2:
             height=450,
         )
     st.plotly_chart(fig_var, width="stretch")
-st.markdown("---")
+
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(
@@ -487,7 +487,7 @@ with col3:
             card_type="warning"
         ), unsafe_allow_html=True
     )
-st.markdown("---")
+
 # Seasonal comparison
 st.subheader("🍂 :orange[Seasonal Breakdown]", divider="orange")
 
