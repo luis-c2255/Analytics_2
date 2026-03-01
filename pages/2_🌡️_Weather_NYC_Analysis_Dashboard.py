@@ -433,12 +433,12 @@ with col2:
         marker_color='lightcoral',
         boxmean='sd'
         ))
-        fig_var.update_layout(
+    fig_var.update_layout(
             title="Daily Temperature Range Distribution",
             yaxis_title="Temperature Range (°F)",
             height=450,
         )
-        st.plotly_chart(fig_var, width="stretch")
+    st.plotly_chart(fig_var, width="stretch")
 st.markdown("---")
 st.write(f"Average Daily Range: {filtered_df['temp_range'].mean():.1f}°F")
 st.write(f"Most Variable Day: {filtered_df['temp_range'].max():.0f}°F")
