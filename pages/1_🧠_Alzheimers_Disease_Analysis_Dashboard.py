@@ -1028,98 +1028,57 @@ with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
     """)
     
 st.divider()
-with st.container(border=True):
-    st.markdown(
-        Components.insight_box(
-            "🎯 PREVENTIVE INTERVENTIONS:",
-            """
-            <ol style="margin: 0; padding-left: 20px;">
-                <li> <strong>Lifestyle Modifications (Modifiable Risk Factors):</strong>
-                <ul>
-                    <li>Increase physical activity (target: >7 hrs/week) </li>
-                    <li>Improve diet quality (Mediterranean diet recommended) </li>
-                    <li>Optimize sleep quality (7-9 hours/night) </li>
-                    <li>Reduce alcohol consumption (<14 drinks/week)</li>
-                    <li>Smoking cessation programs  </li>
-                </ul>
-            </li>
-                <li> <strong>Medical Management:</strong>
-                <ul>
-                    <li>Control hypertension (target: <130/80 mmHg) </li>
-                    <li>Manage cholesterol levels</li>
-                    <li>Screen and treat depression early</li>
-                    <li>Monitor and control diabetes</li>
-                </ul>
-            </li>
-        </ol>
-        """,
-        "success"
-    ), unsafe_allow_html=True
-)
+            
+with st.expander("🎯 PREVENTIVE INTERVENTIONS"):
+    st.markdown("""
+    **Lifestyle Modifications (Modifiable Risk Factors):**
+    - Increase physical activity (target: >7 hrs/week) 
+    - Improve diet quality (Mediterranean diet recommended) 
+    - Optimize sleep quality (7-9 hours/night)
+    - Reduce alcohol consumption (<14 drinks/week)
+    - Smoking cessation programs
+                
+    **Medical Management:**
+    - Control hypertension (target: <130/80 mmHg) 
+    - Manage cholesterol levels
+    - Screen and treat depression early
+    - Monitor and control diabetes
+    """)
+
 st.divider()
-with st.container(border=True):
-    st.markdown(
-        Components.insight_box(
-            "🔬 EARLY DETECTION STRATEGY:",
-            """
-            <ol style="margin: 0; padding-left: 20px;">
-                <li> <strong>Regular cognitive screening for at-risk populations</strong>
-                <ul>
-                    <li>Age 65+ with family history</li>
-                    <li>Patients with multiple comorbidities</li>
-                    <li>Those reporting subjective cognitive decline</li>
-                </ul>
-            </li>
-                <li> <strong>Use predictive model for risk stratification:</strong>
-                <ul>
-                    <li><strong>High risk:</strong>Model probability >0.7 </li>
-                    <li><strong>Moderate risk:</strong>Model probability 0.4-0.7 </li>
-                    <li><strong>Low risk:</strong>Model probability <0.4 </li>
-                </ul>
-            </li>
-        </ol>
-        """,
-        "success"
-    ), unsafe_allow_html=True
-)
+with st.expander("🔬 EARLY DETECTION STRATEGY"):
+    st.markdown("""
+    **Regular cognitive screening for at-risk populations**
+    - Age 65+ with family history
+    - Patients with multiple comorbidities
+    - Those reporting subjective cognitive decline
+
+    **Use predictive model for risk stratification:**
+    - **High risk:** Model probability >0.7 
+    - **Moderate risk:** Model probability 0.4-0.7 
+    - **Low risk:** Model probability <0.4 
+    """)
+
 st.divider()
-with st.container(border=True):
-    st.markdown(
-        Components.insight_box(
-            "📊 MONITORING & FOLLOW-UP:",
-            """
-            <ol style="margin: 0; padding-left: 20px;">
-                <li> <strong>High-risk patients:</strong> Quarterly assessments</li>
-                <li> <strong>Moderate-risk:</strong> Bi-annual assessments</li>
-                <li> <strong>Track progression using:</strong>
-                <ul>
-                    <li>MMSE scores (change >3 points = significant)</li>
-                    <li>Functional assessment</li>
-                    <li>ADL capacity</li>
-                    <li>Symptom emergence</li>
-                </ul>
-            </li>
-        </ol>
-        """,
-        "warning"
-    ), unsafe_allow_html=True
-)
+with st.expander("📊 MONITORING & FOLLOW-UP"):
+    st.markdown("""
+q   - **High-risk patients:** Quarterly assessments
+    - **Moderate-risk:** Bi-annual assessments
+    - **Track progression using:**
+        - MMSE scores (change >3 points = significant)
+        - Functional assessment
+        - ADL capacity
+        - Symptom emergence
+    """)
+
 st.divider()
-with st.container(border=True):
-    st.markdown(
-        Components.insight_box(
-            "🏥 HEALTHCARE SYSTEM INTEGRATION:",
-            """
-            <ol style="margin: 0; padding-left: 20px;">
-                <li>Deploy predictive model in electronic health records</li>
-                <li>Create automated alerts for high-risk patients</li>
-                <li>Establish multidisciplinary care teams</li>
-                <li>Implement patient education programs</li>
-            </ol>
-            """,
-            "info"
-        ), unsafe_allow_html=True
-    )
+with st.expander("🏥 HEALTHCARE SYSTEM INTEGRATION"):
+    st.markdown("""
+    - Deploy predictive model in electronic health records
+    - Create automated alerts for high-risk patients
+    - Establish multidisciplinary care teams
+    - Implement patient education programs
+    """)
 
 # ============================================
 # FOOTER
