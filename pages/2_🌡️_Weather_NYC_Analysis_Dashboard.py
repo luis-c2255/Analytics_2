@@ -552,24 +552,25 @@ if chart_type == 'Scatter':
     hover_data=['date', 'average temperature', 'precipitation']
     )
 elif chart_type == 'Line':
-fig_custom = px.line(
-filtered_df,
-x=x_var,
-y=y_var,
-color=color_by,
-title=f'{y_var} over {x_var}'
-)
-else: # Bar
-fig_custom = px.bar(
-filtered_df,
-x=x_var,
-y=y_var,
-color=color_by,
-title=f'{y_var} by {x_var}'
-)
+    fig_custom = px.line(
+    filtered_df,
+    x=x_var,
+    y=y_var,
+    color=color_by,
+    title=f'{y_var} over {x_var}'
+    )
+else: 
+    # Bar
+    fig_custom = px.bar(
+    filtered_df,
+    x=x_var,
+    y=y_var,
+    color=color_by,
+    title=f'{y_var} by {x_var}'
+    )
 
-fig_custom.update_layout(height=500, template='plotly_white')
-st.plotly_chart(fig_custom, use_container_width=True)
+    fig_custom.update_layout(height=500, template='plotly_white')
+    st.plotly_chart(fig_custom, use_container_width=True)
 
 # Data table explorer
 st.markdown("####📋 Raw Data Explorer")
@@ -586,17 +587,17 @@ default=['date', 'maximum temperature', 'minimum temperature',
 show_extremes = st.checkbox("Show only extreme weather days", value=False)
 
 if show_extremes:
-extreme_df = filtered_df[
-(filtered_df['maximum temperature'] > filtered_df['maximum temperature'].quantile(0.9)) |
-(filtered_df['minimum temperature'] < filtered_df['minimum temperature'].quantile(0.1)) |
-(filtered_df['precipitation'] > filtered_df['precipitation'].quantile(0.9)) |
-(filtered_df['snow fall'] > 0)
-]
-display_df = extreme_df[display_cols] if display_cols else extreme_df
-st.write(f"Showing {len(display_df)} extreme weather days")
+    extreme_df = filtered_df[
+    (filtered_df['maximum temperature'] > filtered_df['maximum temperature'].quantile(0.9)) |
+    (filtered_df['minimum temperature'] < filtered_df['minimum temperature'].quantile(0.1)) |
+    (filtered_df['precipitation'] > filtered_df['precipitation'].quantile(0.9)) |
+    (filtered_df['snow fall'] > 0)
+    ]
+    display_df = extreme_df[display_cols] if display_cols else extreme_df
+    st.write(f"Showing {len(display_df)} extreme weather days")
 else:
-display_df = filtered_df[display_cols] if display_cols else filtered_df
-st.write(f"Showing {len(display_df)} days")
+    display_df = filtered_df[display_cols] if display_cols else filtered_df
+    st.write(f"Showing {len(display_df)} days")
 
 # Display dataframe with sorting
 st.dataframe(
@@ -621,28 +622,28 @@ st.markdown("### 🎯 Key Takeaways from Analysis")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-st.markdown("#### Temperature Patterns")
-warmest_month = filtered_df.groupby('month_name')['average temperature'].mean().idxmax()
-coldest_month = filtered_df.groupby('month_name')['average temperature'].mean().idxmin()
-st.write(f"• Warmest month: {warmest_month}")
-st.write(f"• Coldest month: {coldest_month}")
-st.write(f"• Avg temperature variability: {filtered_df['temp_range'].mean():.1f}°F")
+    st.markdown("#### Temperature Patterns")
+    warmest_month = filtered_df.groupby('month_name')['average temperature'].mean().idxmax()
+    coldest_month = filtered_df.groupby('month_name')['average temperature'].mean().idxmin()
+    st.write(f"• Warmest month: {warmest_month}")
+    st.write(f"• Coldest month: {coldest_month}")
+    st.write(f"• Avg temperature variability: {filtered_df['temp_range'].mean():.1f}°F")
 
 with col2:
-st.markdown("#### Precipitation Insights")
-wettest_month = filtered_df.groupby('month_name')['precipitation'].sum().idxmax()
-rainy_pct = (filtered_df['is_rainy'].sum() / len(filtered_df)) * 100
-st.write(f"• Wettest month: {wettest_month}")
-st.write(f"• Rainy days: {rainy_pct:.1f}% of year")
-st.write(f"• Total precipitation: {filtered_df['precipitation'].sum():.2f}\"")
+    st.markdown("#### Precipitation Insights")
+    wettest_month = filtered_df.groupby('month_name')['precipitation'].sum().idxmax()
+    rainy_pct = (filtered_df['is_rainy'].sum() / len(filtered_df)) * 100
+    st.write(f"• Wettest month: {wettest_month}")
+    st.write(f"• Rainy days: {rainy_pct:.1f}% of year")
+    st.write(f"• Total precipitation: {filtered_df['precipitation'].sum():.2f}\"")
 
 with col3:
-st.markdown("#### Snow Summary")
+    st.markdown("#### Snow Summary")
 if filtered_df['snow fall'].sum() > 0:
-snowiest_month = filtered_df.groupby('month_name')['snow fall'].sum().idxmax()
-st.write(f"• Snowiest month: {snowiest_month}")
-st.write(f"• Total snowfall: {filtered_df['snow fall'].sum():.2f}\"")
-st.write(f"• Snowy days: {filtered_df['is_snowy'].sum()} days")
+    snowiest_month = filtered_df.groupby('month_name')['snow fall'].sum().idxmax()
+    st.write(f"• Snowiest month: {snowiest_month}")
+    st.write(f"• Total snowfall: {filtered_df['snow fall'].sum():.2f}\"")
+    st.write(f"• Snowy days: {filtered_df['is_snowy'].sum()} days")
 else:
 	st.write("• No snow in selected period")
 
