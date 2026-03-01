@@ -1035,7 +1035,7 @@ with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
             """,
                 "error"
             ), unsafe_allow_html=True
-    )
+    
 st.divider()
 with st.container(border=True):
     st.markdown(
