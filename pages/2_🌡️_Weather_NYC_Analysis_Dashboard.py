@@ -499,10 +499,10 @@ template='plotly_white',
 hovermode='x unified'
 )
 
-st.plotly_chart(fig_seasonal, use_container_width=True)
+st.plotly_chart(fig_seasonal, width="stretch")
 
 # Display seasonal table
-st.dataframe(seasonal_df, use_container_width=True, hide_index=True)
+st.dataframe(seasonal_df, width="stretch", hide_index=True)
 
 st.markdown(
     Components.page_header(
@@ -570,7 +570,7 @@ else:
     )
 
     fig_custom.update_layout(height=500, template='plotly_white')
-    st.plotly_chart(fig_custom, use_container_width=True)
+    st.plotly_chart(fig_custom, width="stretch")
 
 # Data table explorer
 st.markdown("####📋 Raw Data Explorer")
@@ -602,7 +602,7 @@ else:
 # Display dataframe with sorting
 st.dataframe(
 display_df.style.background_gradient(cmap='coolwarm', subset=[col for col in display_cols if 'temperature' in col.lower()]),
-use_container_width=True,
+width="stretch",
 height=400
 )
 
