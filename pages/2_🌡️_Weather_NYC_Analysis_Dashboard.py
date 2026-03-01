@@ -634,33 +634,32 @@ index=0
 # Generate custom chart
 if chart_type == 'Scatter':
     fig_custom = px.scatter(
-    filtered_df,
-    x=x_var,
-    y=y_var,
-    color=color_by,
-    title=f'{y_var} vs {x_var}',
-    hover_data=['date', 'average temperature', 'precipitation']
+        filtered_df,
+        x=x_var,
+        y=y_var,
+        color=color_by or None,
+        title=f'{y_var} vs {x_var}',
+        hover_data=['date', 'average temperature', 'precipitation']
     )
 elif chart_type == 'Line':
     fig_custom = px.line(
-    filtered_df,
-    x=x_var,
-    y=y_var,
-    color=color_by,
-    title=f'{y_var} over {x_var}'
+        filtered_df,
+        x=x_var,
+        y=y_var,
+        color=color_by or None,
+        title=f'{y_var} over {x_var}'
     )
 else: 
     # Bar
     fig_custom = px.bar(
-    filtered_df,
-    x=x_var,
-    y=y_var,
-    color=color_by,
-    title=f'{y_var} by {x_var}'
+        filtered_df,
+        x=x_var,
+        y=y_var,
+        color=color_by or None,
+        title=f'{y_var} by {x_var}'
     )
-
     fig_custom.update_layout(height=500)
-    st.plotly_chart(fig_custom, width="stretch")
+st.plotly_chart(fig_custom, width="stretch")
 
 # Data table explorer
 st.subheader("📋 :blue[Raw Data Explorer]", divider="blue")
