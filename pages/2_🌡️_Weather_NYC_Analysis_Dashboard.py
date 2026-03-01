@@ -46,6 +46,8 @@ st.markdown(
         "🌡️ Weather NYC Analysis Dashboard"
     ), unsafe_allow_html=True
 )
+st.markdown("  ")
+st.markdown("  ")
 # Sidebar filters
 st.sidebar.header("🔧 Filters & Controls")
 
