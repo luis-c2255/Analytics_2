@@ -177,25 +177,117 @@ fig_temp.update_layout(
     template='plotly_white'
 )
 st.plotly_chart(fig_temp, width="stretch")
+st.markdown("---")
+# Monthly breakdown
+col1, col2 = st.columns(2)
 
+with col1:
+monthly_avg = filtered_df.groupby('month_name').agg({
+    'average temperature': 'mean',
+    'maximum temperature': 'max',
+    'minimum temperature': 'min'
+}).reindex([
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+])
+fig_monthly = go.Figure()
+fig_monthly.add_trace(go.Bar(
+    x=monthly_avg.index,
+    y=monthly_avg['average temperature'],
+    name='Avg Temperature',
+    marker_color='lightseagreen',
+    hovertemplate='%{x}Avg: %{y:.1f}°F'
+))
+fig_monthly.update_layout(
+    title="Average Temperature by Month",
+    xaxis_title="Month",
+    yaxis_title="Temperature (°F)",
+    height=400,
+)
+st.plotly_chart(fig_monthly, width="stretch")
 
-
-
-
-
-
+# Temperature distribution
+with col2:
+    fig_dist = go.Figure()
+    fig_dist.add_trace(go.Histogram(
+        x=filtered_df['average temperature'],
+        nbinsx=30,
+        marker_color='coral',
+        name='Distribution',
+        hovertemplate='Temperature: %{x}°FCount: %{y}'
+    ))
+    fig_dist.update_layout(
+        title="Temperature Distribution",
+        xaxis_title="Temperature (°F)",
+        yaxis_title="Frequency",
+        height=400,
+    )
+    st.plotly_chart(fig_dist, width="stretch")
+st.markdown("---")
 st.markdown(
     Components.page_header(
         "🌧️ Precipitation Analysis"
     ), unsafe_allow_html=True
 )
-
-
-
-
-
-
-
+st.markdown("---")
+with st.container():
+    fig_precip = go.Figure()
+    fig_precip.add_trace(go.Bar(
+        x=filtered_df['date'],
+        y=filtered_df['precipitation'],
+        marker_color='skyblue',
+        name='Precipitation',
+        hovertemplate='Date: %{x}Precipitation: %{y:.2f}"'
+    ))
+    fig_precip.update_layout(
+        title="Daily Precipitation",
+        xaxis_title="Date",
+        yaxis_title="Precipitation (inches)",
+        height=400,
+    )
+    st.plotly_chart(fig_precip, width="stretch")
+st.markdown("---")
+with st.container():
+    st.markdown("### 📈 :red[Precipitation Stats]", divider="red")
+    rainy_df = filtered_df[filtered_df['precipitation'] > 0]
+    stats_data = {
+        "Metric": [
+            "Total Precipitation",
+            "Rainy Days",
+            "Avg per Rainy Day",
+            "Wettest Day",
+            "Dry Days"
+        ],
+        "Value": [
+            f"{filtered_df['precipitation'].sum():.2f}\"",
+            f"{len(rainy_df)} days",
+            f"{rainy_df['precipitation'].mean():.2f}\"" if len(rainy_df) > 0 else "N/A",
+            f"{filtered_df['precipitation'].max():.2f}\"",
+            f"{(filtered_df['precipitation'] == 0).sum()} days"
+        ]
+    }
+    st.dataframe(
+        pd.DataFrame(stats_data),
+        hide_index=True,
+        width="stretch"
+    )
+st.markdown("---")
+# Monthly precipitation totals
+monthly_precip = filtered_df.groupby('month_name')['precipitation'].sum().reindex([
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+])
+fig_monthly_precip = px.bar(
+    x=monthly_precip.index,
+    y=monthly_precip.values,
+    labels={'x': 'Month', 'y': 'Total Precipitation (inches)'},
+    title='Monthly Precipitation Totals',
+    color=monthly_precip.values,
+    color_continuous_scale='Blues'
+)
+fig_monthly_precip.update_layout(height=400)
+st.plotly_chart(fig_monthly_precip, width="stretch")
+st.markdown("---")
 st.markdown(
     Components.page_header(
         "❄️ Snow Patterns"
