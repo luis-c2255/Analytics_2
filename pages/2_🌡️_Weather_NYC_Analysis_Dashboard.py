@@ -322,7 +322,7 @@ st.markdown(
         "❄️ Snow Patterns"
     ), unsafe_allow_html=True
 )
-st.subheader(":orange[Snow Analysis]", divider="orange")
+st.subheader("☃️ :orange[Snow Analysis]", divider="orange")
 # Snow depth over time
 fig_snow = make_subplots(
     rows=2, cols=1,
