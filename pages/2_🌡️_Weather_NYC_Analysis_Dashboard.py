@@ -513,19 +513,19 @@ st.markdown(
 col1, col2 = st.columns(2)
 
 with col1:
-x_var = st.selectbox(
-"Select X-axis variable",
-options=['date', 'average temperature', 'precipitation', 'snow fall', 'snow depth', 'temp_range'],
-index=0
-)
+    x_var = st.selectbox(
+    "Select X-axis variable",
+    options=['date', 'average temperature', 'precipitation', 'snow fall', 'snow depth', 'temp_range'],
+    index=0
+    )
 
 with col2:
-y_var = st.selectbox(
-"Select Y-axis variable",
-options=['average temperature', 'maximum temperature', 'minimum temperature',
-'precipitation', 'snow fall', 'snow depth', 'temp_range'],
-index=0
-)
+    y_var = st.selectbox(
+    "Select Y-axis variable",
+    options=['average temperature', 'maximum temperature', 'minimum temperature',
+    'precipitation', 'snow fall', 'snow depth', 'temp_range'],
+    index=0
+    )
 
 # Chart type
 chart_type = st.radio(
@@ -543,14 +543,14 @@ index=0
 
 # Generate custom chart
 if chart_type == 'Scatter':
-fig_custom = px.scatter(
-filtered_df,
-x=x_var,
-y=y_var,
-color=color_by,
-title=f'{y_var} vs {x_var}',
-hover_data=['date', 'average temperature', 'precipitation']
-)
+    fig_custom = px.scatter(
+    filtered_df,
+    x=x_var,
+    y=y_var,
+    color=color_by,
+    title=f'{y_var} vs {x_var}',
+    hover_data=['date', 'average temperature', 'precipitation']
+    )
 elif chart_type == 'Line':
 fig_custom = px.line(
 filtered_df,
