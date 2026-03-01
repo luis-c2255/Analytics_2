@@ -1016,25 +1016,16 @@ st.markdown(
 st.divider()
 with st.expander("📋 RISK ASSESSMENT PROTOCOL"):
     st.markdown("""
-            <ol style="margin: 0; padding-left: 20px;">
-                <li> <strong>Prioritize MMSE screening for patients over 65 with: </strong>
-                    <ul>
-                        <li>Low functional assessment scores</li>
-                        <li>Multiple cognitive symptoms (≥3)</li>
-                        <li>Family history of Alzheimer's </li>
-                    </ul>
-                </li>
-                <li> <strong>Monitor high-risk indicators:</strong>
-                    <ul>
-                        <li>MMSE scores below 24 (mild cognitive impairment threshold)</li>
-                        <li>Functional assessment scores below 5 </li>
-                        <li>Presence of memory complaints + disorientation</li>
-                    </ul>
-                </li>
-            </ol>
-            """,
-                "error"
-            )
+                **Prioritize MMSE screening for patients over 65 with:**
+                    - Low functional assessment scores
+                    - Multiple cognitive symptoms (≥3)
+                    - Family history of Alzheimer's 
+
+                **Monitor high-risk indicators:**
+                    - MMSE scores below 24 (mild cognitive impairment threshold)
+                    - Functional assessment scores below 5 
+                    - Presence of memory complaints + disorientation
+                """)
     
 st.divider()
 with st.container(border=True):
