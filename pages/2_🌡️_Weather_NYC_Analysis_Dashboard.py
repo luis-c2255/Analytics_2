@@ -195,7 +195,7 @@ with col1:
                 x=monthly_avg.index,
                 y=monthly_avg['average temperature'],
                 name='Avg Temperature',
-                marker_color='lightseagreen'
+                marker_color='lightseagreen',
                 hovertemplate='%{x}Avg: %{y:.1f}°F'
             ))
     fig_monthly.update_layout(
