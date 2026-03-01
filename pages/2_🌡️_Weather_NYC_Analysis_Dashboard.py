@@ -416,11 +416,11 @@ with col1:
             textfont={"size": 10},
             hovertemplate='%{y} vs %{x}Correlation: %{z:.3f}'
         ))
-        fig_corr.update_layout(
+    fig_corr.update_layout(
             height=450,
             title="Correlation Matrix"
         )
-        st.plotly_chart(fig_corr, width="stretch")
+    st.plotly_chart(fig_corr, width="stretch")
 
 with col2:
     # Temperature variability
