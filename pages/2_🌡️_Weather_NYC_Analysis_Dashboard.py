@@ -128,7 +128,7 @@ with col5:
             card_type="info"
         ), unsafe_allow_html=True
     )
-st.markdown("---")
+st.markdown("  ")
 st.markdown(
     Components.page_header(
         "📈 Temperature Trends"
