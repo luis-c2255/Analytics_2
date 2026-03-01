@@ -900,7 +900,7 @@ with col4:
 top_risk = fi.iloc[0] 
 top_protective = lr_coef[lr_coef["Coefficient"] < 0].iloc[0]
 st.divider()
-col1, col2, col3 = st.columns(3, border=True)
+col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(
         Components.insight_box(
@@ -948,7 +948,7 @@ with col3:
             "info"
         ), unsafe_allow_html=True
     )
-col1, col2 = st.columns(2, border=True)
+col1, col2 = st.columns(2)
 with col1:
     st.markdown(
         Components.insight_box(
@@ -978,7 +978,7 @@ with col2:
             "warning"
         ), unsafe_allow_html=True
     )
-col1, col2 = st.columns(2, border=True)
+col1, col2 = st.columns(2)
 with col1:
     st.markdown(
         Components.insight_box(
