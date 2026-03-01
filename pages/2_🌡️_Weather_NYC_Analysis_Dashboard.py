@@ -593,7 +593,7 @@ with col5:
         ), unsafe_allow_html=True
     )
 
-st.divider()
+st.markdown("  ")
 st.markdown(
     Components.page_header(
         "🔍 Custom Explorer"
@@ -705,7 +705,7 @@ mime='text/csv'
 )
 
 # Footer with insights summary
-st.markdown("---")
+st.markdown("  ")
 st.subheader("🎯 :red[Key Takeaways from Analysis]", divider="red")
 
 col1, col2, col3 = st.columns(3)
