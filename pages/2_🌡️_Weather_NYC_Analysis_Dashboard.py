@@ -128,12 +128,13 @@ with col5:
             card_type="info"
         ), unsafe_allow_html=True
     )
-
+st.markdown("---")
 st.markdown(
     Components.page_header(
         "📈 Temperature Trends"
     ), unsafe_allow_html=True
 )
+
 st.subheader(":blue[Temperature Evolution Over Time]", divider="blue")
 # Interactive line chart
 fig_temp = go.Figure()
