@@ -364,32 +364,51 @@ st.markdown("---")
 # Snow statistics
 col1, col2, col3 = st.columns(3)
 
-snowy_days = filtered_df[filtered_df['snow fall'] > 0]
 with col1:
-    st.markdown("#### ❄️ Snowfall Stats")
-    st.write(f"Total Snowfall: {filtered_df['snow fall'].sum():.2f}\"")
-    st.write(f"Snowy Days: {len(snowy_days)}")
-    if len(snowy_days) > 0:
-        st.write(f"Avg per Snowy Day: {snowy_days['snow fall'].mean():.2f}\"")
-
+    st.markdown(
+        Components.insight_box(
+            "❄️ Snowfall Stats",
+            """
+            <ul style="margin= 0; padding-left: 20px;">
+                <li> <strong>Total Snowfall:</strong> 36.07"</li>
+                <li> <strong>Snowy Days:</strong> 25</li>
+                <li> <strong>Average Snowy Days:</strong> 1.44"</li>
+            </ul>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
 with col2:
-    st.markdown("#### 🏔️ Snow Depth Stats")
-    st.write(f"Max Depth: {filtered_df['snow depth'].max():.2f}\"")
-    st.write(f"Avg Depth: {filtered_df['snow depth'].mean():.2f}\"")
-    days_with_snow = (filtered_df['snow depth'] > 0).sum()
-    st.write(f"Days with Snow on Ground: {days_with_snow}")
-
+    st.markdown(
+        Components.insight_box(
+            "🏔️ Snow Depth Stats",
+            """
+            <ul style="margin= 0; padding-left: 20px;">
+                <li> <strong>Max Depth:</strong> 22.00"</li>
+                <li> <strong>Average Depth:</strong> 0.28"</li>
+                <li> <strong>Days Snow on Ground:</strong> 20</li>
+            </ul>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
 with col3:
-    st.markdown("#### 🌨️ Extreme Events")
-    if len(snowy_days) > 0:
-        snowiest = snowy_days.loc[snowy_days['snow fall'].idxmax()]
-        st.write(f"Snowiest Day:")
-        st.write(f"{snowiest['date'].strftime('%B %d, %Y')}")
-        st.write(f"{snowiest['snow fall']:.2f}\" of snow")
-        deepest = filtered_df.loc[filtered_df['snow depth'].idxmax()]
-        st.write(f"Deepest Snow:")
-        st.write(f"{deepest['date'].strftime('%B %d, %Y')}")
-        st.write(f"{deepest['snow depth']:.2f}\" depth")
+    st.markdown(
+        Components.insight_box(
+            "🌨️ Extreme Events",
+            """
+            <ul style="margin= 0; padding-left: 20px;">
+                <li> <strong>Snowiest Day</strong> January 23, 2016 = 27.30" of snow</li>
+                <li> <strong>Deepest Snow</strong> January 24, 2016 = 22.00" depth</li>
+            </ul>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
+
 st.markdown("---")
 st.markdown(
     Components.page_header(
@@ -440,11 +459,37 @@ with col2:
         )
     st.plotly_chart(fig_var, width="stretch")
 st.markdown("---")
-st.write(f"Average Daily Range: {filtered_df['temp_range'].mean():.1f}°F")
-st.write(f"Most Variable Day: {filtered_df['temp_range'].max():.0f}°F")
-st.write(f"Least Variable Day: {filtered_df['temp_range'].min():.0f}°F")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Average Daily Range:",
+            value=f"{filtered_df['temp_range'].mean():.1f}°F",
+            delta="📆",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Most Variable Day:",
+            value=f"{filtered_df['temp_range'].max():.0f}°F",
+            delta="➕",
+            card_type="success"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="Least Variable Day:",
+            value=f"{filtered_df['temp_range'].min():.0f}°F",
+            delta="➖",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+st.markdown("---")
 # Seasonal comparison
-st.markdown("#### 🍂 Seasonal Breakdown")
+st.subheader("🍂 :orange[Seasonal Breakdown]", divider="orange")
 
 seasons = {
 'Winter': [12, 1, 2],
@@ -501,8 +546,62 @@ hovermode='x unified'
 
 st.plotly_chart(fig_seasonal, width="stretch")
 
-# Display seasonal table
-st.dataframe(seasonal_df, width="stretch", hide_index=True)
+col1, col2, col3, col4, col5, col6
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Season",
+            value="Fall",
+            delta="🍂",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Avg Temperature (°F)",
+            value=f"{round(season_df['average temperature'].mean(), 1)}",
+            delta="🌡️",
+            card_type="error"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title='Total Precipitation (")',
+            value=f"{round(season_df['precipitation'].sum(), 2)}",
+            delta="🌧️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col4:
+    st.markdown(
+        Components.metric_card(
+            title='Total Snowfall (")',
+            value=f"{round(season_df['snow fall'].sum(), 2)}",
+            delta="❄️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col5:
+    st.markdown(
+        Components.metric_card(
+            title='Rainy Days', 
+            value=f"{season_df['is_rainy'].sum()}",
+            delta="💦",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col6:
+    st.markdown(
+        Components.metric_card(
+            title='Snowy Days', 
+            value=f"{season_df['is_snowy'].sum()}",
+            delta="🌨️",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+
 
 st.markdown(
     Components.page_header(
