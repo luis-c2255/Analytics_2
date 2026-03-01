@@ -50,7 +50,7 @@ st.markdown(
 st.sidebar.header("🔧 Filters & Controls")
 
 # Date range filter
-date_range = stsidebar.date_input(
+date_range = st.sidebar.date_input(
     "Select Date Range",
     value=(['date'].min(), df['date'].max()),
     min_value=df['date'].min(),
