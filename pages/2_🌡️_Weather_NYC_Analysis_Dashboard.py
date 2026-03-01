@@ -458,7 +458,7 @@ with col2:
             height=450,
         )
     st.plotly_chart(fig_var, width="stretch")
-
+st.space("stretch")
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(
