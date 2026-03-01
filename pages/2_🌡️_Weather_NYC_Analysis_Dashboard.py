@@ -248,7 +248,7 @@ with st.container():
     st.plotly_chart(fig_precip, width="stretch")
 st.markdown("---")
 st.subheader("📈 :red[Precipitation Stats]", divider="red")
-col1, col2, col3, col4, col5 = st.columnns(5)
+col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     rainy_df = filtered_df[filtered_df['precipitation'] > 0]
     st.markdown(
