@@ -448,7 +448,7 @@ fig_scattter.add_trace(go.Scatter(
     hovertemplate='Date: %{text}',
                     'Volume: %{x:,.0f}',
                     'Abs Return: %{y:.2f}%'
-))
+    ))
 fig_scatter.update_layout(
     xaxis_title='Trading Volume',
     yaxis_title='Absolute Daily Return (%)',
