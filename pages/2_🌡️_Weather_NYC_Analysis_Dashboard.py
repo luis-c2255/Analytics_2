@@ -501,7 +501,7 @@ fig_heat = go.Figure(data=go.Heatmap(
     colorbar=dict (title='Normalized Value')
 ))
 
-fig.update_layout(
+fig_heat.update_layout(
     title={
         'text': 'Monthly Temperature & Precipitation Patterns',
         'font': {'size': 14, 'family': 'Arial, sans-serif'},
