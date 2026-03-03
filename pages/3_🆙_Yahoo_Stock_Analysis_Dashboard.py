@@ -617,14 +617,14 @@ with tab3:
                 display_df = display_df.sort_values('Daily_Return', ascending=True)
                 st.dataframe(display_df.head(n_rows), width="stretch")
 
-                # Download button
-                csv = display_df.to_csv(index=False).encode('utf-8')
-                st.download_button(
-                    label="📥 Download Filtered Data as CSV",
-                    data=csv,
-                    file_name=f"stock_data_{date_range[0]}_{date_range[1]}.csv",
-                    mime="text/csv"
-                )
+    # Download button
+    csv = display_df.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="📥 Download Filtered Data as CSV",
+        data=csv,
+        file_name=f"stock_data_{date_range[0]}_{date_range[1]}.csv",
+        mime="text/csv"
+    )
 st.markdown("   ")
 st.subheader("💡 :yellow[Key Insights Summary]", divider="yellow")
 col1, col2, col3 = st.columns(3)
