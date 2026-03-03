@@ -364,6 +364,65 @@ fig_sr.update_layout(
     hovermode='x unified'
 )
 st.plotly_chart(fig_sr, width="stretch")
+
+st.markdown("   ")
+st.subheader("📑 :green[Current Technical Levels]", divider="green")
+# Current levels
+recent_support = filtered_df['Support_50D'].iloc[-1]
+recent_resistance = filtered_df['Resistance_50D'].iloc[-1]
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Current Price",
+            value=f"${current_price:,.2f}",
+            delta="",
+            card_type="error"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Support",
+            value=f"${recent_support:,.2f} ({((current_price - recent_support)/current_price)*100:.2f}% away)",
+            delta="",
+            card_type="error"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="Resistance",
+            value=f"${recent_resistance:,.2f} ({((recent_resistance - current_price)/current_price)*100:.2f}% away)",
+            delta="",
+            card_type="error"
+        ), unsafe_allow_html=True
+    )
+st.markdown("   ")
+st.subheader("📅 :blue[Monthly Performance Analysis]", divider="blue")
+# Calculate monthly returns
+month_names = ['January', 'February', 'March', 'April', 'May', 'June',
+'July', 'August', 'September', 'October', 'November', 'December']
+
+monthly_returns = filtered_df.groupby('Month')['Daily_Returns'].mean().reindex(range(1, 13))
+
+fig_monthly = go.Figure()
+colors_monthly = ['green' if x > 0 else 'red' for x in monthly_returns]
+
+fig_monthly.add_trace(go.Bar(
+    x=month_names,
+    y=monthly_returns,
+    marker_color=colors_monthly,
+    text=[f"{x:.3f}%" for x in monthly_returns],
+    textposition='outside'
+))
+fig_monthly.update_layout(
+    xaxis_title='Month',
+    yaxis_title='Average Daily Return (%)',
+    height=400,
+    showlegend=False
+)
+st.plotly_chart(fig_monthly, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
