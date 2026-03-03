@@ -677,6 +677,57 @@ with col3:
             
             st.write(f"- Distance to Support: {support_dist:.2f}%")
             st.write(f"- Distance to Resistance: {resistance_dist:.2f}%")
+st.markdown("   ")
+st.subheader("📋 :orange[Actionable Business Recommendations]", divider="orange")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.insight_box(
+            "For Traders:",
+            """
+            <ol style="margin: 0; padding-left: 20px;">
+                <li>Use the 50-day and 200-day moving averages as trend indicators</li>
+                <li>Monitor volatility spikes (30-day rolling std > 90th percentile) for risk management</li>
+                <li>Pay attention to support/resistance levels for entry/exit points</li>
+                <li>High volume days often precede major price movements</li>
+            </ol>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+            Components.insight_box(
+                "For Portfolio Managers:",
+                """
+                <ol style="margin: 0; padding-left: 20px;">
+                    <li>Sharpe Ratio provides risk-adjusted return comparison</li>
+                    <li>Maximum Drawdown helps size positions appropriately</li>
+                    <li>Monthly seasonality can inform timing strategies</li>
+                    <li>Win rate analysis helps set realistic expectations</li>
+                </ol>
+                """,
+                "success"
+            ),
+            unsafe_allow_html=True
+        )
+with col3:
+    st.markdown(
+            Components.insight_box(
+                "For Risk Analysts:",
+                """
+                <ol style="margin: 0; padding-left: 20px;">
+                    <li>VaR (95%) quantifies daily loss exposure</li>
+                    <li>Volatility clustering indicates when to reduce leverage</li>
+                    <li>Drawdown analysis shows recovery patterns</li>
+                    <li>Correlation matrix aids in diversification decisions</li>
+                </ol>
+                """,
+                "error"
+            ),
+            unsafe_allow_html=True
+        )
 # ============================================
 # FOOTER
 # ============================================
