@@ -445,8 +445,8 @@ fig_scattter.add_trace(go.Scatter(
         opacity=0.6
     ),
     text=filtered_df['Date'].dt.strftime('%Y-%m-%d'),
-    hovertemplate='Date: %{text}
-                    Volume: %{x:,.0f}
+    hovertemplate='Date: %{text},
+                    Volume: %{x:,.0f},
                     Abs Return: %{y:.2f}%'
 ))
 fig_scatter.update_layout(
