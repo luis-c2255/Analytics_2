@@ -67,7 +67,12 @@ chart_type = st.sidebar.selectbox(
     "Price Chart Type",
     options = ['Candlestick', 'Line Chart']
 )
-
+# Title
+st.markdown(
+    Components.page_header(
+        "🆙 Yahoo Stock Analysis Dashboard"
+    ), unsafe_allow_html=True
+)
 st.sidebar.markdown("---")
 st.sidebar.markdown("📊 Dashboard shows comprehensive stock market analysis with technical indicators")
 
@@ -118,12 +123,7 @@ st.markdown("   ")
 st.subheader("📊 :rainbow[Price Movement & Trading Volume]", divider="rainbow")
 
 
-# Title
-st.markdown(
-    Components.page_header(
-        "🆙 Yahoo Stock Analysis Dashboard"
-    ), unsafe_allow_html=True
-)
+
 # ============================================
 # FOOTER
 # ============================================
