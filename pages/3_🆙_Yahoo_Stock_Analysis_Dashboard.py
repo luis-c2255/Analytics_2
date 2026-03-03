@@ -426,6 +426,9 @@ st.plotly_chart(fig_monthly, width="stretch")
 st.markdown("   ")
 st.subheader(":rainbow[Seasonal Patterns]", divider="rainbow")
 col1, col2 = st.columns(2)
+# Best and worst months
+best_month = month_names[monthly_returns.idxmax() - 1]
+worst_month = month_names[monthly_returns.idxmin() - 1]
 with col1:
     st.success(f"- Best Month: {best_month} ({monthly_returns.max():.3f}%)")
 with col2:
