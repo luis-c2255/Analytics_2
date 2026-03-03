@@ -137,10 +137,10 @@ div[data-testid="stSidebarNavSearch"] input {
     padding-top: 2rem;
 }
 [data-testid="stSidebarNav"] li {
-    background-color: #811818; /* Darker blue background */
+    background-color: #811818; 
     border-radius: 10px;
     margin-bottom: 10px;
-    border: 1px solid #FF8D5C; /* Your Mint Leaf color */
+    border: 1px solid #FF8D5C; 
     transition: 0.3s;
 }
 [data-testid="stSidebarNav"] li:hover {
@@ -172,9 +172,9 @@ div[data-testid="stSidebarNavSearch"] input {
 } 
 /* Download button */
 .stDownloadButton > button {
-    background-color: #4cc9a6;
-    color: darkgreen;
+    background-color: #FF621F;
+    color: #811818;
 }
 .stDownloadButton > button:hover {
-    background-color: #3A8DFF;
+    background-color: #FF8D5C;
 }
