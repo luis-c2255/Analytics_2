@@ -434,7 +434,7 @@ with col2:
 st.markdown("   ")
 st.subheader("💹 :green[Volume vs Price Movement]", divider="green")
 fig_scatter = go.Figure()
-colors_scatter = ["green" if x > 0 ese 'red' for x in filtered_df['Daily_Return']]
+colors_scatter = ["green" if x > 0 else 'red' for x in filtered_df['Daily_Return']]
 fig_scattter.add_trace(go.Scatter(
     x=filtered_df['Volume'],
     y=filtered_df['Daily_Return'].abs(),
