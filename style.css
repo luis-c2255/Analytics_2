@@ -173,7 +173,7 @@ div[data-testid="stSidebarNavSearch"] input {
 /* Download button */
 .stDownloadButton > button {
     background-color: #FF621F;
-    color: white;
+    color: #811818;
     font-weight: 600;
 }
 .stDownloadButton > button:hover {
