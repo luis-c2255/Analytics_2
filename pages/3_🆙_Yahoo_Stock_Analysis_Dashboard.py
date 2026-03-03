@@ -26,7 +26,7 @@ def load_data():
     df['Price_Range'] = df['High'] - df['Low']
     df['Volume_MA_20'] = df['Volume'].rolling(window=20).mean()
     df['Close_MA_50'] = df['Close'].rolling(window=50).mean()
-    df['Close_MA_200'] = df[Close].rolling(window=200).mean()
+    df['Close_MA_200'] = df['Close'].rolling(window=200).mean()
     df['Volatility_30D'] = df['Daily_Return'].rolling(window=30).std()
     df['Support_50D'] = df['Low'].rolling(window=50).min()
     df['Resistance_50D'] = df['High'].rolling(window=50).max()
