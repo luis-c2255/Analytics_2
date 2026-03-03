@@ -283,7 +283,7 @@ fig_vol.add_trace(go.Scatter(
 ))
 # Add threshold line
 vol_threshold = filtered_df['Volatility_30D'].quantile(0.90)
-fig_vol.add.hline(
+fig_vol.add_hline(
     y=vol_threshold,
     line_dash='dash',
     line_color='red',
