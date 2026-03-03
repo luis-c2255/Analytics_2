@@ -76,7 +76,7 @@ st.markdown(
         "🆙 Yahoo Stock Analysis Dashboard"
     ), unsafe_allow_html=True
 )
-st.sidebar.markdown("   ")
+st.markdown("   ")
 # Main metrics
 col1, col2, col3, col4 = st.columns(4)
 with col1:
