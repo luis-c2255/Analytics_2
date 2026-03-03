@@ -461,6 +461,60 @@ with col2:
             height=450,
         )
     st.plotly_chart(fig_var, width="stretch")
+
+monthly_pivot = df.pivot_table(
+    values='average temperature',
+    index='month',
+    aggfunc='mean'
+).reindex(range(1, 13))
+
+monthly_pivot_precip = df.pivot_table(
+    values='precipitation',
+    index='month',
+    aggfunc='sum'
+).reindex(range(1, 13))
+
+combined_data = pd.DataFrame({
+    'Avg Temperature': monthly_pivot.values.flatten(),
+    'Total Precipitation': monthly_pivot_precip.values.flatten()
+}, index=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+
+combined_data_normalized = (combined_data - combined_data.mean()) / combined_data.std()
+
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+y_labels = ['Avg Temperature', 'Total Precipitation']
+
+z_normalized = combined_data_normalized.T.values
+z_original = combined_data.T.values
+
+text_labels = [[f'{val:.1f}' for val in row] for row in z_original]
+
+fig_heat = go.Figure(data=go.Heatmap(
+    z=z_normalized,
+    x=months,
+    y=y_labels,
+    text=text_labels,
+    texttemplate='%{text}',
+    textfont={"size": 10},
+    colorscale='RdYlBu_r',
+    zmid=0,
+    colorbar=dict (title='Normalized Value')
+))
+
+fig.update_layout(
+    title={
+        'text': 'Monthly Temperature & Precipitation Patterns',
+        'font': {'size': 14, 'family': 'Arial, sans-serif'},
+        'x': 0.5,
+        'xanchor': 'center'
+    },
+    xaxis_title='Month',
+    yaxis_title='',
+    width=800,
+    height=400
+)
+st.plotly_chart(fig_heat, width="stretch")
+
 st.markdown("  ")
 col1, col2, col3 = st.columns(3)
 with col1:
