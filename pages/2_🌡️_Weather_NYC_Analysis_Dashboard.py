@@ -814,6 +814,116 @@ with col3:
         unsafe_allow_html=True
     )
 
+st.markdown("  ")
+st.subheader("💡 :yellow[Key Recommendations]", divider="yellow")
+st.markdown(
+        Components.insight_box(
+            "🎯 KEY RECOMMENDATIONS:",
+            """
+            <ul style="margin: 0; padding-left: 20px;">
+                <li> <strong>✅ Generally mild climate - </strong>suitable for outdoor activities most of the year</li>
+                <li> <strong>❄️ Significant snowfall (36 inches annually)</strong> snow removal budget essential</li>
+            </ul>
+            """,
+            "warning"
+        ),
+        unsafe_allow_html=True
+    )
+st.markdown("  ")
+st.subheader("💼 :orange[Industry-Specific Recommendations]", divider="orange")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.insight_box(
+            "🏗️ Construction:",
+            """
+            <ul style="margin: 0; padding-left: 20px;">
+                <li> <strong>Optimal building months: </strong>Apr-Oct (avg temp > 10°C)</li>
+                <li> <strong>Rain delays expected:</strong> ~84 days</li>
+                <li> <strong>Winter preparation needed:</strong> Nov-Mar</li>
+            </ul>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+            Components.insight_box(
+                "🌾 Agriculture:",
+                """
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li> <strong>Growing season:</strong> ~231 days above 10°C</li>
+                    <li> <strong>Total growing season precipitation:</strong> 70.6 centimeters</li>
+                    <li> <strong>Frost risk periods: </strong> 53 days below freezing</li>
+                </ul>
+                """,
+                "success"
+            ),
+            unsafe_allow_html=True
+        )
+with col3:
+    st.markdown(
+            Components.insight_box(
+                "🏨 Tourism/Hospitality:",
+                """
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li> <strong>Peak comfort months: </strong>May-Sep (warm, moderate precipitation)</li>
+                    <li> <strong>Off-season discount periods: </strong> Dec-Feb (cold, snow)</li>
+                    <li> <strong>Shoulder seasons: </strong> Mar-Apr, Oct-Nov (variable weather)</li>
+                </ul>
+                """,
+                "error"
+            ),
+            unsafe_allow_html=True
+        )
+st.markdown("  ")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.insight_box(
+            "🚛 Logistics/Transportation:",
+            """
+            <ul style="margin: 0; padding-left: 20px;">
+                <li> <strong>Weather delay risk days: </strong>28 days</li>
+                <li> <strong>Heavy snow events: </strong> 1 days requiring special protocols</li>
+                <li> <strong>Clear weather reliability: </strong> 222 days (61%)</li>
+            </ul>
+            """,
+            "info"
+        ),
+        unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+            Components.insight_box(
+                "⚡ Energy/Utilities:",
+                """
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li> <strong>Peak heating demand: </strong> 66 days below 4,5°C</li>
+                    <li> <strong>Peak cooling demand: </strong> 69 days above 24°C</li>
+                    <li> <strong>Moderate demand period: </strong> 231 days</li>
+                </ul>
+                """,
+                "success"
+            ),
+            unsafe_allow_html=True
+        )
+with col3:
+    st.markdown(
+            Components.insight_box(
+                "📅 Event Planning:",
+                """
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li> <strong>Lowest rain risk: </strong>March (best for outdoor events)</li>
+                    <li> <strong>Best weather windows: </strong> Late spring & early fall</li>
+                    <li> <strong>Indoor backup needed: </strong> 38% of days have precipitation</li>
+                </ul>
+                """,
+                "error"
+            ),
+            unsafe_allow_html=True
+        )
 # Sidebar - Additional Information
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📚 About This Dashboard")
