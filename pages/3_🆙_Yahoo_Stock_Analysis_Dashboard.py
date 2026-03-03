@@ -123,8 +123,80 @@ st.markdown("   ")
 # Row 1: Price Chart and Volume
 st.subheader("📊 :rainbow[Price Movement & Trading Volume]", divider="rainbow")
 
+fig = make_subplots(
+    rows=2, cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.05,
+    row_heights=[0.7, 0.3],
+    subplot_titles=('Stock Price', 'Trading Volume')
+)
+# Price chart
+if chart_type == 'Candlestick':
+    fig.add_trace(
+        go.Candlestick(
+            x=filtered_df['Date'],
+            open=filtered_df['Open'],
+            high=filtered_df['High'],
+            low=filtered_df['Low'],
+            close=filtered_df['Close'],
+            name='Price'
+        ),
+        row=1, col=1
+    )
+else:
+    fig.add_trace(
+        go.Scatter(
+            x=filtered_df['Date'],
+            y=filtered_df['Close'],
+            mode='lines',
+            name='Close Price',
+            line=dict(color='blue', width=2)
+        ),
+        row=1, col=1
+    )
+# Add moving averages
+if '50-Day MA' in ma_options:
+    fig.add_trace(
+        go.Scatter(
+            x=filtered_df['Date'],
+            y=filtered_df['Close_MA_50'],
+            name='50-Day MA',
+            line=dict(color='orange', width=1.5)
+        ),
+        row=1, col=1
+    )
+if '200-Day MA' in ma_options:
+    fig.add_trace(
+        go.Scatter(
+            x=filtered_df['Date'],
+            y=filtered_df['Close_MA_200'],
+            name='200-Day MA',
+            line=dict(color='red', width=1.5)
+        ),
+        row=1, col=1
+    )
+    # Volume
+    colors = ['red' if row['Close'] < row['Open'] else 'green' for idx, row in filtered_df.iterrows()]
+    fig.add_trace(
+        go.Bar(
+            x=filtered_df['Date'],
+            y=filtered_df['Volume'],
+            name='Volume',
+            marker_color=colors,
+            showlegend=False
+        ),
+        row=2, col=1
+    )
+    fig.update_layout(
+        height=600,
+        xaxis_rangeslider_visible=False,
+        hovermode='x unified'
+    )
+    fig.update_xaxes(title_text="Date", row=2, col=1)
+    fig.update_yaxes(title_text='Price ($)', row=1, col=1)
+    fig.update_yaxes(title_text='Volume', row=2, col=1)
 
-
+    st.plotly_chart(fig, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
