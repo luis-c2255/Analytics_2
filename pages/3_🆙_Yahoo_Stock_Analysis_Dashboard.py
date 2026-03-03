@@ -298,7 +298,7 @@ fig_vol.update_layout(
 st.plotly_chart(fig_vol, width="stretch")
 
 st.markdown("   ")
-st.subheader("💣 :purple[Volatility Analysis]", divider="purple")
+st.subheader("💣 :violet[Volatility Analysis]", divider="violet")
 # High volatility periods
 high_vol_count = len(filtered_df[filtered_df['Volatility_30D'] >vol_threshold])
 col1, col2, col3 = st.columns(3)
