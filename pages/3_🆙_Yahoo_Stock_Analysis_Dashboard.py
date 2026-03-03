@@ -197,6 +197,173 @@ if '200-Day MA' in ma_options:
     fig.update_yaxes(title_text='Volume', row=2, col=1)
 
     st.plotly_chart(fig, width="stretch")
+
+st.markdown("   ")
+st.subheader("📈 :blue[Daily Returns Distribution]", divider="blue")
+
+fig_returns = go.Figure()
+fig_returns.add_trace(go.Histogram(
+    x=filtered_df['Daily_Return'].dropna(),
+    nbinsx=50,
+    marker_color='steelblue',
+    name='Daily Returns'
+))
+fig_returns.update_layout(
+    xaxis_title='Daily Return (%)',
+    yaxis_title='Frequency',
+    height=400,
+    showlegend=False
+)
+st.plotly_chart(fig_returns, width="stretch")
+
+st.markdown("   ")
+st.subheader("↩️ :blue[Return Statistics]", divider="blue")
+col1, col2, col3, col4, col5 = st.columns(5)
+with col1:
+    current_price = filtered_df['Close'].iloc[-1]
+    st.markdown(
+        Components.metric_card(
+            title="Mean",
+            value=f"{filtered_df['Daily_Return'].mean():.4f}%",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    total_return = ((filtered_df['Close'].iloc[-1] - filtered_df['Close'].iloc[0]) / filtered_df['Close'].iloc[0]) * 100
+    st.markdown(
+        Components.metric_card(
+            title="Median",
+            value=f"{filtered_df['Daily_Return'].median():.4f}%",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    avg_volume = filtered_df['Volume'].mean()
+    st.markdown(
+        Components.metric_card(
+            title="Std Dev",
+            value=f"{filtered_df['Daily_Return'].std():.4f}%",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col4:
+    volatility = filtered_df['Daily_Return'].std()
+    st.markdown(
+        Components.metric_card(
+            title="Best Day",
+            value=f"{filtered_df['Daily_Return'].max():.2f}%",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+with col5:
+    volatility = filtered_df['Daily_Return'].std()
+    st.markdown(
+        Components.metric_card(
+            title="Worst Day",
+            value=f"{filtered_df['Daily_Return'].min():.2f}%",
+            delta="",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+st.markdown("   ")
+st.subheader("⚡ :orange[Market Volatility (30-Day Rolling)]", divider="orange")
+
+fig_vol = go.Figure()
+fig_vol.add_trace(go.Scatter(
+    x=filtered_df['Date'],
+    y=filtered_df['Volatility_30D'],
+    mode='lines',
+    fill='tozeroy',
+    name='Volatility',
+    line=dict(color='purple', width=2)
+))
+# Add threshold line
+vol_threshold = filtered_df['Volatility_30D'].quantile(0.90)
+fig_vol.add.hline(
+    y=vol_threshold,
+    line_dash='dash',
+    line_color='red',
+    annotation_text=f"90th Percentile: {vol_threshold:.2f}%"
+)
+fig_vol.update_layout(
+    xaxis_title='Date',
+    yaxis_title='Volatility (%)',
+    height=400,
+    showlegend=False
+)
+st.plotly_chart(fig_vol, width="stretch")
+
+st.markdown("   ")
+st.subheader("💣 :purple[Volatility Analysis]", divider="purple")
+# High volatility periods
+high_vol_count = len(filtered_df[filtered_df['Volatility_30D'] >vol_threshold])
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Current 30D Volatility",
+            value=f"{filtered_df['Volatility_30D'].iloc[-1]:.4f}%",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Average Volatility",
+            value=f"{filtered_df['Volatility_30D'].mean():.4f}%",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="High Volatility Days",
+            value=f"{high_vol_count} ({high_vol_count/len(filtered_df)*100:.1f}%)",
+            delta="",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+st.markdown("   ")
+st.subheader("🎯 :red[Support & Resistance Levels]", divider="red")
+
+# Support/Resistance and Monthly Performance
+# Use last 200 days for clearer visualization
+recent_data = filtered_df.tail(200)
+fig_sr = go.Figure()
+fig_sr.add_trace(go.Scatter(
+    x=recent_data['Date'],
+    y=recent_data['Close'],
+    mode='lines',
+    name='Close Price',
+    line=dict(color='blue', width=2)
+))
+fig_sr.add_trace(go.Scatter(
+    x=recent_data['Date'],
+    y=recent_data['Support_50D'],
+    mode='lines',
+    name='Support (50D)',
+    line=dict(color='green', width=2, dash='dash')
+))
+fig_sr.add_trace(go.Scatter(
+    x=recent_data['Date'],
+    y=recent_data['Resistance_50D'],
+    mode='lines',
+    name='Resistance (50D)',
+    line=dict(color='red', width=2, dash='dash')
+))
+fig_sr.update_layout(
+    xaxis_title='Date',
+    yaxis_title='Price ($)',
+    height=400,
+    hovermode='x unified'
+)
+st.plotly_chart(fig_sr, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
