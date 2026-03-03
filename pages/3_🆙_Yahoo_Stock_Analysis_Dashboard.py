@@ -88,7 +88,7 @@ with col2:
     st.markdown(
         Components.metric_card(
             title="Total Return",
-            value=f"{total_return:.2f}%", delta=f"{total_return:.2f}%",
+            value=f"{total_return:.2f}%",
             delta="🔁",
             card_type="info"
         ), unsafe_allow_html=True
