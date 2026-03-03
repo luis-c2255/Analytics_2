@@ -457,6 +457,225 @@ fig_scatter.update_layout(
     showlegend=False
 )
 st.plotly_chart(fig_scatter, width="stretch")
+
+# Correlation Analysis
+vol_return_corr = filtered_df[['Volume', 'Daily_Return']].corr().iloc[0, 1]
+st.subheader(":rainbow[Volume Insights]", divider="rainbow")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.info(f"- Correlation (Volume vs Return): {vol_return_corr:.4f}")
+with col2:
+    st.warning(f"- High volume often indicates institutional activity")
+with col3:
+    st.success(f"- Max Volume Day: {filtered_df.loc[filtered_df['Volume'].idxmax(), 'Date'].strftime('%Y-%m-%d')}")
+
+st.markdown("   ")
+st.subheader("🔗 :yellow[Feature Correlation Matrix]", divider="yellow")
+
+# Select key features for correlation
+corr_features = ['Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return', 'Price_Range']
+corr_matrix = filtered_df[corr_features].corr()
+
+fig_corr = go.Figure(data=go.Heatmap(
+    z=corr_matrix.values,
+    x=corr_matrix.columns,
+    y=corr_matrix.columns,
+    colorscale='RdBu',
+    zmid=0,
+    text=corr_matrix.values,
+    texttemplate='%{text:.2f}',
+    textfont={'size': 10},
+    colorbar=dict(title='Correlation')
+))
+fig_corr.update_layout(
+    height=400,
+    xaxis={'side': 'bottom'}
+)
+st.plotly_chart(fig_corr, width="stretch")
+
+st.subheader(":rainbow[Correlation Insights]", divider="rainbow")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.info("Strong correlations between OHLC prices (expected)")
+with col2:
+    st.info("Volume often independent of price direction")
+with col3:
+    st.info("Price_Range indicates daily volatility")
+
+st.markdown("   ")
+st.subheader("🔍 :violet[Advanced Analytics]", divider="violet")
+
+tab1, tab2, tab3 = st.tabs(["📊 Year-over-Year", "🎲 Risk Metrics", "📋 Data Table"])
+with tab1:
+    # Yearly performance
+    yearly_data = filtered_df.groupby('Year').agg({
+        'Close': ['first', 'last'],
+        'Volume': 'mean',
+        'Daily_Return': ['mean', 'std']
+    }).round(2)
+    yearly_data.columns = ['Open Price', 'Close Price', 'Avg Volume', 'Avg Return (%)', 'Volatility (%)']
+    yearly_data['YoY Return (%)'] = ((yearly_data['Close Price'] - yearly_data['Open Price']) / yearly_data['Open Price'] * 100).round(2)
+    st.write("Yearly Performance Summary:")
+    st.dataframe(yearly_data, width="stretch")
+    # Yearly returns chart
+    fig_yearly = go.Figure()
+    colors_yearly = ['green' if x > 0 else 'red' for x in yearly_data['YoY Return (%)']]
+    fig_yearly.add_trace(go.Bar(
+        x=yearly_data.index,
+        y=yearly_data['YoY Return (%)'],
+        marker_color=colors_yearly,
+        text=[f"{x:.2f}%" for x in yearly_data['YoY Return (%)']],
+        textposition='outside'
+    ))
+    fig_yearly.update_layout(
+        title='Year-over-Year-Returns',
+        xaxis_title='Year',
+        yaxis_title='Annual Return (%)',
+        height=400,
+        showlegend=False
+    )
+    st.plotly_chart(fig_yearly, width="stretch")
+with tab2:
+    st.write("Risk & Performance Metrics:")
+    # Calculate risk metrics
+    returns = filtered_df['Daily_Return'].dropna()
+    # Sharpe Ratio (assuming 0% risk-free rate, annualized)
+    sharpe_ratio = (returns.mean() / returns.std()) * np.sqrt(252)
+    # Maximum Drawdown
+    cumulative = (1 + returns / 100).cumprod()
+    running_max = cumulative.cummax()
+    drawdown = (cumulative - running_max) / running_max * 100
+    max_drawdown = drawdown.min()
+    # Value at Risk (VaR) - 95% confidence
+    var_95 = np.percentile(returns, 5)
+    # Sortino Ratio (downside deviation)
+    downside_returns = returns[returns < 0]
+    downside_std = downside_returns.std()
+    sortino_ratio = (returns.mean() / downside_std) * np.sqrt(252) if downside_std > 0 else 0
+
+    # Win Rate
+    win_rate = (len(returns[returns > 0]) / len(returns)) * 100
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Sharpe Ratio (Annualized)", f"{sharpe_ratio:.4f}")
+        st.metric("Sortino Ratio (Annualized)", f"{sortino_ratio:.4f}")
+    with col2:
+        st.metric("Maximum Drawdown", f"{max_drawdown:.2f}%")
+        st.metric("Value at Risk (95%)", f"{var_95:.2f}%")
+    with col3:
+        st.metric("Win Rate", f"{win_rate:.2f}%")
+        st.metric("Avg Win/Loss Ratio", f"{abs(returns[returns > 0].mean() / returns[returns < 0].mean()):.2f}")
+    # Drawdown chart
+    st.write("Drawdown Over Time:")
+    fig_dd = go.Figure()
+    fig_dd.add_trace(go.Scatter(
+        x=filtered_df['Date'],
+        y=drawdown,
+        mode='lines',
+        fill='tozeroy',
+        line=dict(color='red', width=1.5),
+        fillcolor='rgba(255, 0, 0, 0.3)'
+    ))
+    fig_dd.update_layout(
+        xaxis_title='Date',
+        yaxis_title='Drawdown (%)',
+        height=350,
+        showlegend=False
+    )
+    st.plotly_chart(fig_dd, width="stretch")
+    st.info("""
+    Metric Explanations:
+    - Sharpe Ratio: Risk-adjusted return (higher is better,>1 is good, >2 is excellent)
+    - Sortino Ratio: Like Sharpe but only considers downside volatility
+    - Maximum Drawdown: Largest peak-to-trough decline (lower is better)
+    - VaR 95%: Expected maximum loss on 95% of trading days
+    - Win Rate: Percentage of days with positive returns
+    """)
+with tab3:
+    st.write("Raw Data Table (Filtered by Date Range):")
+    # Display options
+    show_columns = st.multiselect(
+        "Select columns to display:",
+        options=filtered_df.columns.tolist(),
+        default=['Date', 'Open', 'High', 'Low', 'Close', 'Volume', 'Daily_Return']
+    )
+    # Number of rows to display
+    n_rows = st.slider("Number of rows to display:", min_value=10, max_value=len(filtered_df), value=50)
+    # Sort order
+    sort_order = st.radio("Sort by:", options=['Most Recent First', 'Oldest First', 'Highest Return', 'Lowest Return'])
+    display_df = filtered_df[show_columns].copy()
+    if sort_order == 'Most Recent First':
+        display_df = display_df.sort_values('Date', ascending=False)
+    elif sort_order == 'Oldest First':
+        display_df = display_df.sort_values('Date', ascending=True)
+    elif sort_order == 'Highest Return':
+        if 'Daily_Return' in show_columns:
+            display_df = display_df.sort_values('Daily_Return', ascending=False)
+        elif sort_order == 'Lowest Return':
+            if 'Daily_Return' in show_columns:
+                display_df = display_df.sort_values('Daily_Return', ascending=True)
+                st.dataframe(display_df.head(n_rows), width="stretch")
+
+                # Download button
+                csv = display_df.to_csv(index=False).encode('utf-8')
+                st.download_button(
+                    label="📥 Download Filtered Data as CSV",
+                    data=csv,
+                    file_name=f"stock_data_{date_range[0]}_{date_range[1]}.csv",
+                    mime="text/csv"
+                )
+st.markdown("   ")
+st.subheader("💡 :yellow[Key Insights Summary]", divider="yellow")
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.write("📈 Price Trends")
+    if total_return > 0:
+        st.success(f"✅ Positive return of {total_return:.2f}% over selected period")
+    else:
+        st.error(f"❌ Negative return of {total_return:.2f}% over selected period")
+    # Bull vs Bear days
+    bull_days = len(filtered_df[filtered_df['Close'] > filtered_df['Close_MA_200']])
+    bear_days = len(filtered_df) - bull_days
+    st.write(f"- Bull Market: {bull_days} days ({bull_days/len(filtered_df)*100:.1f}%)")
+    st.write(f"- Bear Market: {bear_days} days ({bear_days/len(filtered_df)*100:.1f}%)")
+with col2:
+    st.write("⚡ Volatility Profile")
+    current_vol = filtered_df['Volatility_30D'].iloc[-1]
+    avg_vol = filtered_df['Volatility_30D'].mean()
+    if current_vol > avg_vol * 1.2:
+        st.warning(f"⚠️ Current volatility ({current_vol:.2f}%) is elevated")
+    elif current_vol < avg_vol * 0.8:
+        st.info(f"📉 Current volatility ({current_vol:.2f}%)is below average")
+    else:
+        st.success(f"✅ Current volatility ({current_vol:.2f}%) is normal")
+        st.write(f"- Average Volatility: {avg_vol:.2f}%")
+        st.write(f"- Best Day Return: {filtered_df['Daily_Return'].max():.2f}%")
+        st.write(f"- Worst Day Return: {filtered_df['Daily_Return'].min():.2f}%")
+with col3:
+    st.write("🎯 Trading Signals")
+    # Simple technical signals
+    last_close = filtered_df['Close'].iloc[-1]
+    last_ma50 = filtered_df['Close_MA_50'].iloc[-1]
+    last_ma200 = filtered_df['Close_MA_200'].iloc[-1]
+    
+    if last_close > last_ma50 and last_close > last_ma200:
+        st.success("🟢 Bullish: Price above both MAs")
+    elif last_close < last_ma50 and last_close < last_ma200:
+        st.error("🔴 Bearish: Price below both MAs")
+    else:
+        st.warning("🟡 Mixed: Price between MAs")
+        
+        # Support/Resistance proximity
+        support_dist = ((last_close - recent_support) / last_close) * 100
+        resistance_dist = ((recent_resistance - last_close) / last_close) * 100
+
+        if support_dist < 2:
+            st.info("📍 Near support level")
+        elif resistance_dist < 2:
+            st.info("📍 Near resistance level")
+            
+            st.write(f"- Distance to Support: {support_dist:.2f}%")
+            st.write(f"- Distance to Resistance: {resistance_dist:.2f}%")
 # ============================================
 # FOOTER
 # ============================================
