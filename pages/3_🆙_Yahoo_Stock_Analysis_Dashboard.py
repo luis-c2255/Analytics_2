@@ -404,7 +404,7 @@ st.subheader("📅 :blue[Monthly Performance Analysis]", divider="blue")
 month_names = ['January', 'February', 'March', 'April', 'May', 'June',
 'July', 'August', 'September', 'October', 'November', 'December']
 
-monthly_returns = filtered_df.groupby('Month')['Daily_Returns'].mean().reindex(range(1, 13))
+monthly_returns = filtered_df.groupby('Month')['Daily_Return'].mean().reindex(range(1, 13))
 
 fig_monthly = go.Figure()
 colors_monthly = ['green' if x > 0 else 'red' for x in monthly_returns]
