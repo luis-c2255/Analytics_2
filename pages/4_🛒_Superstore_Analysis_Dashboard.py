@@ -618,10 +618,10 @@ with st.expander("5️⃣ SHIPPING & LOGISTICS OPTIMIZATION"):
 with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
     st.markdown("""
     **📅 Quarterly Performance:**
-    Q1: $1,991,957 sales, $238,246 profit
-    Q2: $2,873,552 sales, $325,397 profit
-    Q3: $3,478,375 sales, $400,825 profit
-    Q4: $4,298,618 sales, $502,989 profit
+    - Q1: $1,991,957 sales, $238,246 profit
+    - Q2: $2,873,552 sales, $325,397 profit
+    - Q3: $3,478,375 sales, $400,825 profit
+    - Q4: $4,298,618 sales, $502,989 profit
 
     📈 Peak Month: December
     📉 Lowest Month: February
