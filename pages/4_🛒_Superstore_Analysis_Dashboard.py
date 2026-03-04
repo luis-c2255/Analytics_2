@@ -315,7 +315,7 @@ fig_segment.add_trace(go.Bar(
 fig_segment.update_layout(
     title='Sales vs Profit by Customer Segment',
     barmode='group',
-    height=400
+    height=600
 )
 st.plotly_chart(fig_segment, width="stretch")
 
