@@ -339,7 +339,7 @@ fig_shipping = px.scatter(
     size_max=60
 )
 fig_shipping.update_traces(textposition='top center')
-fig_shipping.update_layout(height=400)
+fig_shipping.update_layout(height=600)
 st.plotly_chart(fig_shipping, width="stretch")
 
 st.markdown("   ")
