@@ -462,7 +462,7 @@ st.dataframe(
 )
 # ===== FOOTER WITH DOWNLOAD OPTIONS =====
 st.markdown("   ")
-st.sidebar.subheader("💾 :violet[Export Data]", divider="violet")
+st.sidebar.subheader("💾 :yellow[Export Data]", divider="yellow")
 
 csv_filtered = df_filtered.to_csv(index=False).encode('utf-8')
 st.sidebar.download_button(
