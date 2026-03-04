@@ -495,14 +495,14 @@ with st.expander("1️⃣ PROFITABILITY CONCERNS"):
     st.markdown("""
     - ⚠️ 2672 products are generating losses
     - 💸 Total losses: $920,646.16 (62.7% of total profit)
-
+    ---
     **📊 Top 5 Loss-Making Sub-Categories:**
     1. Tables: $144,123.15
     2. Bookcases: $101,446.30
     3. Phones: $96,417.66
     4. Chairs: $96,084.90
     5. Machines: $78,672.74
-
+    ---
     **✅ RECOMMENDATION:**
     - Investigate pricing strategy for loss-making products
     - Consider discontinuing products with consistent losses
@@ -522,7 +522,7 @@ with st.expander("2️⃣ REGIONAL PERFORMANCE GAPS"):
     23. Central Asia: -37.71% ($-7,282 profit)
 
     - ⚠️ 64.3% profit margin gap between best and worst regions
-
+    ---
     **✅ RECOMMENDATION:**
     - Study best practices from Canada and apply to Central Asia
     - Analyze market-specific factors (competition, pricing, customer preferences)
@@ -538,14 +538,14 @@ with st.expander("3️⃣ PRODUCT MIX OPTIMIZATION"):
     - Furniture: 6.94% margin | $4,110,452 sales
     
     - ⚠️ 422 high-volume products have <10% profit margin
-
-    **Top 5 High-Volume, Low-Margin Products:*
+    ---
+    **Top 5 High-Volume, Low-Margin Products:**
     1. Apple Smart Phone, Full Size... - 6.8% margin, $86,936 sales
     2. Office Star Executive Leather Armchair, Adjustable... - 9.3% margin, $50,662 sales
     3. Samsung Smart Phone, Cordless... - -0.4% margin, $48,653 sales
     4. Samsung Smart Phone, VoIP... - 8.6% margin, $45,406 sales
     5. Cisco Smart Phone, Cordless... - 9.8% margin, $41,022 sales
-
+    ---
     **✅ RECOMMENDATION:**
     - Renegotiate supplier prices for high-volume, low-margin items
     - Increase prices strategically on popular products with low margins
@@ -573,7 +573,7 @@ with st.expander("4️⃣ CUSTOMER SEGMENT PROFITABILITY"):
     - Customers: 3,207
     - Avg Profit/Customer: $86.38
     - Avg Sales/Customer: $720.25
-
+    ---
     **✅ RECOMMENDATION:**
     - Focus acquisition efforts on Home Office segment (highest margin)
     - Develop loyalty programs tailored to each segment
@@ -607,7 +607,7 @@ with st.expander("5️⃣ SHIPPING & LOGISTICS OPTIMIZATION"):
     - Profit Margin: 11.75%
     - Avg Shipping Cost: $40.14
     - Shipping as % of Sales: 8.16%
-
+    ---
     **✅ RECOMMENDATION:**
     - Negotiate better rates with shipping carriers for high-volume modes
     - Implement minimum order values for expensive shipping modes
@@ -625,7 +625,7 @@ with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
 
     📈 Peak Month: December
     📉 Lowest Month: February
-
+    ---
 
     **✅ RECOMMENDATION:**
     - Plan inventory and staffing for peak periods (December)
@@ -645,7 +645,7 @@ with st.expander("7️⃣ HIGH-VALUE CUSTOMER RETENTION"):
     3. Sanjit Chand: $8,205.38 profit, 35 orders
     4. Hunter Lopez: $7,816.57 profit, 24 orders
     5. Bill Eplett: $7,410.01 profit, 42 orders
-
+    ---
     **✅ RECOMMENDATION:**
     - Implement VIP customer program for top 20 customers
     - Assign dedicated account managers to high-value clients
@@ -672,7 +672,7 @@ with st.expander("8️⃣ DISCOUNT IMPACT ANALYSIS"):
     8. Lexmark MX611dhe Monochrome Laser Printer... - $5,269.97 loss
     9. GBC Ibimaster 500 Manual ProClick Binding System... - $5,098.57 loss
     10. Nokia Smart Phone, Full Size... - $5,056.81 loss
-
+    ---
     **✅ RECOMMENDATION:**
     - Review discount policies - heavy discounts may be eroding margins
     - Implement maximum discount thresholds by category
@@ -708,7 +708,7 @@ with st.expander("💰 POTENTIAL FINANCIAL IMPACT (Conservative Estimates)"):
     1. Eliminate 50% of product losses: +$460,323.08
     2. Improve overall margin by 2%: +$252,850.04
     3. Reduce shipping costs by 10%: +$135,808.57
-
+    ---
     **TOTAL POTENTIAL PROFIT INCREASE**: $848,981.69
     **Current Profit**: $1,467,457.29
     **Projected Profit**: $2,316,438.98
