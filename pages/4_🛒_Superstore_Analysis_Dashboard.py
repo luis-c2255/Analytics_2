@@ -462,34 +462,27 @@ st.dataframe(
 )
 # ===== FOOTER WITH DOWNLOAD OPTIONS =====
 st.markdown("   ")
-st.subheader("💾 :violet[Export Data]", divider="violet")
+st.sidebar.subheader("💾 :violet[Export Data]", divider="violet")
 
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    # Download filtered data
-    csv_filtered = df_filtered.to_csv(index=False).encode('utf-8')
-    st.download_button(
+csv_filtered = df_filtered.to_csv(index=False).encode('utf-8')
+st.sidebar.download_button(
         label="📥 Download Filtered Data (CSV)",
         data=csv_filtered,
         file_name='filtered_superstore_data.csv',
         mime='text/csv'
     )
 
-with col2:
-    # Download country summary
-    country_summary_csv = country_detail.to_csv(index=False).encode('utf-8')
-    st.download_button(
+country_summary_csv = country_detail.to_csv(index=False).encode('utf-8')
+st.sidebar.download_button(
         label="📥 Download Country Summary (CSV)",
         data=country_summary_csv,
         file_name='country_performance_summary.csv',
         mime='text/csv'
     )
 
-with col3:
-    # Download product summary
-    product_summary_csv = product_detail.to_csv(index=False).encode('utf-8')
-    st.download_button(
+
+product_summary_csv = product_detail.to_csv(index=False).encode('utf-8')
+st.sidebar.download_button(
         label="📥 Download Product Summary (CSV)",
         data=product_summary_csv,
         file_name='product_performance_summary.csv',
