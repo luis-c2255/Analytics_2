@@ -622,7 +622,7 @@ with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
     - Q2: $2,873,552 sales, $325,397 profit
     - Q3: $3,478,375 sales, $400,825 profit
     - Q4: $4,298,618 sales, $502,989 profit
-
+    ---
     📈 Peak Month: December
     📉 Lowest Month: February
     ---
