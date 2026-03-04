@@ -365,11 +365,9 @@ st.plotly_chart(fig_heatmap, width="stretch")
 
 st.markdown("   ")
 st.subheader("📋 :green[Detailed Performance Data]", divider="green")
-tab1, tab2, tab3, tab4 = st.tabs(["🌍 Countries", "📦 Sub-Categories", "🏷️ Products", "👤 Customers"])
 
-with tab1:
-    st.subheader(":blue[Country-Level Performance]")
-    country_detail = df_filtered.groupby('Country').agg({
+st.subheader("🌍 :blue[Country-Level Performance]")
+country_detail = df_filtered.groupby('Country').agg({
         'Sales': 'sum',
         'Profit': 'sum',
         'Order ID': 'nunique',
@@ -390,9 +388,9 @@ st.dataframe(
     width="stretch",
     height=700
 )
-with tab2:
-    st.subheader(":orange[Sub-Category Performance]")
-    subcat_detail = df_filtered.groupby('Sub-Category').agg({
+st.markdown("   ")
+st.subheader("📦 :orange[Sub-Category Performance]")
+subcat_detail = df_filtered.groupby('Sub-Category').agg({
         'Sales': 'sum',
         'Profit': 'sum',
         'Order ID': 'nunique',
@@ -414,9 +412,9 @@ st.dataframe(
     height=400
 )
 
-with tab3:
-    st.subheader(":yellow[Product Performance (Top 100 by Sales)]")
-    product_detail = df_filtered.groupby('Product Name').agg({
+st.markdown("   ")
+st.subheader("🏷️ :yellow[Product Performance (Top 100 by Sales)]")
+product_detail = df_filtered.groupby('Product Name').agg({
         'Sales': 'sum',
         'Profit': 'sum',
         'Order ID': 'nunique',
@@ -437,9 +435,9 @@ st.dataframe(
     width="stretch", height=400
 )
 
-with tab4:
-    st.subheader(":violet[Top 50 Customers by Sales]")
-    customer_detail = df_filtered.groupby('Customer Name').agg({
+st.markdown("   ")
+st.subheader("👤 :violet[Top 50 Customers by Sales]")
+customer_detail = df_filtered.groupby('Customer Name').agg({
         'Sales': 'sum',
         'Profit': 'sum',
         'Order ID': 'nunique',
