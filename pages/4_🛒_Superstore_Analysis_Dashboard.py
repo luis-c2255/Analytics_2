@@ -136,7 +136,7 @@ st.markdown("   ")
 st.subheader("🌍 :blue[Regional & Category Performance]", divider="blue")
 
 st.markdown("   ")
-st.subheader("Sales by Region", divider="blue")
+st.subheader(":blue[Sales by Region]")
 regional_sales = df_filtered.groupby('Region').agg({
     'Sales': 'sum',
     'Profit': 'sum'
