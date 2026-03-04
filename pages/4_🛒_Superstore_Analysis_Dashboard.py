@@ -388,7 +388,7 @@ st.dataframe(
         'Profit Margin (%)': '{:.2f}%'
     }).background_gradient(subset=['Profit ($)'], cmap='RdYlGn'),
     width="stretch",
-    height=400
+    height=600
 )
 with tab2:
     st.subheader(":orange[Sub-Category Performance]")
