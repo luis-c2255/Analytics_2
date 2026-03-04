@@ -508,7 +508,7 @@ most_profitable_region = regional_sales.loc[regional_sales['Profit'].idxmax(), '
 least_profitable_region = regional_sales.loc[regional_sales['Profit'].idxmin(), 'Region']
 best_category = category_sales.loc[category_sales['Profit'].idxmax(), 'Category']
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown(
         Components.metric_card(
@@ -536,17 +536,7 @@ with col3:
             card_type="success"
         ), unsafe_allow_html=True
     )
-with col4:
-    if len(unprofitable) > 0:
-        loss_percentage = (abs(unprofitable['Profit'].sum()) / total_profit * 100)
-    st.markdown(
-        Components.metric_card(
-            title="Losses represent",
-            value=f"{loss_percentage:.1f}% of total profit",
-            delta="🚨",
-            card_type="error"
-        ), unsafe_allow_html=True
-    )
+
 st.markdown("   ")
 st.subheader("💎 :blue[Key Insights & Actionable Recommendations]", divider="blue")
 # ============================================
