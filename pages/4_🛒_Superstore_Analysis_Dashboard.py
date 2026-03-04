@@ -22,7 +22,7 @@ def load_data():
     df = pd.read_csv('global_superstore_2016.csv')
     df['Order Date'] = pd.to_datetime(df['Order Date'])
     df['Ship Date'] = pd.to_datetime(df['Ship Date'])
-return df
+    return df
 
 df = load_data()
 
