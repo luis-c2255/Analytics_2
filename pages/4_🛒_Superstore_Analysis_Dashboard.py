@@ -35,7 +35,7 @@ min_date = df['Order Date'].min()
 max_date = df['Order Date'].max()
 date_range = st.sidebar.date_input(
     "Select Date Range",
-    value = (min_date_max_date),
+    value = (min_date, max_date),
     min_value=min_date,
     max_value=max_date
 )
