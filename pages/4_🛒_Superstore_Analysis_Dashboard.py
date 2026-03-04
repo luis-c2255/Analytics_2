@@ -685,24 +685,24 @@ with st.expander("8️⃣ DISCOUNT IMPACT ANALYSIS"):
 with st.expander("📊 EXECUTIVE SUMMARY - TOP 5 ACTION ITEMS"):
     st.markdown("""
     1. 🚨 ADDRESS UNPROFITABLE PRODUCTS
-    → 2672 products losing $920,646
-    → Action: Review pricing, discontinue chronic loss-makers
+    -  2672 products losing $920,646
+    -  Action: Review pricing, discontinue chronic loss-makers
 
     2. 🌍 REPLICATE BEST REGIONAL PRACTICES
-    → Canada has 64.3% better margins than worst region
-    → Action: Study and implement winning strategies across regions
+    -  Canada has 64.3% better margins than worst region
+    -  Action: Study and implement winning strategies across regions
 
     3. 💎 PROTECT HIGH-VALUE CUSTOMERS
-    → Top 20 customers = 8.9% of profit
-    → Action: Launch VIP program, assign account managers
+    -  Top 20 customers = 8.9% of profit
+    -  Action: Launch VIP program, assign account managers
 
     4. 📦 OPTIMIZE PRODUCT MIX
-    → 422 high-volume products have <10% margins
-     → Action: Renegotiate supplier prices, adjust pricing strategy
+    -  422 high-volume products have <10% margins
+    -  Action: Renegotiate supplier prices, adjust pricing strategy
 
     5. 🚚 IMPROVE SHIPPING EFFICIENCY
-    → Average shipping cost: $66.93 per order
-    → Action: Negotiate carrier rates, optimize warehouse locations
+    -  Average shipping cost: $66.93 per order
+    -  Action: Negotiate carrier rates, optimize warehouse locations
     """)
 with st.expander("💰 POTENTIAL FINANCIAL IMPACT (Conservative Estimates)"):
     st.markdown("""
@@ -710,10 +710,10 @@ with st.expander("💰 POTENTIAL FINANCIAL IMPACT (Conservative Estimates)"):
     2. Improve overall margin by 2%: +$252,850.04
     3. Reduce shipping costs by 10%: +$135,808.57
     ---
-    **TOTAL POTENTIAL PROFIT INCREASE**: $848,981.69
-    **Current Profit**: $1,467,457.29
-    **Projected Profit**: $2,316,438.98
-    **Percentage Increase**: 57.9%
+    - **TOTAL POTENTIAL PROFIT INCREASE**: $848,981.69
+    - **Current Profit**: $1,467,457.29
+    - **Projected Profit**: $2,316,438.98
+    - **Percentage Increase**: 57.9%
     """)
 # ============================================
 # FOOTER
