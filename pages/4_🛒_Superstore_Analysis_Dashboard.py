@@ -656,10 +656,10 @@ with st.expander("7️⃣ HIGH-VALUE CUSTOMER RETENTION"):
 with st.expander("8️⃣ DISCOUNT IMPACT ANALYSIS"):
     st.markdown("""
     **💸 Discount Impact on Profitability:**
-    - 0-10%: 17.23% margin, 3,095 orders
-    - 10-20%: 9.86% margin, 4,376 orders
-    - 20-30%: -5.53% margin, 843 orders
-    - 30%+: -51.27% margin, 5,900 orders
+        - 0-10%: 17.23% margin, 3,095 orders
+        - 10-20%: 9.86% margin, 4,376 orders
+        - 20-30%: -5.53% margin, 843 orders
+        - 30%+: -51.27% margin, 5,900 orders
 
     **⚠️ Products with >20% discount AND negative profit:**
     1. Cubify CubeX 3D Printer Double Head Print... - $9,239.97 loss
