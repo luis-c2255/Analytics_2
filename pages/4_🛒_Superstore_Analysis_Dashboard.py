@@ -175,8 +175,7 @@ st.plotly_chart(fig_category, width="stretch")
 st.markdown("   ")
 st.subheader("🏆 :yellow[Top Performers & ⚠️ Underperformers]", divider="yellow")
 
-st.markdown("   ")
-st.subheader(":orange[Top 10 Countries by Profit]")
+
 country_profit = df_filtered.groupby('Country').agg({
     'Profit': 'sum',
     'Sales': 'sum'
@@ -200,7 +199,7 @@ fig_top_countries.update_layout(height=400, yaxis={'categoryorder':'total ascend
 st.plotly_chart(fig_top_countries, width="stretch")
 
 st.markdown("   ")
-st.subheader(":yellow[Bottom 10 Countries by Profit]")
+
 bottom_countries = country_profit.nsmallest(10, 'Profit')
 
 fig_bottom_countries = px.bar(
