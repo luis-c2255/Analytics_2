@@ -292,7 +292,7 @@ st.plotly_chart(fig_trends, width="stretch")
 st.markdown("   ")
 st.subheader("👥 :violet[Customer Segment & 🚚 Shipping Analysis]", divider="violet")
 
-st.subheader(":rainbow[Segment Performance]")
+
 segment_data = df_filtered.groupby('Segment').agg({
     'Sales': 'sum',
     'Profit': 'sum',
@@ -319,7 +319,7 @@ fig_segment.update_layout(
 )
 st.plotly_chart(fig_segment, width="stretch")
 
-st.subheader(":violet[Shipping Mode Analysis]")
+
 shipping_data = df_filtered.groupby('Ship Mode').agg({
     'Sales': 'sum',
     'Profit': 'sum',
