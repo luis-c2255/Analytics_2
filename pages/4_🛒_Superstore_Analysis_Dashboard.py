@@ -135,8 +135,7 @@ with col5:
 st.markdown("   ")
 st.subheader("🌍 :blue[Regional & Category Performance]", divider="blue")
 
-st.markdown("   ")
-st.subheader(":blue[Sales by Region]")
+
 regional_sales = df_filtered.groupby('Region').agg({
     'Sales': 'sum',
     'Profit': 'sum'
@@ -155,7 +154,7 @@ fig_region.update_traces(texttemplate='$%{text:.2s}', textposition='outside')
 fig_region.update_layout(height=400)
 st.plotly_chart(fig_region, width="stretch")
 st.markdown("   ")
-st.subheader(":green[Sales by Category]", divider="green")
+
 category_sales = df_filtered.groupby('Category').agg({
     'Sales': 'sum',
     'Profit': 'sum'
