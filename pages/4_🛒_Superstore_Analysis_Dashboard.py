@@ -490,44 +490,230 @@ st.sidebar.download_button(
     )
 
 st.markdown("   ")
-st.subheader("💡 :yellow[Quick Insights]", divider="yellow")
+st.subheader("🎯 :red[STRATEGIC INSIGHTS & RECOMMENDATIONS]", divider="red")
+with st.expander("1️⃣ PROFITABILITY CONCERNS"):
+    st.markdown("""
+    - ⚠️ 2672 products are generating losses
+    - 💸 Total losses: $920,646.16 (62.7% of total profit)
 
-# Calculate key insights
-most_profitable_region = regional_sales.loc[regional_sales['Profit'].idxmax(), 'Region']
-least_profitable_region = regional_sales.loc[regional_sales['Profit'].idxmin(), 'Region']
-best_category = category_sales.loc[category_sales['Profit'].idxmax(), 'Category']
+    **📊 Top 5 Loss-Making Sub-Categories:**
+    1. Tables: $144,123.15
+    2. Bookcases: $101,446.30
+    3. Phones: $96,417.66
+    4. Chairs: $96,084.90
+    5. Machines: $78,672.74
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.markdown(
-        Components.metric_card(
-            title="Most Profitable Region",
-            value=f"{most_profitable_region}",
-            delta="🏆",
-            card_type="success"
-        ), unsafe_allow_html=True
-    )
-with col2:
-    st.markdown(
-        Components.metric_card(
-            title="Least Profitable Region",
-            value=f"{least_profitable_region}",
-            delta="⚠️",
-            card_type="warning"
-        ), unsafe_allow_html=True
-    )
-with col3:
-    st.markdown(
-        Components.metric_card(
-            title="Best Category",
-            value=f"{best_category}",
-            delta="📦",
-            card_type="success"
-        ), unsafe_allow_html=True
-    )
+    **✅ RECOMMENDATION:**
+    - Investigate pricing strategy for loss-making products
+    - Consider discontinuing products with consistent losses
+    - Review supplier contracts and shipping costs for these items
+    - Implement minimum order values or bundle unprofitable items
+    """)
 
-st.markdown("   ")
-st.subheader("💎 :blue[Key Insights & Actionable Recommendations]", divider="blue")
+with st.expander("2️⃣ REGIONAL PERFORMANCE GAPS"):
+    st.markdown("""
+    **📈 Regional Profit Margins:**
+    1. Canada: 26.62% ($17,817 profit)
+    2. Eastern Europe: 24.86% ($77,085 profit)
+    3. North Africa: 24.80% ($57,836 profit)
+    ....
+    21. Western Asia: -17.00% ($-53,922 profit)
+    22. Western Africa: -28.99% ($-50,408 profit)
+    23. Central Asia: -37.71% ($-7,282 profit)
+
+    - ⚠️ 64.3% profit margin gap between best and worst regions
+
+    **✅ RECOMMENDATION:**
+    - Study best practices from Canada and apply to Central Asia
+    - Analyze market-specific factors (competition, pricing, customer preferences)
+    - Consider regional pricing strategies
+    - Evaluate logistics and shipping costs by region
+    """)
+
+with st.expander("3️⃣ PRODUCT MIX OPTIMIZATION"):
+    st.markdown("""
+    **📦 Category Performance:**
+    - Technology: 13.99% margin | $4,744,557 sales
+    - Office Supplies: 13.69% margin | $3,787,493 sales
+    - Furniture: 6.94% margin | $4,110,452 sales
+    
+    - ⚠️ 422 high-volume products have <10% profit margin
+
+    **Top 5 High-Volume, Low-Margin Products:*
+    1. Apple Smart Phone, Full Size... - 6.8% margin, $86,936 sales
+    2. Office Star Executive Leather Armchair, Adjustable... - 9.3% margin, $50,662 sales
+    3. Samsung Smart Phone, Cordless... - -0.4% margin, $48,653 sales
+    4. Samsung Smart Phone, VoIP... - 8.6% margin, $45,406 sales
+    5. Cisco Smart Phone, Cordless... - 9.8% margin, $41,022 sales
+
+    **✅ RECOMMENDATION:**
+    - Renegotiate supplier prices for high-volume, low-margin items
+    - Increase prices strategically on popular products with low margins
+    - Create product bundles to improve overall margin
+    - Focus marketing on high-margin categories
+    """)
+
+with st.expander("4️⃣ CUSTOMER SEGMENT PROFITABILITY"):
+    st.markdown("""
+    **👥 Segment Analysis:**
+     Consumer:
+     - Profit Margin: 11.51%
+     - Customers: 8,987
+     - Avg Profit/Customer: $83.37
+     - Avg Sales/Customer: $724.15
+
+    Corporate:
+    - Profit Margin: 11.54%
+    - Customers: 5,221
+    - Avg Profit/Customer: $84.51
+    - Avg Sales/Customer: $732.56
+
+    Home Office:
+    - Profit Margin: 11.99%
+    - Customers: 3,207
+    - Avg Profit/Customer: $86.38
+    - Avg Sales/Customer: $720.25
+
+    **✅ RECOMMENDATION:**
+    - Focus acquisition efforts on Home Office segment (highest margin)
+    - Develop loyalty programs tailored to each segment
+    - Create segment-specific product bundles
+    - Analyze customer lifetime value (CLV) by segment
+    """)
+
+with st.expander("5️⃣ SHIPPING & LOGISTICS OPTIMIZATION"):
+    st.markdown("""
+    **🚚 Shipping Mode Analysis:**
+     First Class:
+     - Orders: 3,845
+     - Profit Margin: 11.37%
+     - Avg Shipping Cost: $80.26
+     - Shipping as % of Sales: 16.85%
+
+    Same Day:
+    - Orders: 1,349
+    - Profit Margin: 11.42%
+    - Avg Shipping Cost: $86.09
+    - Shipping as % of Sales: 17.41%
+
+    Second Class:
+    - Orders: 5,146
+    - Profit Margin: 11.40%
+    - Avg Shipping Cost: $61.21
+    - Shipping as % of Sales: 12.28%
+
+    Standard Class:
+    - Orders: 15,405
+    - Profit Margin: 11.75%
+    - Avg Shipping Cost: $40.14
+    - Shipping as % of Sales: 8.16%
+
+    **✅ RECOMMENDATION:**
+    - Negotiate better rates with shipping carriers for high-volume modes
+    - Implement minimum order values for expensive shipping modes
+    - Offer free shipping thresholds to increase average order value
+    - Optimize warehouse locations to reduce shipping distances
+    """)
+
+with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
+    st.markdown("""
+    **📅 Quarterly Performance:**
+    Q1: $1,991,957 sales, $238,246 profit
+    Q2: $2,873,552 sales, $325,397 profit
+    Q3: $3,478,375 sales, $400,825 profit
+    Q4: $4,298,618 sales, $502,989 profit
+
+    📈 Peak Month: December
+    📉 Lowest Month: February
+
+
+    **✅ RECOMMENDATION:**
+    - Plan inventory and staffing for peak periods (December)
+    - Launch promotions during slow months (February)
+    - Implement demand forecasting for better inventory management
+    - Consider seasonal product lines and marketing campaigns
+    """)
+
+with st.expander("7️⃣ HIGH-VALUE CUSTOMER RETENTION"):
+    st.markdown("""
+    💎 Top 20 customers generate 8.9% of total profit
+    💰 Combined profit from top 20: $130,880.37
+
+    Top 5 Most Valuable Customers:
+    1. Tamara Chand: $8,672.90 profit, 36 orders
+    2. Raymond Buch: $8,453.05 profit, 29 orders
+    3. Sanjit Chand: $8,205.38 profit, 35 orders
+    4. Hunter Lopez: $7,816.57 profit, 24 orders
+    5. Bill Eplett: $7,410.01 profit, 42 orders
+
+    **✅ RECOMMENDATION:**
+    - Implement VIP customer program for top 20 customers
+    - Assign dedicated account managers to high-value clients
+    - Offer exclusive discounts and early access to new products
+    - Conduct regular check-ins and satisfaction surveys
+    - Protect these relationships - losing one could significantly impact profit
+    """)
+with st.expander("8️⃣ DISCOUNT IMPACT ANALYSIS"):
+    st.markdown("""
+    **💸 Discount Impact on Profitability:**
+    0-10%: 17.23% margin, 3,095 orders
+    10-20%: 9.86% margin, 4,376 orders
+    20-30%: -5.53% margin, 843 orders
+    30%+: -51.27% margin, 5,900 orders
+
+    **⚠️ Products with >20% discount AND negative profit:**
+    1. Cubify CubeX 3D Printer Double Head Print... - $9,239.97 loss
+    2. GBC DocuBind P400 Electric Binding System... - $6,859.39 loss
+    3. Hoover Stove, White... - $6,714.59 loss
+    4. Apple Smart Phone, Full Size... - $6,357.31 loss
+    5. Motorola Smart Phone, Cordless... - $5,804.68 loss
+    6. Samsung Smart Phone, Cordless... - $5,706.27 loss
+    7. Cisco Smart Phone, Cordless... - $5,516.26 loss
+    8. Lexmark MX611dhe Monochrome Laser Printer... - $5,269.97 loss
+    9. GBC Ibimaster 500 Manual ProClick Binding System... - $5,098.57 loss
+    10. Nokia Smart Phone, Full Size... - $5,056.81 loss
+
+    **✅ RECOMMENDATION:**
+    - Review discount policies - heavy discounts may be eroding margins
+    - Implement maximum discount thresholds by category
+    - Use targeted discounts only for slow-moving inventory
+    - Train sales team on value-based selling vs. discount-driven sales
+    - A/B test promotions to find optimal discount levels
+    """)
+
+with st.expander("📊 EXECUTIVE SUMMARY - TOP 5 ACTION ITEMS"):
+    st.markdown("""
+    1. 🚨 ADDRESS UNPROFITABLE PRODUCTS
+    → 2672 products losing $920,646
+    → Action: Review pricing, discontinue chronic loss-makers
+
+    2. 🌍 REPLICATE BEST REGIONAL PRACTICES
+    → Canada has 64.3% better margins than worst region
+    → Action: Study and implement winning strategies across regions
+
+    3. 💎 PROTECT HIGH-VALUE CUSTOMERS
+    → Top 20 customers = 8.9% of profit
+    → Action: Launch VIP program, assign account managers
+
+    4. 📦 OPTIMIZE PRODUCT MIX
+    → 422 high-volume products have <10% margins
+     → Action: Renegotiate supplier prices, adjust pricing strategy
+
+    5. 🚚 IMPROVE SHIPPING EFFICIENCY
+    → Average shipping cost: $66.93 per order
+    → Action: Negotiate carrier rates, optimize warehouse locations
+    """)
+with st.expander("💰 POTENTIAL FINANCIAL IMPACT (Conservative Estimates)"):
+    st.markdown("""
+    1. Eliminate 50% of product losses: +$460,323.08
+    2. Improve overall margin by 2%: +$252,850.04
+    3. Reduce shipping costs by 10%: +$135,808.57
+
+    **TOTAL POTENTIAL PROFIT INCREASE**: $848,981.69
+    **Current Profit**: $1,467,457.29
+    **Projected Profit**: $2,316,438.98
+    **Percentage Increase**: 57.9%
+    """)
 # ============================================
 # FOOTER
 # ============================================
