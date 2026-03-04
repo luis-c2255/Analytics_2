@@ -637,8 +637,8 @@ with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
 
 with st.expander("7️⃣ HIGH-VALUE CUSTOMER RETENTION"):
     st.markdown("""
-    💎 Top 20 customers generate 8.9% of total profit
-    💰 Combined profit from top 20: $130,880.37
+    - 💎 Top 20 customers generate 8.9% of total profit
+    - 💰 Combined profit from top 20: $130,880.37
 
     Top 5 Most Valuable Customers:
     1. Tamara Chand: $8,672.90 profit, 36 orders
