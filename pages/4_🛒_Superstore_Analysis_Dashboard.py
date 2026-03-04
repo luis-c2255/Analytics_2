@@ -625,6 +625,7 @@ with st.expander("6️⃣ SEASONAL & TEMPORAL PATTERNS"):
     ---
     📈 Peak Month: December
     📉 Lowest Month: February
+    
     ---
 
     **✅ RECOMMENDATION:**
