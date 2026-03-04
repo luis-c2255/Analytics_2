@@ -19,7 +19,7 @@ except FileNotFoundError:
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv('global_superstore_2016.csv')
+    df = pd.read_excel('global_superstore_2016.xlsx')
     df['Order Date'] = pd.to_datetime(df['Order Date'])
     df['Ship Date'] = pd.to_datetime(df['Ship Date'])
     return df
