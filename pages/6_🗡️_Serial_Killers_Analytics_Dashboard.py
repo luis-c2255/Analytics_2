@@ -118,8 +118,8 @@ st.markdown("   ")
 st.sidebar.header("🎛️ Filters")
 
 # Year range filter
-min_year = int(df['Start year'].min()) if df['Start year'].notna().any() else 1900
-max_year = int(df['Start year'].max()) if df['Start year'].notna().any() else 2020
+min_year = int(df['Start year'].min()) if df_clean['Start year'].notna().any() else 1900
+max_year = int(df['Start year'].max()) if df_clean['Start year'].notna().any() else 2020
 
 year_range = st.sidebar.slider(
     "Select Year Range",
@@ -128,19 +128,19 @@ year_range = st.sidebar.slider(
     value=(min_year, max_year)
 )
 # Country filter
-countries = ['All'] + sorted(df['Country'].dropna().unique().tolist())
+countries = ['All'] + sorted(df_clean['Country'].dropna().unique().tolist())
 selected_country = st.sidebar.selectbox("Select Country", countries)
 
 # Victim category filter
-victim_cats = ['All'] + sorted(df['Victim_Category'].unique().tolist())
+victim_cats = ['All'] + sorted(df_clean['Victim_Category'].unique().tolist())
 selected_victim_cat = st.sidebar.selectbox("Select Victim Category", victim_cats)
 
 # Region filter
-regions = ['All'] + sorted(df['Region'].unique().tolist())
+regions = ['All'] + sorted(df_clean['Region'].unique().tolist())
 selected_region = st.sidebar.selectbox("Select Region", regions)
 
 # Apply filters
-filtered_df = df.copy()
+filtered_df = df_clean.copy()
 if selected_country != 'All':
     filtered_df = filtered_df[filtered_df['Country'] == selected_country]
 if selected_victim_cat != 'All':
