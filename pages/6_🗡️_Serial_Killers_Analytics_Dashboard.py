@@ -407,7 +407,20 @@ region_victim_stats = filtered_df.groupby('Region').agg({
 }).round(2)
 region_victim_stats.columns = ['Avg Victims', 'Median Victims', 'Total Victims', 'Case Count']
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
-st.dataframe(region_victim_stats, width="stretch")
+def style_table(df, color_theme):
+    html = (
+        df.style
+        .hide()
+        .set_table_styles([
+            {'selector': 'table', 'props': 'width: 100%; display: block; table-layout: fixed; border-collapse: collapse;'},
+            {'selector': 'th', 'props': f"background-color: {color_theme}; color: white; padding: 8px; text-align: center; position: sticky; top: 0; width: 25%;"},
+            {'selector': 'td', 'props': 'padding: 8px; text-align: center; border-bottom: 1px solid #ddd; width: 25%'},
+            {'selector': 'tr:hover', 'props': 'background-color: #f5f5f5;'},
+        ])
+        .to_html()
+    )
+    return f'<div style="height: 380px; width: 100%; overflow: auto; border: 1px solid #ccc; border-radius: 8px;">{html}</div>'
+    st.markdown(style_table(region_victim_stats, color_theme="#F0DD4D"), unsafe_allow_html=True)
 
 
 st.markdown("   ")
