@@ -538,13 +538,15 @@ if search_term:
         filtered_df['Nicknames'].str.contains(search_term, case=False, na=False) |
         filtered_df['Born Location'].str.contains(search_term, case=False, na=False) |
         filtered_df['Country'].str.contains(search_term, case=False, na=False)
-]
-st.write(f"Found {len(search_results)} result(s)")
+    ]
+    st.write(f"Found {len(search_results)} result(s)")
 
-if len(search_results) > 0:
-    display_cols = ['Name', 'Nicknames', 'Country', 'Start year', 'End year',
-    'Proven victims', 'Possible victims', 'Criminal Penalty']
-st.dataframe(search_results[display_cols], width="stretch")
+    if len(search_results) > 0:
+        display_cols = [
+            'Name', 'Nicknames', 'Country', 'Start year', 'End year',
+            'Proven victims', 'Possible victims', 'Criminal Penalty'
+        ]
+        st.dataframe(search_results[display_cols], width="stretch")
 
 # Full dataset view
 st.subheader("📊 :rainbow[Full Dataset]")
