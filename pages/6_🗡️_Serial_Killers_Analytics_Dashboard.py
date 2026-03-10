@@ -23,6 +23,7 @@ except FileNotFoundError:
 def load_data():
     df = pd.read_csv('serial_killers.csv')
     return df
+
 df = load_data()
 
 # Victim categorization
@@ -42,6 +43,8 @@ def categorize_victims(count):
 
 
 def clean_data(df):
+    df_clean = df.copy()
+
     # Parse dates
     df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
     df_clean['Born Date'] = pd.to_datetime(df_clean['Born Date'], errors='coerce')
@@ -99,11 +102,9 @@ def clean_data(df):
     df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
 
     return df_clean
+
 # Apply cleaning
 df_clean = clean_data(df)
-
-# Load data
-df = load_data()
 
 # Title
 st.markdown(
