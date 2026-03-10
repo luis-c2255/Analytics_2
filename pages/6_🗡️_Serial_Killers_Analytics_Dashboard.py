@@ -53,48 +53,51 @@ def categorize_victims(count):
 
 df_clean['Victim_Category'] = df_clean['Proven victims'].apply(categorize_victims)
 
-# Penalty categorization
-def categorize_penalty(penalty):
-    if pd.isna(penalty):
-        return 'Unknown'
-    penalty_lower = str(penalty).lower()
-    if 'death' in penalty_lower or 'execution' in penalty_lower:
-        return 'Death Penalty'
-    elif 'life' in penalty_lower:
-        return 'Life Imprisonment'
-    elif 'years' in penalty_lower:
-        return 'Fixed Term'
-    else:
-        return 'Other'
-df_clean['Penalty_Category'] = df_clean['Criminal Penalty'].apply(categorize_penalty)
+def clean_data(df):
+    # Penalty categorization
+    def categorize_penalty(penalty):
+        if pd.isna(penalty):
+            return 'Unknown'
+        penalty_lower = str(penalty).lower()
+        if 'death' in penalty_lower or 'execution' in penalty_lower:
+            return 'Death Penalty'
+        elif 'life' in penalty_lower:
+            return 'Life Imprisonment'
+        elif 'years' in penalty_lower:
+            return 'Fixed Term'
+        else:
+            return 'Other'
+    df_clean = df.copy()
+    df_clean['Penalty_Category'] = df_clean['Criminal Penalty'].apply(categorize_penalty)
 
-# Region mapping
-region_map = {
-    'United States': 'North America',
-    'Canada': 'North America',
-    'Mexico': 'North America',
-    'United Kingdom': 'Europe',
-    'Germany': 'Europe',
-    'France': 'Europe',
-    'Italy': 'Europe',
-    'Russia': 'Europe',
-    'Spain': 'Europe',
-    'Poland': 'Europe',
-    'Netherlands': 'Europe',
-    'Belgium': 'Europe',
-    'Australia': 'Oceania',
-    'Brazil': 'South America',
-    'Colombia': 'South America',
-    'Argentina': 'South America',
-    'India': 'Asia',
-    'China': 'Asia',
-    'Japan': 'Asia',
-    'South Korea': 'Asia',
-    'South Africa': 'Africa',
+    # Region mapping
+    region_map = {
+        'United States': 'North America',
+        'Canada': 'North America',
+        'Mexico': 'North America',
+        'United Kingdom': 'Europe',
+        'Germany': 'Europe',
+        'France': 'Europe',
+        'Italy': 'Europe',
+        'Russia': 'Europe',
+        'Spain': 'Europe',
+        'Poland': 'Europe',
+        'Netherlands': 'Europe',
+        'Belgium': 'Europe',
+        'Australia': 'Oceania',
+        'Brazil': 'South America',
+        'Colombia': 'South America',
+        'Argentina': 'South America',
+        'India': 'Asia',
+        'China': 'Asia',
+        'Japan': 'Asia',
+        'South Korea': 'Asia',
+        'South Africa': 'Africa',
     }
-df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
 
-return df_clean
+    df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
+
+    return df_clean
 
 # Load data
 df = load_data()
