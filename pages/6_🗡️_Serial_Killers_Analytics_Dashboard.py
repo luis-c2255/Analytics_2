@@ -213,7 +213,7 @@ st.subheader("💀 :yellow[Victim Analysis]", divider="yellow")
 
 
 st.markdown("   ")
-st.subheader("⚖️ :orange[Criminal Justice]",, divider="orange")
+st.subheader("⚖️ :orange[Criminal Justice]", divider="orange")
 
 
 
