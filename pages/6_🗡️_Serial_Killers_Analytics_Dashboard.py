@@ -43,7 +43,7 @@ def categorize_victims(count):
 
 
 def clean_data(df):
-    df_clean = df.copy()
+    df_clean = df.copy()   # ← REQUIRED FIRST LINE
 
     # Parse dates
     df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
@@ -105,6 +105,7 @@ def clean_data(df):
 
 # Apply cleaning
 df_clean = clean_data(df)
+
 
 # Title
 st.markdown(
