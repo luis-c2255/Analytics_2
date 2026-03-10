@@ -420,7 +420,7 @@ def style_table(df, color_theme):
         .to_html()
     )
     return f'<div style="height: 380px; width: 100%; overflow: auto; border: 1px solid #ccc; border-radius: 8px;">{html}</div>'
-    st.markdown(style_table(region_victim_stats, color_theme="#F0DD4D"), unsafe_allow_html=True)
+st.markdown(style_table(region_victim_stats, color_theme="#F0DD4D"), unsafe_allow_html=True)
 
 
 st.markdown("   ")
