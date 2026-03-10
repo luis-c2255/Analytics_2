@@ -53,7 +53,7 @@ def categorize_victims(count):
 
 df_clean['Victim_Category'] = df_clean['Proven victims'].apply(categorize_victims)
 
-def clean_data(df):
+def clean_data(df_clean):
     # Penalty categorization
     def categorize_penalty(penalty):
         if pd.isna(penalty):
@@ -67,7 +67,7 @@ def clean_data(df):
             return 'Fixed Term'
         else:
             return 'Other'
-    df_clean = df.copy()
+
     df_clean['Penalty_Category'] = df_clean['Criminal Penalty'].apply(categorize_penalty)
 
     # Region mapping
