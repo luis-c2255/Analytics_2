@@ -407,16 +407,7 @@ region_victim_stats = filtered_df.groupby('Region').agg({
 }).round(2)
 region_victim_stats.columns = ['Avg Victims', 'Median Victims', 'Total Victims', 'Case Count']
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
-
-styles = [
-    dict(selector='th', props=[
-        ("font-size", "120%"),
-        ("text-align", "center"),
-        ("text-transform", "capitalize"),
-        ("background-color", "#F0DD4D"),
-        ("color", "#8B4421")])
-]
-st.dataframe(region_victim_stats.style.set_table_styles(styles))
+st.dataframe(region_victim_stats, width="stretch")
 
 
 st.markdown("   ")
