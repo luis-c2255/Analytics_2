@@ -31,7 +31,7 @@ with col3:
     icon="🆙", icon_position="left", width="stretch"
     )
 st.markdown("---")
-col4, col5 = st.columns(2)
+col4, col5, col6 = st.columns(6)
 
 with col4:
     st.link_button("Superstore Analysis Dashboard", 
@@ -43,7 +43,11 @@ with col5:
     "https://analytics2.streamlit.app/Telco_Customer_Churn_Analysis_Dashboard", 
     icon="👥", icon_position="left", width="stretch"
     )
-
+with col6:
+    st.link_button("Serial Killers Analysis Dashboard", 
+    "https://analytics2.streamlit.app/Serial_Killers_Analytics_Dashboard", 
+    icon="🗡️", icon_position="left", width="stretch"
+    )
 
 
 # Load custom CSS
