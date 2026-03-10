@@ -21,7 +21,7 @@ except FileNotFoundError:
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv('serial_killers.csv')
+df = pd.read_csv('serial_killers.csv')
 
 # Data Cleaning
 df_clean = df.copy()
