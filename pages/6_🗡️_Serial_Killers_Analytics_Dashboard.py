@@ -21,10 +21,9 @@ except FileNotFoundError:
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv('serial_killers.csv')
+    df_clean = pd.read_csv('serial_killers.csv')
 
-# Data Cleaning
-df_clean = df.copy()
+
 
 # Parse dates
 df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
