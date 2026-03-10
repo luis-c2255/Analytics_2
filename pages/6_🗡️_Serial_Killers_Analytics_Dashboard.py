@@ -435,9 +435,9 @@ st.plotly_chart(fig11, width="stretch")
 df_apprehended = filtered_df[filtered_df['Date Apprehended'].notna()].copy()
 
 if len(df_apprehended) > 0:
-df_apprehended['Apprehension_Year'] = df_apprehended['Date Apprehended'].dt.year
-df_apprehended['Years_To_Catch'] = df_apprehended['Apprehension_Year'] - df_apprehended['Start year']
-df_apprehended = df_apprehended[df_apprehended['Years_To_Catch'] >= 0]
+    df_apprehended['Apprehension_Year'] = df_apprehended['Date Apprehended'].dt.year
+    df_apprehended['Years_To_Catch'] = df_apprehended['Apprehension_Year'] - df_apprehended['Start year']
+    df_apprehended = df_apprehended[df_apprehended['Years_To_Catch'] >= 0]
 
 st.subheader(":orange[Time to Apprehension Analysis]")
 
