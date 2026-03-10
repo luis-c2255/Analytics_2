@@ -21,17 +21,9 @@ except FileNotFoundError:
 # Load data
 @st.cache_data
 def load_data():
-    df_clean = pd.read_csv('serial_killers.csv')
-
-    # Parse dates
-    df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
-    df_clean['Born Date'] = pd.to_datetime(df_clean['Born Date'], errors='coerce')
-    df_clean['Died Date'] = pd.to_datetime(df_clean['Died Date'], errors='coerce')
-
-    # Calculate derived fields
-    df_clean['Active_Years'] = df_clean['End year'] - df_clean['Start year']
-    df_clean['Active_Years'] = df_clean['Active_Years'].apply(lambda x: max(x, 0) if pd.notna(x) else np.nan)
-    df_clean['Decade'] = (df_clean['Start year'] // 10 * 10).astype('Int64')
+    df = pd.read_csv('serial_killers.csv')
+    return df
+df = load_data()
 
 # Victim categorization
 def categorize_victims(count):
@@ -48,9 +40,22 @@ def categorize_victims(count):
     else:
         return '+50 victims'
 
-df_clean['Victim_Category'] = df_clean['Proven victims'].apply(categorize_victims)
 
-def clean_data(df_clean):
+def clean_data(df):
+    df_clean = df.copy()
+    # Parse dates
+    df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
+    df_clean['Born Date'] = pd.to_datetime(df_clean['Born Date'], errors='coerce')
+    df_clean['Died Date'] = pd.to_datetime(df_clean['Died Date'], errors='coerce')
+
+    # Derived fields
+    df_clean['Active_Years'] = df_clean['End year'] - df_clean['Start year']
+    df_clean['Active_Years'] = df_clean['Active_Years'].apply(lambda x: max(x, 0) if pd.notna(x) else np.nan)
+    df_clean['Decade'] = (df_clean['Start year'] // 10 * 10).astype('Int64')
+
+    # Victim category
+    df_clean['Victim_Category'] = df_clean['Proven victims'].apply(categorize_victims)
+    
     # Penalty categorization
     def categorize_penalty(penalty):
         if pd.isna(penalty):
@@ -95,6 +100,8 @@ def clean_data(df_clean):
     df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
 
     return df_clean
+# Apply cleaning
+df_clean = clean_data(df)
 
 # Load data
 df = load_data()
