@@ -92,7 +92,7 @@ region_map = {
     'South Korea': 'Asia',
     'South Africa': 'Africa',
     }
-    df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
+df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
 
     return df_clean
 
