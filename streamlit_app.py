@@ -31,7 +31,7 @@ with col3:
     icon="🆙", icon_position="left", width="stretch"
     )
 st.markdown("---")
-col4, col5, col6 = st.columns(6)
+col4, col5, col6 = st.columns(3)
 
 with col4:
     st.link_button("Superstore Analysis Dashboard", 
