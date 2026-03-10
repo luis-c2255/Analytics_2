@@ -23,17 +23,15 @@ except FileNotFoundError:
 def load_data():
     df_clean = pd.read_csv('serial_killers.csv')
 
+    # Parse dates
+    df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
+    df_clean['Born Date'] = pd.to_datetime(df_clean['Born Date'], errors='coerce')
+    df_clean['Died Date'] = pd.to_datetime(df_clean['Died Date'], errors='coerce')
 
-
-# Parse dates
-df_clean['Date Apprehended'] = pd.to_datetime(df_clean['Date Apprehended'], errors='coerce')
-df_clean['Born Date'] = pd.to_datetime(df_clean['Born Date'], errors='coerce')
-df_clean['Died Date'] = pd.to_datetime(df_clean['Died Date'], errors='coerce')
-
-# Calculate derived fields
-df_clean['Active_Years'] = df_clean['End year'] - df_clean['Start year']
-df_clean['Active_Years'] = df_clean['Active_Years'].apply(lambda x: max(x, 0) if pd.notna(x) else np.nan)
-df_clean['Decade'] = (df_clean['Start year'] // 10 * 10).astype('Int64')
+    # Calculate derived fields
+    df_clean['Active_Years'] = df_clean['End year'] - df_clean['Start year']
+    df_clean['Active_Years'] = df_clean['Active_Years'].apply(lambda x: max(x, 0) if pd.notna(x) else np.nan)
+    df_clean['Decade'] = (df_clean['Start year'] // 10 * 10).astype('Int64')
 
 # Victim categorization
 def categorize_victims(count):
