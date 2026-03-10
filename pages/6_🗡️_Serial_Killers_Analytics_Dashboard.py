@@ -94,7 +94,7 @@ region_map = {
     }
 df_clean['Region'] = df_clean['Country'].map(region_map).fillna('Other')
 
-return df_clean
+    return df_clean
 
 # Load data
 df = load_data()
