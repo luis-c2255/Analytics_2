@@ -497,7 +497,7 @@ x='Years_To_Catch',
 nbins=25,
 title='Distribution of Years to Apprehension',
 labels={'Years_To_Catch': 'Years to Catch', 'count': 'Frequency'},
-color_discrete_sequence=['solar']
+color_discrete_sequence=['tealrose']
 )
 fig13.update_layout(height=400)
 st.plotly_chart(fig13, width="stretch")
