@@ -234,7 +234,7 @@ st.plotly_chart(fig2, width="stretch")
 
 st.markdown("   ")
 # World map
-country_victims = filtered_df.groupby('Country').agg({
+country_victims = df_clean.groupby('Country').agg({
     'Proven victims': 'sum',
     'Name': 'count'
     }).reset_index()
@@ -243,6 +243,13 @@ country_victims['Avg_Victims_Per_Killer'] = (
     country_victims['Total_Victims'] / country_victims['Serial_Killer_Count']
     ).round(2)
 
+red_orange_scale = [
+    [0.0, "#2b0000"],
+    [0.3, "#660000"],
+    [0.6, "#cc3300"],
+    [0.8, "#ff6600"],
+    [1.0, "#ffcc66"]
+]
 fig3 = px.choropleth(
     country_victims,
     locations='Country',
@@ -251,8 +258,9 @@ fig3 = px.choropleth(
     hover_name='Country',
     hover_data={'Total_Victims': True, 'Avg_Victims_Per_Killer': ':.2f'},
     title='Global Distribution Heat Map',
-    color_continuous_scale='cividis',
-    labels={'Serial_Killer_Count': 'Number of Serial Killers'}
+    color_continuous_scale=red_orange_scale,
+    labels={'Serial_Killer_Count': 'Number of Serial Killers'},
+    template="plotly_dark"
 )
 fig3.update_layout(height=600)
 st.plotly_chart(fig3, uwidth="stretch")
