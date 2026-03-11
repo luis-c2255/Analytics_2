@@ -242,7 +242,6 @@ country_victims.columns = ['Country', 'Total_Victims', 'Serial_Killer_Count']
 country_victims['Avg_Victims_Per_Killer'] = (
     country_victims['Total_Victims'] / country_victims['Serial_Killer_Count']
     ).round(2)
-st.write(country_victims.sort_values('Serial_Killer_Count', ascending=False).head())
 
 red_orange_scale = [
     [0.0, "#2b0000"],
@@ -283,7 +282,7 @@ fig4.add_trace(go.Bar(
     x=decade_analysis['Decade'],
     y=decade_analysis['Serial_Killer_Count'],
     name='Number of Cases',
-    marker_color='crimson',
+    marker_color='green',
     yaxis='y'
 ))
 
@@ -292,7 +291,7 @@ fig4.add_trace(go.Scatter(
     y=decade_analysis['Total_Victims'],
     name='Total Victims',
     mode='lines+markers',
-    marker_color='darkblue',
+    marker_color='#ADFF2F',
     line=dict(width=3),
     yaxis='y2'
 ))
