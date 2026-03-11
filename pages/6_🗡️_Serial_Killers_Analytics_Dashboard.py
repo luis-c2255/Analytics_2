@@ -264,6 +264,7 @@ fig3 = px.choropleth(
     template="plotly_dark"
 )
 fig3.update_layout(height=600)
+fig3.update_coloraxes(cmin=0, cmax=country_victims['Serial_Killer_Count'].max())
 st.plotly_chart(fig3, uwidth="stretch")
 
 st.markdown("   ")
