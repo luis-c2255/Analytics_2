@@ -459,7 +459,7 @@ fig11 = px.imshow(
 penalty_decade.T,
 labels=dict(x="Decade", y="Penalty Type", color="Count"),
 title="Penalty Types by Decade",
-color_continuous_scale='Reds',
+color_continuous_scale='Peach',
 aspect="auto"
 )
 fig11.update_layout(height=500)
