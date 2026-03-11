@@ -483,9 +483,9 @@ y='Years_To_Catch',
 title='Time to Apprehension by Victim Category',
 labels={'Years_To_Catch': 'Years to Catch', 'Victim_Category': 'Victim Category'},
 color='Victim_Category',
-color_discrete_sequence=px.colors.sequential.Reds
+color_discrete_sequence=px.colors.sequential.Redor
 )
-fig12.update_layout(height=400, showlegend=False)
+fig12.update_layout(height=700, showlegend=False)
 fig12.update_xaxes(tickangle=45)
 st.plotly_chart(fig12, width="stretch")
 st.markdown("   ")
