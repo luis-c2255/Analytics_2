@@ -323,7 +323,7 @@ fig5 = px.line(
     labels={'Cases_Started': 'Number of Cases', 'Year': 'Year'},
     markers=True
 )
-fig5.update_traces(line_color='crimson')
+fig5.update_traces(line_color='#2BB570')
 fig5.update_layout(height=400)
 st.plotly_chart(fig5, width="stretch")
 
