@@ -415,7 +415,7 @@ region_victim_stats.columns = [
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
 
 styled_df = region_victim_stats.style.set_table_styles([
-    {'selector': "th.col_heading',
+    {'selector': 'th.col_heading',
     'props':[
         ('background-color', '#FFED4B'),
         ('color', '#8B4421'),
