@@ -337,7 +337,7 @@ fig6 = px.histogram(
     nbins=30,
     title='Distribution of Active Period Duration',
     labels={'Active_Years': 'Years Active', 'count': 'Frequency'},
-    color_discrete_sequence=['darkred']
+    color_discrete_sequence=['#2BB570']
 )
 fig6.update_layout(height=400)
 st.plotly_chart(fig6, width="stretch")
