@@ -404,8 +404,6 @@ st.plotly_chart(fig9, width="stretch")
 st.markdown("   ")
 # Victim statistics by region
 st.subheader(":yellow[Victim Statistics by Region]")
-st.write("Filtered rows:", len(filtered_df))
-
 
 region_victim_stats = filtered_df.groupby('Region').agg({
     'Proven victims': ['mean', 'median', 'sum', 'count']
@@ -415,8 +413,15 @@ region_victim_stats.columns = [
     'Avg Victims', 'Median Victims', 'Total Victims', 'Case Count'
 ]
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
+styles = [
+    dict(selector="th", props=[("font-size", "120%"),
+                               ("text-align", "center"),
+                               ("text-transform", "capitalize"),
+                               ("background-color", "#FFED4B"), # Your color here
+                               ("color", "#8B4421")])
+]
 
-st.dataframe(region_victim_stats, width="stretch")
+st.dataframe(region_victim_stats.style.set_table_styles(styles))
 
 
 st.markdown("   ")
