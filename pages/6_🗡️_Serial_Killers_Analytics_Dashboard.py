@@ -251,10 +251,10 @@ fig3 = px.choropleth(
     hover_name='Country',
     hover_data={'Total_Victims': True, 'Avg_Victims_Per_Killer': ':.2f'},
     title='Global Distribution Heat Map',
-    color_continuous_scale='OrRd',
+    color_continuous_scale='bluered',
     labels={'Serial_Killer_Count': 'Number of Serial Killers'}
 )
-fig3.update_layout(height=600)
+fig3.update_layout(height=600, map_style="dark")
 st.plotly_chart(fig3, uwidth="stretch")
 
 st.markdown("   ")
