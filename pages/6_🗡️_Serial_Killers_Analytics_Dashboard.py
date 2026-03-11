@@ -254,7 +254,7 @@ fig3 = px.choropleth(
     color_continuous_scale='cividis',
     labels={'Serial_Killer_Count': 'Number of Serial Killers'}
 )
-fig3.update_layout(height=600, map_style="carto-positron")
+fig3.update_layout(height=600)
 st.plotly_chart(fig3, uwidth="stretch")
 
 st.markdown("   ")
