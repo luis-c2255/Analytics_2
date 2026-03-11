@@ -447,7 +447,7 @@ y=penalty_counts.values,
 title='Distribution of Criminal Penalties',
 labels={'x': 'Penalty Type', 'y': 'Number of Cases'},
 color=penalty_counts.values,
-color_continuous_scale='Reds'
+color_continuous_scale='Hot'
 )
 fig10.update_layout(height=500, showlegend=False)
 st.plotly_chart(fig10, width="stretch")
