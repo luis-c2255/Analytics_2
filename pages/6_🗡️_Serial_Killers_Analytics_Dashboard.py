@@ -413,6 +413,8 @@ region_victim_stats.columns = [
     'Avg Victims', 'Median Victims', 'Total Victims', 'Case Count'
 ]
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
+df_stats = pd.DataFrame(region_victim_stats)
+
 styles = [
     dict(selector="th", props=[("font-size", "120%"),
                                ("text-align", "center"),
@@ -421,7 +423,7 @@ styles = [
                                ("color", "#8B4421")])
 ]
 
-st.dataframe(region_victim_stats.style.set_table_styles(styles))
+st.dataframe(df_stats.style.set_table_styles(styles))
 
 
 st.markdown("   ")
