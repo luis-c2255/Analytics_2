@@ -404,7 +404,8 @@ st.plotly_chart(fig9, width="stretch")
 st.markdown("   ")
 # Victim statistics by region
 st.subheader(":yellow[Victim Statistics by Region]")
-st.write("Columns in filtered_df:", filtered_df.columns.tolist())
+st.write("Filtered rows:", len(filtered_df))
+
 
 region_victim_stats = filtered_df.groupby('Region').agg({
     'Proven victims': ['mean', 'median', 'sum', 'count']
