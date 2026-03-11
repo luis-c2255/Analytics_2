@@ -242,6 +242,7 @@ country_victims.columns = ['Country', 'Total_Victims', 'Serial_Killer_Count']
 country_victims['Avg_Victims_Per_Killer'] = (
     country_victims['Total_Victims'] / country_victims['Serial_Killer_Count']
     ).round(2)
+st.write(country_victims.sort_values('Serial_Killer_Count', ascending=False).head())
 
 red_orange_scale = [
     [0.0, "#2b0000"],
