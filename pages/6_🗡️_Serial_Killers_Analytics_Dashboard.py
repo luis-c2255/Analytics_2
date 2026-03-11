@@ -413,18 +413,19 @@ region_victim_stats.columns = [
     'Avg Victims', 'Median Victims', 'Total Victims', 'Case Count'
 ]
 region_victim_stats = region_victim_stats.sort_values('Total Victims', ascending=False)
-df_stats = pd.DataFrame(region_victim_stats)
 
-styles = [
-    dict(selector="th", props=[("font-size", "120%"),
-                               ("text-align", "center"),
-                               ("text-transform", "capitalize"),
-                               ("background-color", "#FFED4B"), # Your color here
-                               ("color", "#8B4421")])
-]
+styled_df = region_victim_stats.style.set_table_styles([
+    {'selector': "th.col_heading',
+    'props':[
+        ('background-color', '#FFED4B'),
+        ('color', '#8B4421'),
+        ('font-weight', 'bold'),
+        ('border', '1px solid #ffffff'),
+        ('padding', '8px')
+    ]}
+])
 
-st.dataframe(df_stats.style.set_table_styles(styles))
-
+st.dataframe(styled_df, width="stretch")
 
 st.markdown("   ")
 st.subheader("⚖️ :orange[Criminal Justice]", divider="orange")
