@@ -282,7 +282,7 @@ fig4.add_trace(go.Bar(
     x=decade_analysis['Decade'],
     y=decade_analysis['Serial_Killer_Count'],
     name='Number of Cases',
-    marker_color='#9ED945',
+    marker_color='#2BB570',
     yaxis='y'
 ))
 
