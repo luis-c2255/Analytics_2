@@ -404,7 +404,7 @@ title='Top 20 Deadliest Serial Killers',
 labels={'Proven victims': 'Number of Proven Victims', 'Name': 'Serial Killer'},
 hover_data=['Country', 'Start year', 'End year'],
 color='Proven victims',
-color_continuous_scale='Reds'
+color_continuous_scale='YlOrBr'
 )
 fig9.update_layout(height=700, showlegend=False, yaxis={'categoryorder': 'total ascending'})
 st.plotly_chart(fig9, width="stretch")
