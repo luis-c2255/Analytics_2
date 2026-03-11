@@ -352,7 +352,7 @@ fig7 = px.pie(
     values=victim_category_counts.values,
     names=victim_category_counts.index,
     title='Distribution by Victim Count Category',
-    color_discrete_sequence=px.colors.sequential.oranges,
+    color_discrete_sequence=px.colors.sequential.cividis,
     hole=0.4
 )
 fig7.update_traces(textposition='inside', textinfo='percent+label')
