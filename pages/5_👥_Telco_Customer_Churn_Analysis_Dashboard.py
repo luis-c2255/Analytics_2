@@ -548,7 +548,6 @@ if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
 
         # Display results  
         st.markdown("   ") 
-        st.markdown("   ") 
         st.subheader("🎯 :violet[Prediction Results]")
         col1, col2, col3 = st.columns(3) 
         with col1:  
