@@ -655,12 +655,11 @@ labels=['Low ($0-35)', 'Medium ($35-70)', 'High ($70-100)', 'Premium ($100+)'])
 segment_summary = df.groupby([
     'Contract',
     'Tenure_Segment']).agg({ 
-        'Tenure_Segment']).agg({ 
-            'customerID': 'count', 
-            'Churn_Binary': 'mean',
-            'MonthlyCharges': 'mean', 
-            'TotalCharges': 'sum' 
-        }).reset_index()
+        'customerID': 'count', 
+        'Churn_Binary': 'mean',
+        'MonthlyCharges': 'mean', 
+        'TotalCharges': 'sum' 
+    }).reset_index()
 segment_summary.columns = ['Contract', 'Tenure', 'Customers', 'Churn_Rate', 'Avg_Monthly', 'Total_Revenue'] 
 segment_summary['Churn_Rate'] = segment_summary['Churn_Rate'] * 100  
 
