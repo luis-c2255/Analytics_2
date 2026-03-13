@@ -43,6 +43,22 @@ def load_model():
 df = load_data()  
 model, model_features = load_model() 
 
+# ========================================  
+# SIDEBAR  
+# ========================================  
+st.sidebar.image("https://img.icons8.com/fluency/96/000000/phone.png", width=80)
+st.sidebar.title("📊 Navigation")  
+
+menu = st.sidebar.radio(
+    "Select Dashboard View:",
+    ["🏠 Overview", "📈 Churn Analysis", "💰 Revenue Impact", 
+    "🤖 Churn Predictor", "📊 Customer Segmentation"]  
+)  
+st.sidebar.markdown("---")  
+st.sidebar.markdown("### Dataset Info")  
+st.sidebar.metric("Total Customers", f"{len(df):,}")  
+st.sidebar.metric("Churn Rate", f"{df['Churn_Binary'].mean()*100:.2f}%")
+st.sidebar.metric("Total Revenue", f"${df['TotalCharges'].sum():,.0f}") 
 
 # Title
 st.markdown(
