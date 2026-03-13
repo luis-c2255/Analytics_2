@@ -528,42 +528,41 @@ if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
         'PaymentMethod': payment  
     }
     # Create dummy variables  
-    for feature, value in categorical_mapping.items(): 
-        for model_feature in model_features: 
-            if model_feature.startswith(feature + "_"):  
-                expected_value = model_feature.split("_", 1)[1]  
-                input_data[model_feature] = 1 if value == expected_value else 0  
-        # Ensure all model features are present 
-        for feature in model_features:  
-            if feature not in input_data.columns:
-                input_data[feature] = 0  
-                # Reorder columns to match model  
-                input_data = input_data[model_features] 
-                # Make prediction  
-                churn_probability = model.predict_proba(input_data)[0][1] 
-                churn_prediction = model.predict(input_data)[0]  
+    for model_feature in model_features:
+        if model_feature not in input_data.columns:
+            found = False
+            for feature, value in categorical_mapping.items():
+                if model_feature.startswith(feature + "_"):
+                    expected_value = model_feature.split("_", 1)[1]
+                    input_data[model_feature] = [1 if value == expected_value else 0]
+                    found = True
+                    break
+            if not found:
+                input_data[model_feature] = 0
+    input_data = input_data[model_features]
+    churn_probability = model.predict_proba(input_data)[0][1]
+    churn_prediction = model.predict(input_data)[0]
 
-# Display results  
-st.markdown("   ")  
-st.subheader("🎯 :violet[Prediction Results]")
-col1, col2, col3 = st.columns(3) 
-with col1:  
-    st.metric("Churn Probability", f"{churn_probability*100:.1f}%") 
+    # Display results  
+    st.subheader("🎯 :violet[Prediction Results]")
+    col1, col2, col3 = st.columns(3) 
+    with col1:  
+        st.metric("Churn Probability", f"{churn_probability*100:.1f}%") 
 
-with col2:  
-    prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
-    st.metric("Prediction", prediction_label)  
-with col3:  
-    if churn_probability > 0.7:
-        risk_level = 'HIGH'
-        risk_color = "🔴"
-    elif churn_probability > 0.4:
-        risk_level = "MEDIUM"
-        risk_color = "🟡"
-    else:
-        risk_level = "LOW"
-        risk_color = "🟢"
-    st.metric("Risk Level", f"{risk_color} {risk_level}")  
+    with col2:  
+        prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
+        st.metric("Prediction", prediction_label)  
+    with col3:  
+        if churn_probability > 0.7:
+            risk_level = 'HIGH'
+            risk_color = "🔴"
+        elif churn_probability > 0.4:
+            risk_level = "MEDIUM"
+            risk_color = "🟡"
+        else:
+            risk_level = "LOW"
+            risk_color = "🟢"
+        st.metric("Risk Level", f"{risk_color} {risk_level}")  
 
 # Probability gauge  
 fig13 = go.Figure(go.Indicator( 
