@@ -735,7 +735,7 @@ service_cols = ['PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecur
 df['Service_Count'] = df[service_cols].apply( 
     lambda row: sum([1 for x in row if x not in ['No', 'No phone service', 'No internet service']]), axis=1)
 
- service_bundle = df.groupby('Service_Count').agg({ 
+service_bundle = df.groupby('Service_Count').agg({ 
     'customerID': 'count',
     'Churn_Binary': 'mean',
     'MonthlyCharges': 'mean'
