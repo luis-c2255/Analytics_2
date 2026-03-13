@@ -902,7 +902,55 @@ for category, actions in action_plans.items():
     with st.expander(category, expanded=True):
         for action in actions:
             st.markdown(action)
+st.markdown("   ")
+st.subheader("📚 :green[Additional Analysis - Advanced Techniques]", divider="green")
 
+st.subheader(":green[Customer Cohort Analysis]")
+# Create cohort based on sign-up period 
+df['Cohort'] = pd.cut(df['tenure'], 
+bins=[0, 6, 12, 24, 36, 100],
+labels=['0-6m', '6-12m', '12-24m', '24-36m', '36m+']) 
+
+# Cohort retention analysis  
+cohort_analysis = df.groupby('Cohort').agg({ 
+    'Churn_Binary': ['count', 'sum', 'mean']
+}).reset_index()
+
+cohort_analysis.columns = ['Cohort', 'Total_Customers', 'Churned', 'Churn_Rate']
+cohort_analysis['Retention_Rate'] = (1 - cohort_analysis['Churn_Rate']) * 100
+cohort_analysis['Churn_Rate'] = cohort_analysis['Churn_Rate'] * 100
+
+print("\nCohort Analysis:")
+print(cohort_analysis)
+
+# Visualize cohort retention
+fig21 = go.Figure()
+fig21.add_trace(go.Bar(
+    x=cohort_analysis['Cohort'],
+    y=cohort_analysis['Retention_Rate'],
+    name='Retention Rate',
+    marker_color='#27ae60',
+    text=cohort_analysis['Retention_Rate'].round(1),
+    texttemplate='%{text}%',
+    textposition='outside'
+))
+fig21.add_trace(go.Bar(
+    x=cohort_analysis['Cohort'],
+    y=cohort_analysis['Churn_Rate'],
+    name='Churn Rate',
+    marker_color='#e74c3c',
+    text=cohort_analysis['Churn_Rate'].round(1),
+    texttemplate='%{text}%',
+    textposition='outside'
+))
+fig21.update_layout(
+    title='Cohort Retention vs Churn Rate',
+    xaxis_title='Customer Cohort (Tenure)',
+    yaxis_title='Rate (%)',
+    barmode='stack',
+    height=500
+)
+st.plotly_chart(fig21, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
