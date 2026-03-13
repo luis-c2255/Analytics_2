@@ -263,7 +263,7 @@ with col1:
             title="Tenure Impact:",
             content=f"Churned: {avg_tenure_churned:.1f} months\n\n", f"Retained: {avg_tenure_retained:.1f} months",
             box_type="info"
-        ), unsafe_allow_html=True
+        )
     )
 with col2: 
     monthly_churned = filtered_df[filtered_df['Churn']=='Yes']['MonthlyCharges'].mean() 
@@ -273,7 +273,7 @@ with col2:
             title="Monthly Charges:",
             content=f"Churned: ${monthly_churned:.2f}\n\n", f"Retained: ${monthly_retained:.2f}",
             box_type="warning"
-        ), unsafe_allow_html=True
+        )
     )
 with col3:
     high_risk = filtered_df[(filtered_df['Contract'] == 'Month-to-month') & (filtered_df['tenure'] < 12)]  
@@ -283,7 +283,7 @@ with col3:
             title="High-Risk Segment:",
             content=f"Month-to-month + Tenure < 12\n\n", f"Churn Rate: {high_risk_rate:.1f}%",
             box_type="error"
-        ), unsafe_allow_html=True
+        )
     )
 st.subheader("💰 :yellow[Revenue Impact]", divider="yellow")
 
