@@ -951,14 +951,109 @@ fig21.update_layout(
     height=500
 )
 st.plotly_chart(fig21, width="stretch")
-# ============================================
-# FOOTER
-# ============================================
-st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: #666;'>
-    <p><strong>👥 Telco Customer Churn Analysis Dashboard</strong></p>
-    <p>Analysis of Telco Customer Churn dataset</p>
-    <p style='font-size: 0.9rem;'>Navigate using the sidebar to explore different datasets</p>
-</div>
-""", unsafe_allow_html=True)
+
+st.subheader(":green[RFM(Recency, Frequency, Monetary)Analysis]")
+# RFM Analysis for customer segmentation  
+# Recency: Tenure (how long they've been customers)  
+# Frequency: Service adoption (number of services)  
+# Monetary: MonthlyCharges 
+df['R_Score'] = pd.qcut(df['tenure'], q=4, labels=[1, 2, 3, 4]) 
+df['F_Score'] = pd.qcut(df['Service_Count'].rank(method='first'), q=4, labels=[1, 2, 3, 4])  
+df['M_Score'] = pd.qcut(df['MonthlyCharges'], q=4, labels=[1, 2, 3, 4])
+
+# Combine scores  
+df['RFM_Score'] = df['R_Score'].astype(str) + df['F_Score'].astype(str) + df['M_Score'].astype(str) 
+df['RFM_Total'] = df['R_Score'].astype(int) + df['F_Score'].astype(int) + df['M_Score'].astype(int) 
+
+# Segment customers based on RFM 
+def rfm_segment(row):
+    if row['RFM_Total'] >= 9:
+        return 'Champions'
+    elif row['RFM_Total'] >= 7:
+        return 'Loyal Customers'
+    elif row['RFM_Total'] >= 5:
+        return 'Potential Loyalists'
+    elif row['RFM_Total'] >= 4:
+        return 'At Risk'
+    else:
+        return 'Need Attention'
+df['RFM_Segment'] = df.apply(rfm_segment, axis=1)
+
+# Analyze churn by RFM segment
+rfm_churn = df.groupby('RFM_Segment').agg({
+    'customerID': 'count',
+    'Churn_Binary': 'mean',
+    'MonthlyCharges': 'mean',
+    'TotalCharges': 'sum'
+}).reset_index()
+
+rfm_churn.columns = ['Segment', 'Customers', 'Churn_Rate', 'Avg_Monthly', 'Total_Revenue']
+rfm_churn['Churn_Rate'] = rfm_churn['Churn_Rate'] * 100
+
+print("\nRFM Segmentation Analysis:")
+print(rfm_churn.sort_values('Churn_Rate', ascending=False))
+
+fig22 = px.scatter(
+    rfm_churn,
+    x='Customers',
+    y='Churn_Rate',
+    size='Total_Revenue',
+    color='Segment',
+    hover_data=['Avg_Monthly'],
+    title='RFM Segments: Customer Count vs Churn Rate (bubble size = revenue)',
+    labels={'Churn_Rate': 'Churn Rate (%)'}
+)
+fig22.update_layout(height=500)
+st.plotly_chart(fig22, width="stretch")
+
+st.subheader(":green[Time Series Forecasting - Predict Future Churn]")
+from sklearn.ensemble import GradientBoostingRegressor
+
+# Create monthly aggregation
+df['Month_Joined'] = df['tenure'].apply(lambda x: 72 - x)
+# Approximate join month
+monthly_churn = df.groupby('Month_Joined').agg({
+    'Churn_Binary': 'mean',
+    'customerID': 'count'
+}).reset_index()
+
+monthly_churn.columns = ['Month', 'Churn_Rate', 'New_Customers']
+monthly_churn = monthly_churn.sort_values('Month')
+
+# Simple forecasting model
+from sklearn.linear_model import LinearRegression
+
+X = monthly_churn['Month'].values.reshape(-1, 1)
+y = monthly_churn['Churn_Rate'].values
+
+# Fit model
+lr_forecast = LinearRegression()
+lr_forecast.fit(X, y)
+
+# Predict next 12 months
+future_months = np.arange(monthly_churn['Month'].max() + 1, monthly_churn['Month'].max() + 13).reshape(-1, 1)
+future_churn = lr_forecast.predict(future_months)
+
+fig23 = go.Figure()
+fig23.add_trace(go.Scatter(
+    x=monthly_churn['Month'],
+    y=monthly_churn['Churn_Rate'] * 100,
+    mode='lines+markers',
+    name='Historical Churn Rate',
+    line=dict(color='#3498db', width=3)
+))
+fig23.add_trace(go.Scatter(
+    x=future_months.flatten(),
+    y=future_churn * 100,
+    mode='lines+markers',
+    name='Forecasted Churn Rate',
+    line=dict(color='#e74c3c', width=3, dash='dash')
+))
+fig23.update_layout(
+    title='Churn Rate Forecast - Next 12 Months',
+    xaxis_title='Month',
+    yaxis_title='Churn Rate (%)',
+    height=500,
+    hovermode='x unified'
+)
+st.plotly_chart(fig23, width="stretch")
