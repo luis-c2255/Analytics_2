@@ -56,7 +56,7 @@ st.markdown("   ")
 # Key Metrics Row  
 col1, col2, col3, col4 = st.columns(4)  
 
-total_customer = len(df)
+total_customers = len(df)
 churned_customers = df['Churn_Binary'].sum()
 churn_rate = (churned_customers / total_customers) * 100
 avg_revenue = df['MonthlyCharges'].mean()
