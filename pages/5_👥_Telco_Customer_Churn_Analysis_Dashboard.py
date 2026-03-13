@@ -488,7 +488,7 @@ with col3:
     streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])  
     streaming_movies = st.selectbox("Streaming Movies", ["No", "Yes", "No internet service"]) 
 
-col1, col2, col3 = st.columns(3)  
+col1, col2 = st.columns(2)  
 with col1: 
     monthly_charges = st.number_input("Monthly Charges ($)", 
     min_value=0.0, max_value=150.0,  
@@ -497,9 +497,9 @@ with col2:
     total_charges = st.number_input("Total Charges ($)", 
     min_value=0.0, max_value=10000.0, 
     value=monthly_charges * tenure, step=10.0) 
-with col3:
-    st.markdown("# :red[Click to predict Churn]")
-    if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
+
+st.markdown("# :red[Click to predict Churn]")
+if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
         # Prepare input data
         input_data = pd.DataFrame({  
             'SeniorCitizen': [1 if senior == "Yes" else 0],  
