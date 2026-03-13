@@ -450,7 +450,7 @@ total_at_risk_revenue = at_risk_customers['MonthlyCharges'].sum()
 st.warning(f"🚨 **Alert:** {len(at_risk_customers)} high-value customers churned, "  
 f"resulting in **${total_at_risk_revenue:,.2f}/month** revenue loss!") 
 
-st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
+st.subheader("🤖 :violet[Churn Predictor]", divider = "violet")
 
 st.subheader("📊 :rainbow[Customer Segmentation]", divider="rainbow")
 # ============================================
