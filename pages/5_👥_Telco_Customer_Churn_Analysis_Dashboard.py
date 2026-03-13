@@ -501,10 +501,9 @@ with col6:
     total_charges = st.number_input("Total Charges ($)", 
     min_value=0.0, max_value=10000.0, 
     value=monthly_charges * tenure, step=10.0) 
-with st.container(horizontal=True, horizontal_alignment="center"):
-    st.markdown("# :red[Click to predict Churn]")
-with st.container(horizontal=True, horizontal_alignment="center"):
-    if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
+
+st.markdown("# :red[Click to predict Churn]")
+if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
         # Prepare input data
         input_data = pd.DataFrame({  
             'SeniorCitizen': [1 if senior == "Yes" else 0],  
