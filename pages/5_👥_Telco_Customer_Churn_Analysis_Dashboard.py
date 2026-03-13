@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots  
+import joblib  
+import seaborn as sns  
+import matplotlib.pyplot as plt 
 
 from utils.theme import Components, Colors, apply_chart_theme, init_page
 
@@ -18,6 +22,26 @@ except FileNotFoundError:
 @st.cache_data
 def load_data():
     df = pd.read_csv('Telco-Customer-Churn.csv')
+
+    # Clean TotalCharges  
+    df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+    df['TotalCharges'].fillna(df['MonthlyCharges'] * df['tenure'], inplace=True)
+
+    # Encode Churn as binary 
+    df['Churn_Binary'] = df['Churn'].map({'Yes': 1, 'No': 0})
+    return df
+
+@st.cache_resource  
+def load_model(): 
+    try:
+        model = joblib.load('churn_prediction_model.pkl')
+        features = joblib.load('model_features.pkl') 
+        return model, features 
+    except:
+        return None, None
+
+df = load_data()  
+model, model_features = load_model() 
 
 
 # Title
