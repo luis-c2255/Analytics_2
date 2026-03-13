@@ -564,33 +564,33 @@ if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
             risk_color = "🟢"
         st.metric("Risk Level", f"{risk_color} {risk_level}")  
 
-# Probability gauge  
-fig13 = go.Figure(go.Indicator( 
-    mode="gauge+number+delta", 
-    value=churn_probability * 100,  
-    domain={'x': [0, 1], 'y': [0, 1]}, 
-    title={'text': "Churn Probability (%)", 'font': {'size': 24}},  
-    delta={'reference': 50, 'increasing': {'color': "red"}},  
-    gauge={ 
-        'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"}, 
-        'bar': {'color': "darkblue"},  
-        'bgcolor': "white", 
-        'borderwidth': 2, 
-        'bordercolor': "gray",  
-        'steps': [  
-            {'range': [0, 30], 'color': '#27ae60'},  
-            {'range': [30, 70], 'color': '#f39c12'},  
-            {'range': [70, 100], 'color': '#e74c3c'}  
-        ],
-        'threshold': {  
-            'line': {'color': "red", 'width': 4},  
-            'thickness': 0.75, 
-            'value': 50  
+    # Probability gauge  
+    fig13 = go.Figure(go.Indicator( 
+        mode="gauge+number+delta", 
+        value=churn_probability * 100,  
+        domain={'x': [0, 1], 'y': [0, 1]}, 
+        title={'text': "Churn Probability (%)", 'font': {'size': 24}},  
+        delta={'reference': 50, 'increasing': {'color': "red"}},  
+        gauge={ 
+            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"}, 
+            'bar': {'color': "darkblue"},  
+            'bgcolor': "white", 
+            'borderwidth': 2, 
+            'bordercolor': "gray",  
+            'steps': [  
+                {'range': [0, 30], 'color': '#27ae60'},  
+                {'range': [30, 70], 'color': '#f39c12'},  
+                {'range': [70, 100], 'color': '#e74c3c'}  
+            ],
+            'threshold': {  
+                'line': {'color': "red", 'width': 4},  
+                'thickness': 0.75, 
+                'value': 50  
+            }
         }
-    }
-))
-fig13.update_layout(height=400) 
-st.plotly_chart(fig13, width="stretch")
+    ))
+    fig13.update_layout(height=400) 
+    st.plotly_chart(fig13, width="stretch")
 # Recommendations  
 st.markdown("   ")  
 st.subheader("💡 :violet[Retention Recommendations]")  
