@@ -724,7 +724,40 @@ st.plotly_chart(fig17, width="stretch")
 st.markdown("   ")  
 st.subheader("📦 :rainbow[Service Bundle Analysis]")  
 
+# Count number of services per customer  
+service_cols = ['PhoneService', 'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies']  
+df['Service_Count'] = df[service_cols].apply( 
+    lambda row: sum([1 for x in row if x not in ['No', 'No phone service', 'No internet service']]), axis=1)
 
+ service_bundle = df.groupby('Service_Count').agg({ 
+    'customerID': 'count',
+    'Churn_Binary': 'mean',
+    'MonthlyCharges': 'mean'
+}).reset_index()
+service_bundle.columns = ['Services', 'Customers', 'Churn_Rate', 'Avg_Monthly_Charges']  
+service_bundle['Churn_Rate'] = service_bundle['Churn_Rate']* 100  
+
+fig18 = make_subplots(specs=[[{"secondary_y": True}]]) 
+fig18.add_trace( 
+    go.Bar(x=service_bundle['Services'], 
+    y=service_bundle['Customers'],
+    name='Number of Customers',
+    marker_color='lightblue'), 
+    secondary_y=False  
+) 
+fig18.add_trace( 
+    go.Scatter(x=service_bundle['Services'],
+    y=service_bundle['Churn_Rate'],
+    name='Churn Rate (%)', 
+    marker_color='red',
+    line=dict(width=3)),
+    secondary_y=True  
+) 
+fig18.update_xaxes(title_text="Number of Services")  
+fig18.update_yaxes(title_text="Number of Customers", secondary_y=False)  
+fig18.update_yaxes(title_text="Churn Rate (%)", secondary_y=True)  
+fig18.update_layout(height=450, title="Customer Count & Churn Rate by Service Bundle Size") 
+st.plotly_chart(fig18, width="stretch")
 # ============================================
 # FOOTER
 # ============================================
