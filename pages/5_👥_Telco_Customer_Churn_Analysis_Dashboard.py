@@ -66,7 +66,7 @@ with col1:
         Components.metric_card(
             title="Total Customers",
             value=f"{total_customers:,}",
-            delta="",
+            delta="🔝",
             card_type="info",
         ), unsafe_allow_html=True
     )
@@ -84,7 +84,7 @@ with col3:
         Components.metric_card(
             title="Avg Monthly Revenue",
             value=f"${avg_revenue:.2f}",
-            delta="",
+            delta="💲",
             card_type="success"
         ), unsafe_allow_html=True
     )
@@ -94,7 +94,7 @@ with col4:
         Components.metric_card(
             title="Monthly Revenue Lost",
             value=f"${revenue_lost:,.0f}",
-            delta="",
+            delta="❗",
             card_type="error"
         ), unsafe_allow_html=True
     )
@@ -273,7 +273,7 @@ with col3:
     st.error(f"**High-Risk Segment:**\n\n"
     f"Month-to-month + Tenure < 12\n\n"
     f"Churn Rate: {high_risk_rate:.1f}%")
-    
+
 st.subheader("💰 :yellow[Revenue Impact]", divider="yellow")
 
 st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
