@@ -554,10 +554,16 @@ with col2:
     prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
     st.metric("Prediction", prediction_label)  
 with col3:  
-    risk_level = "HIGH" if churn_probability > 0.7 else "MEDIUM" 
-    if churn_probability > 0.4 else "LOW"  
-        risk_color = "🔴" if risk_level == "HIGH" else "🟡" if risk_level == "MEDIUM" else "🟢"  
-        st.metric("Risk Level", f"{risk_color} {risk_level}")  
+    if churn_probability > 0.7:
+        risk_level = 'HIGH'
+        risk_color = "🔴"
+    elif churn_probability > 0.4:
+        risk_level = "MEDIUM"
+        risk_color = "🟡"
+    else:
+        risk_level = "LOW"
+        risk_color = "🟢"
+    st.metric("Risk Level", f"{risk_color} {risk_level}")  
 
 # Probability gauge  
 fig13 = go.Figure(go.Indicator( 
