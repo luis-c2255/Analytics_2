@@ -140,7 +140,154 @@ fig3.update_layout(height=500)
 st.plotly_chart(fig3, width="stretch") 
 
 st.subheader("📈 :blue[Churn Analysis]", divider="blue")
+# Filter options  
+col1, col2, col3 = st.columns(3) 
+with col1:
+    contract_filter = st.multiselect( 
+        "Filter by Contract Type",
+        options=df['Contract'].unique(), 
+        default=df['Contract'].unique()  
+    )
+with col2:
+    internet_filter = st.multiselect(
+        "Filter by Internet Service",
+        options=df['InternetService'].unique(),
+        default=df['InternetService'].unique()
+    )
+with col3:
+    tenure_range = st.slider(
+        "Filter by Tenure (months)",
+        min_value=int(df['tenure'].min()),
+        max_value=int(df['tenure'].max()), 
+        value=(int(df['tenure'].min()), int(df['tenure'].max()))
+    ) 
 
+# Apply filters  
+filtered_df = df[ 
+    (df['Contract'].isin(contract_filter)) & 
+    (df['InternetService'].isin(internet_filter)) &  
+    (df['tenure'] >= tenure_range[0]) &  
+    (df['tenure'] <= tenure_range[1])  
+]  
+st.markdown(f"**Filtered Dataset: {len(filtered_df):,} customers**")  
+st.markdown("   ")  
+
+st.subheader("📊 :blue[Churn Rate by Contract Type]")  
+contract_churn = filtered_df.groupby('Contract')['Churn_Binary'].mean() * 100 
+fig4 = px.bar(
+    x=contract_churn.index,
+    y=contract_churn.values,
+    labels={'x': 'Contract Type', 'y': 'Churn Rate (%)'},
+    color=contract_churn.values,
+    color_continuous_scale='Reds',  
+    text=contract_churn.values.round(1)  
+)  
+fig4.update_traces(texttemplate='%{text}%', textposition='outside')  
+fig4.update_layout(height=400, showlegend=False) 
+st.plotly_chart(fig4, width="stretch") 
+
+st.subheader("📊 :blue[Churn Rate by Payment Method]")  
+payment_churn = filtered_df.groupby('PaymentMethod')['Churn_Binary'].mean() * 100 
+fig5 = px.bar(
+    x=payment_churn.values,
+    y=payment_churn.index,
+    orientation='h', 
+    labels={'x': 'Churn Rate (%)', 'y': 'Payment Method'},
+    color=payment_churn.values, 
+    color_continuous_scale='OrRd',
+    text=payment_churn.values.round(1)  
+)
+fig5.update_traces(texttemplate='%{text}%', textposition='outside')
+fig5.update_layout(height=400, showlegend=False) 
+st.plotly_chart(fig5, width="stretch")
+
+# Tenure Distribution  
+st.subheader("📉 :blue[Tenure Distribution by Churn Status]")  
+fig6 = go.Figure() 
+fig6.add_trace(go.Histogram(  
+    x=filtered_df[filtered_df['Churn']=='No']['tenure'],
+    name='Retained', 
+    marker_color='#3498db',
+    opacity=0.7,
+    nbinsx=30  
+))
+fig6.add_trace(go.Histogram(
+    x=filtered_df[filtered_df['Churn']=='Yes']['tenure'],
+    name='Churned', 
+    marker_color='#e74c3c',  
+    opacity=0.7,
+    nbinsx=30  
+)) 
+fig6.update_layout( 
+    barmode='overlay',
+    xaxis_title='Tenure (months)',
+    yaxis_title='Count',
+    height=450, 
+    legend=dict(x=0.7, y=0.95)  
+)
+st.plotly_chart(fig6, width="stretch")
+
+# Churn by Services  
+st.subheader("🔍 :blue[Churn Rate by Service Usage]") 
+services = ['OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies'] 
+service_churn_data = []  
+for service in services:
+    churn_rate = filtered_df.groupby(service)['Churn_Binary'].mean() * 100
+for status, rate in churn_rate.items():
+    service_churn_data.append({'Service': service, 'Status': status, 'Churn_Rate': rate  
+}) 
+service_df = pd.DataFrame(service_churn_data)
+
+fig7 = px.bar( 
+    service_df,
+    x='Service',
+    y='Churn_Rate',
+    color='Status',
+    barmode='group',
+    labels={'Churn_Rate': 'Churn Rate (%)', 'Service': 'Service Type'},
+    color_discrete_map={'Yes': '#27ae60', 'No': '#e74c3c', 'No internet service': '#95a5a6'}  
+) 
+fig7.update_layout(height=450)
+st.plotly_chart(fig7, width="stretch")
+
+# Key Insights Box  
+st.markdown("   ")  
+st.subheader("💡 :blue[Key Insights]")
+col1, col2, col3 = st.columns(3)  
+  
+with col1:
+    avg_tenure_churned = filtered_df[filtered_df['Churn']=='Yes']['tenure'].mean()  
+    avg_tenure_retained = filtered_df[filtered_df['Churn']=='No']['tenure'].mean()  
+    st.markdown(
+        Components.insight_box(
+            "Tenure Impact:",
+            f"Churned: {avg_tenure_churned:.1f} months\n\n",
+            f"Retained: {avg_tenure_retained:.1f} months",
+            "info"
+        ), unsafe_allow_html=True
+    )
+with col2: 
+    monthly_churned = filtered_df[filtered_df['Churn']=='Yes']['MonthlyCharges'].mean() 
+    monthly_retained = filtered_df[filtered_df['Churn']=='No']['MonthlyCharges'].mean()  
+    st.markdown(
+        Components.insight_box(
+            "Monthly Charges:",
+            f"Churned: ${monthly_churned:.2f}\n\n",
+            f"Retained: ${monthly_retained:.2f}",
+            "warning"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    high_risk = filtered_df[(filtered_df['Contract'] == 'Month-to-month') & (filtered_df['tenure'] < 12)]  
+    high_risk_rate = high_risk['Churn_Binary'].mean() * 100
+    st.markdown(
+        Components.insight_box(
+            "High-Risk Segment:",
+            f"Month-to-month + Tenure < 12\n\n",
+            f"Churn Rate: {high_risk_rate:.1f}%",
+            "error"
+        ), unsafe_allow_html=True
+    )
 st.subheader("💰 :yellow[Revenue Impact]", divider="yellow")
 
 st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
