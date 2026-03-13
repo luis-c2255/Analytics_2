@@ -461,7 +461,7 @@ st.markdown("   ")
 st.subheader("📝 :violet[Enter Customer Information]")
 
 # Create input form  
-col1, col2, col3 = st.columns(3)  
+col1, col2 = st.columns(2)  
   
 with col1:  
     st.markdown("**Demographics**")  
@@ -476,24 +476,27 @@ with col2:
     paperless = st.selectbox("Paperless Billing", ["No", "Yes"])  
     payment = st.selectbox("Payment Method", ["Electronic check", "Mailed check", 
     "Bank transfer (automatic)", "Credit card (automatic)"])
+
+col3, col4 = st.columns(2)
+st.markdown("**Services**")
 with col3:
-    st.markdown("**Services**")
     phone = st.selectbox("Phone Service", ["No", "Yes"])  
     multiple_lines = st.selectbox("Multiple Lines", ["No", "Yes", "No phone service"])  
     internet = st.selectbox("Internet Service", ["DSL", "Fiber optic", "No"]) 
     online_security = st.selectbox("Online Security", ["No", "Yes", "No internet service"]) 
+with col4:
     online_backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])  
     device_protection = st.selectbox("Device Protection", ["No", "Yes", "No internet service"])  
     tech_support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"]) 
     streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])  
     streaming_movies = st.selectbox("Streaming Movies", ["No", "Yes", "No internet service"]) 
 
-col1, col2 = st.columns(2)  
-with col1: 
+col5, col6 = st.columns(2)  
+with col5: 
     monthly_charges = st.number_input("Monthly Charges ($)", 
     min_value=0.0, max_value=150.0,  
     value=70.0, step=0.5)  
-with col2:  
+with col6:  
     total_charges = st.number_input("Total Charges ($)", 
     min_value=0.0, max_value=10000.0, 
     value=monthly_charges * tenure, step=10.0) 
