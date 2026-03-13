@@ -767,6 +767,142 @@ fig18.update_yaxes(title_text="Number of Customers", secondary_y=False)
 fig18.update_yaxes(title_text="Churn Rate (%)", secondary_y=True)  
 fig18.update_layout(height=450, title="Customer Count & Churn Rate by Service Bundle Size") 
 st.plotly_chart(fig18, width="stretch")
+
+# Demographic Segmentation  
+st.markdown("   ")  
+st.subheader("👨‍👩‍👧‍👦 :red[Demographic Segmentation]", divider="red")
+# Senior Citizen Analysis  
+senior_analysis = df.groupby(['SeniorCitizen', 'Churn']).size().reset_index(name='Count') 
+senior_analysis['SeniorCitizen'] = senior_analysis['SeniorCitizen'].map({0: 'Non-Senior', 1: 'Senior'}) 
+
+fig19 = px.bar(
+    senior_analysis,
+    x='SeniorCitizen',
+    y='Count',
+    color='Churn',
+    barmode='group',
+    title='Churn by Senior Citizen Status',
+    color_discrete_map={'Yes': '#e74c3c', 'No': '#3498db'}
+)
+fig19.update_layout(height=400)
+st.plotly_chart(fig19, width="stretch")
+
+# Partner/Dependents Analysis  
+family_analysis = df.groupby(['Partner', 'Dependents', 'Churn']).size().reset_index(name='Count') 
+family_analysis['Family_Status'] = family_analysis.apply(lambda x: f"Partner: {x['Partner']}, Dependents: {x['Dependents']}", axis=1) 
+
+fig20 = px.bar(
+    family_analysis,
+    x='Family_Status',
+    y='Count',
+    color='Churn',
+    barmode='group',
+    title='Churn by Family Status',
+    color_discrete_map={'Yes': '#e74c3c', 'No': '#3498db'}
+)
+fig20.update_xaxes(tickangle=45)
+fig20.update_layout(height=400)
+st.plotly_chart(fig20, width="stretch")
+
+# Segment Performance Table  
+st.markdown("   ")  
+st.subheader("📋 :red[Detailed Segment Performance]")  
+
+# Create comprehensive segment analysis 
+segment_detail = df.groupby(['Contract', 'Tenure_Segment', 'Revenue_Segment']).agg({
+    'customerID': 'count',
+    'Churn_Binary': 'mean',
+    'MonthlyCharges': 'mean', 
+    'TotalCharges': 'mean',
+    'tenure': 'mean'
+}).reset_index()
+
+segment_detail.columns = ['Contract', 'Tenure_Segment', 'Revenue_Segment', 'Customer_Count', 'Churn_Rate', 'Avg_Monthly_Charges', 'Avg_Total_Charges', 'Avg_Tenure']
+segment_detail['Churn_Rate'] = (segment_detail['Churn_Rate'] * 100).round(2)  
+segment_detail['Avg_Monthly_Charges'] = segment_detail['Avg_Monthly_Charges'].round(2) 
+segment_detail['Avg_Total_Charges'] = segment_detail['Avg_Total_Charges'].round(2) 
+segment_detail['Avg_Tenure'] = segment_detail['Avg_Tenure'].round(1)
+# Sort by churn rate descending  
+segment_detail = segment_detail.sort_values('Churn_Rate', ascending=False)  
+# Display with color coding  
+st.dataframe(segment_detail.head(20).style.background_gradient(
+    subset=['Churn_Rate'], 
+    cmap='RdYlGn_r')
+    .background_gradient(
+        subset=['Avg_Monthly_Charges', 'Avg_Total_Charges'],
+        cmap='Blues')
+        .format({
+            'Churn_Rate': '{:.2f}%',
+            'Avg_Monthly_Charges': '${:.2f}',
+            'Avg_Total_Charges': '${:.2f}',
+            'Avg_Tenure': '{:.1f} months'
+        }),
+        width="stretch"
+    )
+# Strategic Insights  
+st.markdown("   ")  
+st.subheader("🎯 :red[Strategic Segment Insights]")
+col1, col2, col3 = st.columns(3)  
+with col1:  
+    # High-risk segment
+    high_risk_segment = segment_detail.nlargest(1, 'Churn_Rate').iloc[0]
+    st.error(f"**🔴 Highest Risk Segment:**\n\n"
+    f"Contract: {high_risk_segment['Contract']}\n\n"
+    f"Tenure: {high_risk_segment['Tenure_Segment']}\n\n"
+    f"Revenue: {high_risk_segment['Revenue_Segment']}\n\n"
+    f"Revenue: {high_risk_segment['Revenue_Segment']}\n\n"  
+    f"Churn Rate: {high_risk_segment['Churn_Rate']:.1f}%\n\n"
+    f"Customers: {int(high_risk_segment['Customer_Count'])}") 
+with col2:
+    # Most valuable segment 
+    high_value_segment = segment_detail.nlargest(1, 'Avg_Total_Charges').iloc[0] 
+    st.success(f"**💎 Most Valuable Segment:**\n\n"
+    f"Contract: {high_value_segment['Contract']}\n\n" 
+    f"Tenure: {high_value_segment['Tenure_Segment']}\n\n" 
+    f"Revenue: {high_value_segment['Revenue_Segment']}\n\n"
+    f"Avg CLV: ${high_value_segment['Avg_Total_Charges']:.0f}\n\n"
+    f"Customers: {int(high_value_segment['Customer_Count'])}") 
+with col3:
+    # Best retention segment 
+    best_retention = segment_detail.nsmallest(1, 'Churn_Rate').iloc[0]  
+    st.info(f"**🟢 Best Retention Segment:**\n\n" 
+    f"Contract: {best_retention['Contract']}\n\n"  
+    f"Tenure: {best_retention['Tenure_Segment']}\n\n"  
+    f"Revenue: {best_retention['Revenue_Segment']}\n\n"  
+    f"Churn Rate: {best_retention['Churn_Rate']:.1f}%\n\n"  
+    f"Customers: {int(best_retention['Customer_Count'])}") 
+
+# Action Plan  
+st.markdown("   ")  
+st.subheader("📝 :red[Recommended Action Plan by Segment]")  
+action_plans = { 
+    "🔴 High-Risk Segments": [ 
+        "**Month-to-month + Short Tenure (0-12 months):**", 
+        " • Immediate outreach with contract upgrade incentives (25-30% discount)", 
+        " • Assign dedicated retention specialists", 
+        " • Offer 3-month trial of premium services", 
+        " • Implement early warning monitoring system" 
+    ],
+    "🟡 Medium-Risk Segments": [
+        "**One-year contracts nearing renewal:**",
+        " • Proactive renewal campaigns 60 days before expiration",
+        " • Loyalty rewards for contract extension", 
+        " • Usage analysis and personalized recommendations", 
+        " • Competitive comparison highlighting value" 
+    ],
+    "🟢 Low-Risk/High-Value Segments": [ 
+        "**Two-year contracts + Long Tenure:**",
+        " • VIP treatment and priority support", 
+        " • Exclusive early access to new features",
+        " • Referral incentive programs",
+        " • Annual appreciation events/gifts"
+    ]
+}
+for category, actions in action_plans.items():
+    with st.expander(category, expanded=True):
+        for action in actions:
+            st.markdown(action)
+
 # ============================================
 # FOOTER
 # ============================================
