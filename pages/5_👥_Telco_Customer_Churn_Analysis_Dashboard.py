@@ -556,8 +556,8 @@ with col2:
 with col3:  
     risk_level = "HIGH" if churn_probability > 0.7 else "MEDIUM" 
     if churn_probability > 0.4 else "LOW"  
-    risk_color = "🔴" if risk_level == "HIGH" else "🟡" if risk_level == "MEDIUM" else "🟢"  
-    st.metric("Risk Level", f"{risk_color} {risk_level}")  
+        risk_color = "🔴" if risk_level == "HIGH" else "🟡" if risk_level == "MEDIUM" else "🟢"  
+        st.metric("Risk Level", f"{risk_color} {risk_level}")  
 
 # Probability gauge  
 fig13 = go.Figure(go.Indicator( 
