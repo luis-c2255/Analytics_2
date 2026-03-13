@@ -451,8 +451,281 @@ st.warning(f"🚨 **Alert:** {len(at_risk_customers)} high-value customers churn
 f"resulting in **${total_at_risk_revenue:,.2f}/month** revenue loss!") 
 
 st.subheader("🤖 :violet[Churn Predictor]", divider = "violet")
+if model is None:
+    st.error("⚠️ Model not found! Please train the model first.")
+    st.info("Run the training script to generate 'churn_prediction_model.pkl'")
+else:
+    st.success("✅ Model loaded successfully!") 
+
+st.markdown("   ")  
+st.subheader("📝 :violet[Enter Customer Information]")
+
+# Create input form  
+col1, col2, col3 = st.columns(3)  
+  
+with col1:  
+    st.markdown("**Demographics**")  
+    gender = st.selectbox("Gender", ["Male", "Female"])  
+    senior = st.selectbox("Senior Citizen", ["No", "Yes"])  
+    partner = st.selectbox("Has Partner", ["No", "Yes"])  
+    dependents = st.selectbox("Has Dependents", ["No", "Yes"]) 
+with col2:
+    st.markdown("**Account Information**")
+    tenure = st.slider("Tenure (months)", 0, 72, 12) 
+    contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])  
+    paperless = st.selectbox("Paperless Billing", ["No", "Yes"])  
+    payment = st.selectbox("Payment Method", ["Electronic check", "Mailed check", 
+    "Bank transfer (automatic)", "Credit card (automatic)"])
+with col3:
+    st.markdown("**Services**")
+    phone = st.selectbox("Phone Service", ["No", "Yes"])  
+    multiple_lines = st.selectbox("Multiple Lines", ["No", "Yes", "No phone service"])  
+    internet = st.selectbox("Internet Service", ["DSL", "Fiber optic", "No"]) 
+    online_security = st.selectbox("Online Security", ["No", "Yes", "No internet service"]) 
+    online_backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])  
+    device_protection = st.selectbox("Device Protection", ["No", "Yes", "No internet service"])  
+    tech_support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"]) 
+    streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])  
+    streaming_movies = st.selectbox("Streaming Movies", ["No", "Yes", "No internet service"]) 
+
+col1, col2 = st.columns(2)  
+with col1: 
+    monthly_charges = st.number_input("Monthly Charges ($)", 
+    min_value=0.0, max_value=150.0,  
+    value=70.0, step=0.5)  
+with col2:  
+    total_charges = st.number_input("Total Charges ($)", 
+    min_value=0.0, max_value=10000.0, 
+    value=monthly_charges * tenure, step=10.0) 
+
+# Predict button  
+st.markdown("   ")
+if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
+    # Prepare input data
+    input_data = pd.DataFrame({  
+        'SeniorCitizen': [1 if senior == "Yes" else 0],  
+        'Partner': [1 if partner == "Yes" else 0],
+        'Dependents': [1 if dependents == "Yes" else 0],
+        'tenure': [tenure],  
+        'PhoneService': [1 if phone == "Yes" else 0],  
+        'PaperlessBilling': [1 if paperless == "Yes" else 0], 
+        'MonthlyCharges': [monthly_charges],  
+        'TotalCharges': [total_charges],  
+        'gender': [1 if gender == "Male" else 0] 
+    })
+    # Add categorical features (one-hot encoded)  
+    # This is simplified - in production, use the exact preprocessing pipeline
+    categorical_mapping = {
+        'MultipleLines': multiple_lines,  
+        'InternetService': internet,  
+        'OnlineSecurity': online_security,  
+        'OnlineBackup': online_backup,  
+        'DeviceProtection': device_protection,  
+        'TechSupport': tech_support,  
+        'StreamingTV': streaming_tv,  
+        'StreamingMovies': streaming_movies,  
+        'Contract': contract,  
+        'PaymentMethod': payment  
+    }
+    # Create dummy variables  
+    for feature, value in categorical_mapping.items(): 
+        for model_feature in model_features: 
+            if model_feature.startswith(feature + "_"):  
+                expected_value = model_feature.split("_", 1)[1]  
+                input_data[model_feature] = 1 if value == expected_value else 0  
+        # Ensure all model features are present 
+        for feature in model_features:  
+            if feature not in input_data.columns:
+                input_data[feature] = 0  
+                # Reorder columns to match model  
+                input_data = input_data[model_features] 
+                # Make prediction  
+                churn_probability = model.predict_proba(input_data)[0][1] 
+                churn_prediction = model.predict(input_data)[0]  
+
+# Display results  
+st.markdown("   ")  
+st.subheader("🎯 :violet[Prediction Results]")
+col1, col2, col3 = st.columns(3) 
+with col1:  
+    st.metric("Churn Probability", f"{churn_probability*100:.1f}%") 
+
+with col2:  
+    prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
+    st.metric("Prediction", prediction_label)  
+with col3:  
+    risk_level = "HIGH" if churn_probability > 0.7 else "MEDIUM" 
+    if churn_probability > 0.4 else "LOW"  
+    risk_color = "🔴" if risk_level == "HIGH" else "🟡" if risk_level == "MEDIUM" else "🟢"  
+    st.metric("Risk Level", f"{risk_color} {risk_level}")  
+
+# Probability gauge  
+fig13 = go.Figure(go.Indicator( 
+    mode="gauge+number+delta", 
+    value=churn_probability * 100,  
+    domain={'x': [0, 1], 'y': [0, 1]}, 
+    title={'text': "Churn Probability (%)", 'font': {'size': 24}},  
+    delta={'reference': 50, 'increasing': {'color': "red"}},  
+    gauge={ 
+        'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"}, 
+        'bar': {'color': "darkblue"},  
+        'bgcolor': "white", 
+        'borderwidth': 2, 
+        'bordercolor': "gray",  
+        'steps': [  
+            {'range': [0, 30], 'color': '#27ae60'},  
+            {'range': [30, 70], 'color': '#f39c12'},  
+            {'range': [70, 100], 'color': '#e74c3c'}  
+        ],
+        'threshold': {  
+            'line': {'color': "red", 'width': 4},  
+            'thickness': 0.75, 
+            'value': 50  
+        }
+    }
+))
+fig13.update_layout(height=400) 
+st.plotly_chart(fig13, width="stretch")
+# Recommendations  
+st.markdown("   ")  
+st.subheader("💡 :violet[Retention Recommendations]")  
+if churn_probability > 0.7:  
+    st.error("**🚨 HIGH RISK - Immediate Action Required!**")  
+    recommendations = [  
+        "📞 **Priority Contact:** Reach out within 24 hours with personalized retention offer",  
+        "💰 **Special Discount:** Offer 20-30% discount for upgrading to annual contract",  
+        "🎁 **Value-Added Services:** Provide free premium services (tech support, security) for 3 months",  
+        "📋 **Account Review:** Schedule dedicated account manager meeting",  
+        "🔒 **Contract Upgrade:** Incentivize switch from month-to-month to long-term contract"  
+    ]
+elif churn_probability > 0.4:  
+    st.warning("**⚠️ MEDIUM RISK - Proactive Engagement Needed**")  
+    recommendations = [  
+        "📧 **Email Campaign:** Send personalized service upgrade offers",  
+        "🎯 **Targeted Promotion:** 10-15% discount on annual plans", 
+        "📞 **Customer Survey:** Understand pain points and satisfaction levels",  
+        "🛠️ **Service Enhancement:** Recommend additional services based on usage patterns",  
+        "💳 **PaymentMethod:** Encourage automatic payment methods with small discount"  
+    ]
+else:
+    st.success("**✅ LOW RISK - Maintain Engagement**") 
+    recommendations = [  
+        "🌟 **Loyalty Program:** Enroll in rewards program for long-term customers",  
+        "📨 **Regular Communication:** Monthly newsletter with tips and new features",  
+        "🎁 **Appreciation Gestures:** Occasional bonus services or credits",  
+        "📊 **Usage Insights:** Provide personalized usage reports and optimization tips",  
+        "🔄 **Cross-Sell:** Recommend complementary services based on current usage"  
+    ]
+    for i, rec in enumerate(recommendations, 1):  
+        st.markdown(f"{i}. {rec}")  
+
+# Financial Impact  
+st.markdown("   ")  
+st.subheader("💰 :violet[Financial Impact Analysis") 
+
+col1, col2 = st.columns(2)  
+  
+with col1:  
+    monthly_loss = monthly_charges  
+    annual_loss = monthly_charges * 12  
+    lifetime_loss = monthly_charges * 24 # Assume 2-year average lifetime
+    st.info(f"**Potential Revenue Loss if Customer Churns:**\n\n" 
+    f"• Monthly: ${monthly_loss:.2f}\n\n" 
+    f"• Annual: ${annual_loss:.2f}\n\n"  
+    f"• Lifetime (24 months): ${lifetime_loss:.2f}")
+with col2:  
+    retention_cost = monthly_charges * 0.2 # Assume 20% discount for retention 
+    roi = (monthly_charges * 12) - retention_cost 
+    st.success(f"**Retention Investment ROI:**\n\n"  
+    f"• Retention Cost (20% discount): ${retention_cost:.2f}\n\n" 
+    f"• Annual Retention Value: ${monthly_charges * 12:.2f}\n\n"  
+    f"• Net ROI: ${roi:.2f} ({(roi/(retention_cost))*100:.0f}% return)") 
 
 st.subheader("📊 :rainbow[Customer Segmentation]", divider="rainbow")
+# Create segments  
+df['Tenure_Segment'] = pd.cut(df['tenure'], 
+bins=[0, 12, 24, 48, 100],  
+labels=['0-12 months', '12-24 months', '24-48 months', '48+ months']) 
+
+df['Revenue_Segment'] = pd.cut(df['MonthlyCharges'],
+bins=[0, 35, 70, 100, 150], 
+labels=['Low ($0-35)', 'Medium ($35-70)', 'High ($70-100)', 'Premium ($100+)']) 
+
+# Segment Summary  
+segment_summary = df.groupby([
+    'Contract',
+    'Tenure_Segment']).agg({ 
+        'Tenure_Segment']).agg({ 
+            'customerID': 'count', 
+            'Churn_Binary': 'mean',
+            'MonthlyCharges': 'mean', 
+            'TotalCharges': 'sum' 
+        }).reset_index()
+segment_summary.columns = ['Contract', 'Tenure', 'Customers', 'Churn_Rate', 'Avg_Monthly', 'Total_Revenue'] 
+segment_summary['Churn_Rate'] = segment_summary['Churn_Rate'] * 100  
+
+# Heatmap  
+pivot_churn = segment_summary.pivot(index='Tenure', columns='Contract', values='Churn_Rate') 
+
+fig14 = px.imshow(pivot_churn,
+labels=dict(x="Contract Type", y="Tenure Segment", color="Churn Rate (%)"),  
+x=pivot_churn.columns,  
+y=pivot_churn.index,  
+color_continuous_scale='RdYlGn_r',  
+text_auto='.1f',  
+aspect="auto")  
+
+fig14.update_layout(height=400, title="Churn Rate Heatmap by Segment") 
+st.plotly_chart(fig14, width="stretch") 
+
+  
+# Customer Count by Segment  
+st.subheader("👥 :rainbow[Customer Distribution by Segment]") 
+
+pivot_customers = segment_summary.pivot(index='Tenure', columns='Contract', values='Customers') 
+fig15 = px.bar(segment_summary,  
+x='Tenure',  
+y='Customers',  
+color='Contract',  
+barmode='group',  
+labels={'Customers': 'Number of Customers'},  
+color_discrete_sequence=px.colors.qualitative.Set2)  
+fig15.update_layout(height=400)
+st.plotly_chart(fig15, width="stretch")
+
+# Revenue by segment  
+fig16 = px.bar(segment_summary,
+x='Tenure',  
+y='Total_Revenue',  
+color='Contract',  
+barmode='group',  
+labels={'Total_Revenue': 'Total Revenue ($)'},  
+color_discrete_sequence=px.colors.qualitative.Pastel)  
+fig16.update_layout(height=400) 
+st.plotly_chart(fig16, width="stretch")
+
+# Revenue Segmentation  
+st.markdown("   ")  
+st.subheader("💵 :rainbow[Revenue-Based Segmentation]") 
+revenue_analysis = df.groupby(['Revenue_Segment', 'Churn']).agg({ 
+    'customerID': 'count',
+    'MonthlyCharges': 'sum'  
+}).reset_index()  
+revenue_analysis.columns = ['Revenue_Segment', 'Churn', 'Customers', 'Total_Monthly_Revenue']  
+fig17 = px.sunburst(revenue_analysis,  
+path=['Revenue_Segment', 'Churn'],  
+values='Customers',  
+color='Total_Monthly_Revenue',  
+color_continuous_scale='Blues',  
+title='Customer Distribution: Revenue Segments & Churn Status')  
+fig17.update_layout(height=600)  
+st.plotly_chart(fig17, width="stretch")
+
+# Service Bundle Analysis  
+st.markdown("   ")  
+st.subheader("📦 :rainbow[Service Bundle Analysis]")  
+
+
 # ============================================
 # FOOTER
 # ============================================
