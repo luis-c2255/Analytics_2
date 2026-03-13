@@ -591,36 +591,36 @@ if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
     ))
     fig13.update_layout(height=400) 
     st.plotly_chart(fig13, width="stretch")
-# Recommendations  
-st.markdown("   ")  
-st.subheader("💡 :violet[Retention Recommendations]")  
-if churn_probability > 0.7:  
-    st.error("**🚨 HIGH RISK - Immediate Action Required!**")  
-    recommendations = [  
-        "📞 **Priority Contact:** Reach out within 24 hours with personalized retention offer",  
-        "💰 **Special Discount:** Offer 20-30% discount for upgrading to annual contract",  
-        "🎁 **Value-Added Services:** Provide free premium services (tech support, security) for 3 months",  
-        "📋 **Account Review:** Schedule dedicated account manager meeting",  
-        "🔒 **Contract Upgrade:** Incentivize switch from month-to-month to long-term contract"  
-    ]
-elif churn_probability > 0.4:  
-    st.warning("**⚠️ MEDIUM RISK - Proactive Engagement Needed**")  
-    recommendations = [  
-        "📧 **Email Campaign:** Send personalized service upgrade offers",  
-        "🎯 **Targeted Promotion:** 10-15% discount on annual plans", 
-        "📞 **Customer Survey:** Understand pain points and satisfaction levels",  
-        "🛠️ **Service Enhancement:** Recommend additional services based on usage patterns",  
-        "💳 **PaymentMethod:** Encourage automatic payment methods with small discount"  
-    ]
-else:
-    st.success("**✅ LOW RISK - Maintain Engagement**") 
-    recommendations = [  
-        "🌟 **Loyalty Program:** Enroll in rewards program for long-term customers",  
-        "📨 **Regular Communication:** Monthly newsletter with tips and new features",  
-        "🎁 **Appreciation Gestures:** Occasional bonus services or credits",  
-        "📊 **Usage Insights:** Provide personalized usage reports and optimization tips",  
-        "🔄 **Cross-Sell:** Recommend complementary services based on current usage"  
-    ]
+    # Recommendations  
+    st.markdown("   ")  
+    st.subheader("💡 :violet[Retention Recommendations]")  
+    if churn_probability > 0.7:  
+        st.error("**🚨 HIGH RISK - Immediate Action Required!**")  
+        recommendations = [  
+            "📞 **Priority Contact:** Reach out within 24 hours with personalized retention offer",  
+            "💰 **Special Discount:** Offer 20-30% discount for upgrading to annual contract",  
+            "🎁 **Value-Added Services:** Provide free premium services (tech support, security) for 3 months",  
+            "📋 **Account Review:** Schedule dedicated account manager meeting",  
+            "🔒 **Contract Upgrade:** Incentivize switch from month-to-month to long-term contract"  
+        ]
+    elif churn_probability > 0.4:  
+        st.warning("**⚠️ MEDIUM RISK - Proactive Engagement Needed**")  
+        recommendations = [  
+            "📧 **Email Campaign:** Send personalized service upgrade offers",  
+            "🎯 **Targeted Promotion:** 10-15% discount on annual plans", 
+            "📞 **Customer Survey:** Understand pain points and satisfaction levels",  
+            "🛠️ **Service Enhancement:** Recommend additional services based on usage patterns",  
+            "💳 **PaymentMethod:** Encourage automatic payment methods with small discount"  
+        ]
+    else:
+        st.success("**✅ LOW RISK - Maintain Engagement**") 
+        recommendations = [  
+            "🌟 **Loyalty Program:** Enroll in rewards program for long-term customers",  
+            "📨 **Regular Communication:** Monthly newsletter with tips and new features",  
+            "🎁 **Appreciation Gestures:** Occasional bonus services or credits",  
+            "📊 **Usage Insights:** Provide personalized usage reports and optimization tips",  
+            "🔄 **Cross-Sell:** Recommend complementary services based on current usage"  
+        ]
     for i, rec in enumerate(recommendations, 1):  
         st.markdown(f"{i}. {rec}")  
 
