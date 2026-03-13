@@ -548,6 +548,8 @@ with st.container(horizontal=True, horizontal_alignment="center"):
         churn_prediction = model.predict(input_data)[0]
 
         # Display results  
+        st.markdown("   ") 
+        st.markdown("   ") 
         st.subheader("🎯 :violet[Prediction Results]")
         col1, col2, col3 = st.columns(3) 
         with col1:  
