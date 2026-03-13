@@ -276,6 +276,117 @@ with col3:
 
 st.subheader("💰 :yellow[Revenue Impact]", divider="yellow")
 
+# Calculate revenue metrics  
+total_revenue = df['TotalCharges'].sum()  
+churned_revenue = df[df['Churn']=='Yes']['TotalCharges'].sum()  
+monthly_recurring_lost = df[df['Churn']=='Yes']['MonthlyCharges'].sum()  
+avg_customer_value = df['TotalCharges'].mean()  
+
+# Top Metrics  
+col1, col2, col3, col4 = st.columns(4)  
+with col1:
+    st.markdown(
+        Components.metric_card(
+            title="Total Revenue",
+            value=f"${total_revenue:,.0f}",
+            delta="💲",
+            card_type="success",
+        ), unsafe_allow_html=True
+    )
+with col2:
+    st.markdown(
+        Components.metric_card(
+            title="Revenue Lost (Churn)",
+            value=f"${churned_revenue:,.0f}",
+            delta=f"-{(churned_revenue/total_revenue)*100:.1f}%",
+            card_type="error"
+        ), unsafe_allow_html=True
+    )
+with col3:
+    st.markdown(
+        Components.metric_card(
+            title="Monthly Revenue Lost",
+            value=f"${monthly_recurring_lost:,.0f}",
+            delta="❗",
+            card_type="warning"
+        ), unsafe_allow_html=True
+    )
+with col4:
+    revenue_lost = df[df['Churn_Binary']==1]['MonthlyCharges'].sum()
+    st.markdown(
+        Components.metric_card(
+            title="Avg Customer Value",
+            value=f"${avg_customer_value:.2f}",
+            delta="🔝",
+            card_type="info"
+        ), unsafe_allow_html=True
+    )
+st.markdown("   ")  
+st.subheader("📊 :yellow[Revenue Distribution by Contract Type]")
+contract_revenue = df.groupby(['Contract', 'Churn'])['TotalCharges'].sum().reset_index() 
+fig8 = px.bar(
+    contract_revenue, 
+    x='Contract',
+    y='TotalCharges',
+    color='Churn',
+    barmode='group',
+    labels={'TotalCharges': 'Total Revenue ($)', 'Contract': 'Contract Type'}, 
+    color_discrete_map={'Yes': '#e74c3c', 'No': '#3498db'},
+    text_auto='.2s'  
+) 
+fig8.update_layout(height=400)
+st.plotly_chart(fig8, width="stretch")
+
+st.subheader("📈 :yellow[Monthly Charges Distribution]")  
+fig9 = go.Figure()  
+fig9.add_trace(go.Box( 
+    y=df[df['Churn']=='No']['MonthlyCharges'],
+    name='Retained', 
+    marker_color='#3498db'  
+)) 
+fig9.add_trace(go.Box( 
+    y=df[df['Churn']=='Yes']['MonthlyCharges'],
+    name='Churned',
+    marker_color='#e74c3c'  
+))  
+fig9.update_layout(
+    yaxis_title='Monthly Charges ($)',
+    height=400  
+)  
+st.plotly_chart(fig9, width="stretch")
+
+st.subheader("📉 :yellow[Projected Revenue Loss Over Time]")
+months = st.slider("Select projection period (months)", 1, 36, 12) 
+# Calculate projected loss  
+monthly_loss_data = []  
+cumulative_loss = 0 
+for month in range(1, months + 1): 
+    monthly_loss = monthly_recurring_lost 
+    cumulative_loss += monthly_loss
+    monthly_loss_data.append({
+        'Month': month, 
+        'Monthly Loss': monthly_loss, 
+        'Cumulative Loss': cumulative_loss
+    })
+    loss_df = pd.DataFrame(monthly_loss_data) 
+    fig10 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig10.add_trace( 
+        go.Bar(x=loss_df['Month'], y=loss_df['Monthly Loss'], 
+        name='Monthly Loss', marker_color='#e74c3c'),
+        secondary_y=False 
+    )
+    fig10.add_trace(  
+        go.Scatter(x=loss_df['Month'], y=loss_df['Cumulative Loss'], 
+        name='Cumulative Loss', marker_color='#c0392b', 
+        line=dict(width=3)),
+        secondary_y=True
+    )
+    fig10.update_xaxes(title_text="Month") 
+    fig10.update_yaxes(title_text="Monthly Loss ($)", secondary_y=False)
+    fig10.update_yaxes(title_text="Cumulative Loss ($)", secondary_y=True)
+    fig10.update_layout(height=500)
+    st.plotly_chart(fig10, width="stretch")
+
 st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
 
 st.subheader("📊 :rainbow[Customer Segmentation]", divider="rainbow")
