@@ -387,6 +387,69 @@ for month in range(1, months + 1):
     fig10.update_layout(height=500)
     st.plotly_chart(fig10, width="stretch")
 
+st.info(f"💡 **Projection Insight:** If churn continues at current rate, "  
+f"projected revenue loss over {months} months: **${cumulative_loss:,.0f}**")  
+
+st.markdown("   ")  
+st.subheader("💎 :yellow[Customer Lifetime Value (CLV) Analysis]")  
+# CLV by Contract Type  
+clv_contract = df.groupby('Contract').agg({
+    'TotalCharges': 'mean',
+    'tenure': 'mean', 
+    'MonthlyCharges': 'mean' 
+}).reset_index()
+fig11 = px.bar(
+    clv_contract,
+    x='Contract',
+    y='TotalCharges', 
+    labels={'TotalCharges': 'Average CLV ($)', 'Contract': 'Contract Type'},
+    color='TotalCharges',
+    color_continuous_scale='Greens', 
+    text='TotalCharges'  
+)  
+fig11.update_traces(texttemplate='$%{text:.0f}', textposition='outside')  
+fig11.update_layout(height=400, showlegend=False) 
+st.plotly_chart(fig11, width="stretch")
+
+# CLV by Churn Status  
+clv_churn = df.groupby('Churn').agg({ 
+    'TotalCharges': 'mean',
+    'tenure': 'mean',
+    'MonthlyCharges': 'mean' 
+}).reset_index() 
+fig12 = px.bar(  
+    clv_churn,  
+    x='Churn',  
+    y='TotalCharges',  
+    labels={'TotalCharges': 'Average CLV ($)', 'Churn': 'Customer Status'},  
+    color='Churn',  
+    color_discrete_map={'Yes': '#e74c3c', 'No': '#27ae60'},  
+    text='TotalCharges'  
+)  
+fig12.update_traces(texttemplate='$%{text:.0f}', textposition='outside')  
+fig12.update_layout(height=400, showlegend=False) 
+st.plotly_chart(fig12, width="stretch")
+
+# Top Revenue Customers at Risk  
+st.markdown("   ")  
+st.subheader("⚠️ :yellow[High-Value Customers at Risk]")
+at_risk_customers = df[
+    (df['Churn'] == 'Yes') &  
+    (df['MonthlyCharges'] > df['MonthlyCharges'].quantile(0.75))  
+].sort_values('TotalCharges', ascending=False).head(10) 
+
+st.dataframe( 
+    at_risk_customers[['customerID', 'Contract', 'tenure', 'MonthlyCharges',
+    'TotalCharges', 'PaymentMethod']].style.format({ 
+        'MonthlyCharges': '${:.2f}', 
+        'TotalCharges': '${:.2f}' 
+    }),
+    width="stretch"
+)
+total_at_risk_revenue = at_risk_customers['MonthlyCharges'].sum()  
+st.warning(f"🚨 **Alert:** {len(at_risk_customers)} high-value customers churned, "  
+f"resulting in **${total_at_risk_revenue:,.2f}/month** revenue loss!") 
+
 st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
 
 st.subheader("📊 :rainbow[Customer Segmentation]", divider="rainbow")
