@@ -500,7 +500,7 @@ with col2:
 
 # Predict button  
 st.markdown("   ")
-if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
+if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
     # Prepare input data
     input_data = pd.DataFrame({  
         'SeniorCitizen': [1 if senior == "Yes" else 0],  
