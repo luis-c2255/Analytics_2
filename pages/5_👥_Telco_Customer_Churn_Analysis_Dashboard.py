@@ -626,7 +626,7 @@ if st.button("🔮 Predict Churn Probability", type="primary", width="stretch"):
 
 # Financial Impact  
 st.markdown("   ")  
-st.subheader("💰 :violet[Financial Impact Analysis") 
+st.subheader("💰 :violet[Financial Impact Analysis]") 
 
 col1, col2 = st.columns(2)  
   
