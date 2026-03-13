@@ -258,33 +258,22 @@ col1, col2, col3 = st.columns(3)
 with col1:
     avg_tenure_churned = filtered_df[filtered_df['Churn']=='Yes']['tenure'].mean()  
     avg_tenure_retained = filtered_df[filtered_df['Churn']=='No']['tenure'].mean()  
-    st.markdown(
-        Components.insight_box(
-            title="Tenure Impact:",
-            content=f"Churned: {avg_tenure_churned:.1f} months\n\n", f"Retained: {avg_tenure_retained:.1f} months",
-            box_type="info"
-        )
-    )
+    st.info(f"**Tenure Impact:**\n\n"
+    f"Churned: {avg_tenure_churned:.1f} months\n\n" 
+    f"Retained: {avg_tenure_retained:.1f} months")
 with col2: 
     monthly_churned = filtered_df[filtered_df['Churn']=='Yes']['MonthlyCharges'].mean() 
     monthly_retained = filtered_df[filtered_df['Churn']=='No']['MonthlyCharges'].mean()  
-    st.markdown(
-        Components.insight_box(
-            title="Monthly Charges:",
-            content=f"Churned: ${monthly_churned:.2f}\n\n", f"Retained: ${monthly_retained:.2f}",
-            box_type="warning"
-        )
-    )
+    st.warning(f"**Monthly Charges:**\n\n"
+    f"Churned: ${monthly_churned:.2f}\n\n" 
+    f"Retained: ${monthly_retained:.2f}")
 with col3:
     high_risk = filtered_df[(filtered_df['Contract'] == 'Month-to-month') & (filtered_df['tenure'] < 12)]  
     high_risk_rate = high_risk['Churn_Binary'].mean() * 100
-    st.markdown(
-        Components.insight_box(
-            title="High-Risk Segment:",
-            content=f"Month-to-month + Tenure < 12\n\n", f"Churn Rate: {high_risk_rate:.1f}%",
-            box_type="error"
-        )
-    )
+    st.error(f"**High-Risk Segment:**\n\n"
+    f"Month-to-month + Tenure < 12\n\n"
+    f"Churn Rate: {high_risk_rate:.1f}%")
+    
 st.subheader("💰 :yellow[Revenue Impact]", divider="yellow")
 
 st.subheader("🤖 :violet[Churn Predictor]", divider="violet")
