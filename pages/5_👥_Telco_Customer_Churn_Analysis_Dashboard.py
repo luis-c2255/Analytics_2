@@ -450,7 +450,7 @@ total_at_risk_revenue = at_risk_customers['MonthlyCharges'].sum()
 st.warning(f"🚨 **Alert:** {len(at_risk_customers)} high-value customers churned, "  
 f"resulting in **${total_at_risk_revenue:,.2f}/month** revenue loss!") 
 
-st.subheader("🤖 :violet[Churn Predictor]", divider = "violet")
+st.subheader("💻 :violet[Churn Predictor]", divider = "violet")
 if model is None:
     st.error("⚠️ Model not found! Please train the model first.")
     st.info("Run the training script to generate 'churn_prediction_model.pkl'")
