@@ -99,7 +99,7 @@ with col4:
         ), unsafe_allow_html=True
     )
 st.markdown("   ")
-st.subheader("📉 :red[Churn Distribution]")
+st.subheader("📉 :orange[Churn Distribution]")
 churn_counts = df['Churn'].value_counts()
 fig = px.pie(
     values=churn_counts.values,
@@ -111,7 +111,7 @@ fig.update_layout(height=400)
 st.plotly_chart(fig, width="stretch")
 
 st.markdown("   ")
-st.subheader("📊 :red[Customer Distribution by Contract Type]")
+st.subheader("📊 :orange[Customer Distribution by Contract Type]")
 contract_data = df['Contract'].value_counts()
 fig2 = px.bar(
     x=contract_data.index,
@@ -125,7 +125,7 @@ st.plotly_chart(fig2, width="stretch")
 
 # Tenure vs Monthly Charges Scatter  
 st.markdown("   ")
-st.subheader("📈 :red[Tenure vs Monthly Charges by Churn Status]")
+st.subheader("📈 :orange[Tenure vs Monthly Charges by Churn Status]")
 fig3 = px.scatter(
     df,
     x='tenure',
