@@ -108,7 +108,7 @@ fig = px.pie(
     hole=0.4
 )
 fig.update_layout(height=400)
-st.plotly_chart(fig,, width="stretch")
+st.plotly_chart(fig, width="stretch")
 
 st.markdown("   ")
 st.subheader("📊 :red[Customer Distribution by Contract Type]")
