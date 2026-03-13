@@ -488,7 +488,7 @@ with col3:
     streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])  
     streaming_movies = st.selectbox("Streaming Movies", ["No", "Yes", "No internet service"]) 
 
-col1, col2 = st.columns(2)  
+col1, col2, col3 = st.columns(3)  
 with col1: 
     monthly_charges = st.number_input("Monthly Charges ($)", 
     min_value=0.0, max_value=150.0,  
@@ -497,132 +497,130 @@ with col2:
     total_charges = st.number_input("Total Charges ($)", 
     min_value=0.0, max_value=10000.0, 
     value=monthly_charges * tenure, step=10.0) 
-
-# Predict button  
-st.markdown("   ")
-if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
-    # Prepare input data
-    input_data = pd.DataFrame({  
-        'SeniorCitizen': [1 if senior == "Yes" else 0],  
-        'Partner': [1 if partner == "Yes" else 0],
-        'Dependents': [1 if dependents == "Yes" else 0],
-        'tenure': [tenure],  
-        'PhoneService': [1 if phone == "Yes" else 0],  
-        'PaperlessBilling': [1 if paperless == "Yes" else 0], 
-        'MonthlyCharges': [monthly_charges],  
-        'TotalCharges': [total_charges],  
-        'gender': [1 if gender == "Male" else 0] 
-    })
-    # Add categorical features (one-hot encoded)  
-    # This is simplified - in production, use the exact preprocessing pipeline
-    categorical_mapping = {
-        'MultipleLines': multiple_lines,  
-        'InternetService': internet,  
-        'OnlineSecurity': online_security,  
-        'OnlineBackup': online_backup,  
-        'DeviceProtection': device_protection,  
-        'TechSupport': tech_support,  
-        'StreamingTV': streaming_tv,  
-        'StreamingMovies': streaming_movies,  
-        'Contract': contract,  
-        'PaymentMethod': payment  
-    }
-    # Create dummy variables  
-    for model_feature in model_features:
-        if model_feature not in input_data.columns:
-            found = False
-            for feature, value in categorical_mapping.items():
-                if model_feature.startswith(feature + "_"):
-                    expected_value = model_feature.split("_", 1)[1]
-                    input_data[model_feature] = [1 if value == expected_value else 0]
-                    found = True
-                    break
-            if not found:
-                input_data[model_feature] = 0
-    input_data = input_data[model_features]
-    churn_probability = model.predict_proba(input_data)[0][1]
-    churn_prediction = model.predict(input_data)[0]
-
-    # Display results  
-    st.subheader("🎯 :violet[Prediction Results]")
-    col1, col2, col3 = st.columns(3) 
-    with col1:  
-        st.metric("Churn Probability", f"{churn_probability*100:.1f}%") 
-
-    with col2:  
-        prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
-        st.metric("Prediction", prediction_label)  
-    with col3:  
-        if churn_probability > 0.7:
-            risk_level = 'HIGH'
-            risk_color = "🔴"
-        elif churn_probability > 0.4:
-            risk_level = "MEDIUM"
-            risk_color = "🟡"
-        else:
-            risk_level = "LOW"
-            risk_color = "🟢"
-        st.metric("Risk Level", f"{risk_color} {risk_level}")  
-
-    # Probability gauge  
-    fig13 = go.Figure(go.Indicator( 
-        mode="gauge+number+delta", 
-        value=churn_probability * 100,  
-        domain={'x': [0, 1], 'y': [0, 1]}, 
-        title={'text': "Churn Probability (%)", 'font': {'size': 24}},  
-        delta={'reference': 50, 'increasing': {'color': "red"}},  
-        gauge={ 
-            'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"}, 
-            'bar': {'color': "darkblue"},  
-            'bgcolor': "white", 
-            'borderwidth': 2, 
-            'bordercolor': "gray",  
-            'steps': [  
-                {'range': [0, 30], 'color': '#27ae60'},  
-                {'range': [30, 70], 'color': '#f39c12'},  
-                {'range': [70, 100], 'color': '#e74c3c'}  
-            ],
-            'threshold': {  
-                'line': {'color': "red", 'width': 4},  
-                'thickness': 0.75, 
-                'value': 50  
-            }
+with col3:
+    if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
+        # Prepare input data
+        input_data = pd.DataFrame({  
+            'SeniorCitizen': [1 if senior == "Yes" else 0],  
+            'Partner': [1 if partner == "Yes" else 0],
+            'Dependents': [1 if dependents == "Yes" else 0],
+            'tenure': [tenure],  
+            'PhoneService': [1 if phone == "Yes" else 0],  
+            'PaperlessBilling': [1 if paperless == "Yes" else 0], 
+            'MonthlyCharges': [monthly_charges],  
+            'TotalCharges': [total_charges],  
+            'gender': [1 if gender == "Male" else 0] 
+        })
+        # Add categorical features (one-hot encoded)  
+        # This is simplified - in production, use the exact preprocessing pipeline
+        categorical_mapping = {
+            'MultipleLines': multiple_lines,  
+            'InternetService': internet,  
+            'OnlineSecurity': online_security,  
+            'OnlineBackup': online_backup,  
+            'DeviceProtection': device_protection,  
+            'TechSupport': tech_support,  
+            'StreamingTV': streaming_tv,  
+            'StreamingMovies': streaming_movies,  
+            'Contract': contract,  
+            'PaymentMethod': payment  
         }
-    ))
-    fig13.update_layout(height=400) 
-    st.plotly_chart(fig13, width="stretch")
-    # Recommendations  
-    st.markdown("   ")  
-    st.subheader("💡 :violet[Retention Recommendations]")  
-    if churn_probability > 0.7:  
-        st.error("**🚨 HIGH RISK - Immediate Action Required!**")  
-        recommendations = [  
-            "📞 **Priority Contact:** Reach out within 24 hours with personalized retention offer",  
-            "💰 **Special Discount:** Offer 20-30% discount for upgrading to annual contract",  
-            "🎁 **Value-Added Services:** Provide free premium services (tech support, security) for 3 months",  
-            "📋 **Account Review:** Schedule dedicated account manager meeting",  
-            "🔒 **Contract Upgrade:** Incentivize switch from month-to-month to long-term contract"  
-        ]
-    elif churn_probability > 0.4:  
-        st.warning("**⚠️ MEDIUM RISK - Proactive Engagement Needed**")  
-        recommendations = [  
-            "📧 **Email Campaign:** Send personalized service upgrade offers",  
-            "🎯 **Targeted Promotion:** 10-15% discount on annual plans", 
-            "📞 **Customer Survey:** Understand pain points and satisfaction levels",  
-            "🛠️ **Service Enhancement:** Recommend additional services based on usage patterns",  
-            "💳 **PaymentMethod:** Encourage automatic payment methods with small discount"  
-        ]
-    else:
-        st.success("**✅ LOW RISK - Maintain Engagement**") 
-        recommendations = [  
-            "🌟 **Loyalty Program:** Enroll in rewards program for long-term customers",  
-            "📨 **Regular Communication:** Monthly newsletter with tips and new features",  
-            "🎁 **Appreciation Gestures:** Occasional bonus services or credits",  
-            "📊 **Usage Insights:** Provide personalized usage reports and optimization tips",  
-            "🔄 **Cross-Sell:** Recommend complementary services based on current usage"  
-        ]
-    for i, rec in enumerate(recommendations, 1):  
-        st.markdown(f"{i}. {rec}")  
+        # Create dummy variables  
+        for model_feature in model_features:
+            if model_feature not in input_data.columns:
+                found = False
+                for feature, value in categorical_mapping.items():
+                    if model_feature.startswith(feature + "_"):
+                        expected_value = model_feature.split("_", 1)[1]
+                        input_data[model_feature] = [1 if value == expected_value else 0]
+                        found = True
+                        break
+                if not found:
+                    input_data[model_feature] = 0
+        input_data = input_data[model_features]
+        churn_probability = model.predict_proba(input_data)[0][1]
+        churn_prediction = model.predict(input_data)[0]
+
+        # Display results  
+        st.subheader("🎯 :violet[Prediction Results]")
+        col1, col2, col3 = st.columns(3) 
+        with col1:  
+            st.metric("Churn Probability", f"{churn_probability*100:.1f}%") 
+
+        with col2:  
+            prediction_label = "🔴 LIKELY TO CHURN" if churn_prediction == 1 else "🟢 LIKELY TO STAY"  
+            st.metric("Prediction", prediction_label)  
+        with col3:  
+            if churn_probability > 0.7:
+                risk_level = 'HIGH'
+                risk_color = "🔴"
+            elif churn_probability > 0.4:
+                risk_level = "MEDIUM"
+                risk_color = "🟡"
+            else:
+                risk_level = "LOW"
+                risk_color = "🟢"
+            st.metric("Risk Level", f"{risk_color} {risk_level}")  
+
+        # Probability gauge  
+        fig13 = go.Figure(go.Indicator( 
+            mode="gauge+number+delta", 
+            value=churn_probability * 100,  
+            domain={'x': [0, 1], 'y': [0, 1]}, 
+            title={'text': "Churn Probability (%)", 'font': {'size': 24}},  
+            delta={'reference': 50, 'increasing': {'color': "red"}},  
+            gauge={ 
+                'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"}, 
+                'bar': {'color': "darkblue"},  
+                'bgcolor': "white", 
+                'borderwidth': 2, 
+                'bordercolor': "gray",  
+                'steps': [  
+                    {'range': [0, 30], 'color': '#27ae60'},  
+                    {'range': [30, 70], 'color': '#f39c12'},  
+                    {'range': [70, 100], 'color': '#e74c3c'}  
+                ],
+                'threshold': {  
+                    'line': {'color': "red", 'width': 4},  
+                    'thickness': 0.75, 
+                    'value': 50  
+                }
+            }
+        ))
+        fig13.update_layout(height=400) 
+        st.plotly_chart(fig13, width="stretch")
+        # Recommendations  
+        st.markdown("   ")  
+        st.subheader("💡 :violet[Retention Recommendations]")  
+        if churn_probability > 0.7:  
+            st.error("**🚨 HIGH RISK - Immediate Action Required!**")  
+            recommendations = [  
+                "📞 **Priority Contact:** Reach out within 24 hours with personalized retention offer",  
+                "💰 **Special Discount:** Offer 20-30% discount for upgrading to annual contract",  
+                "🎁 **Value-Added Services:** Provide free premium services (tech support, security) for 3 months",  
+                "📋 **Account Review:** Schedule dedicated account manager meeting",  
+                "🔒 **Contract Upgrade:** Incentivize switch from month-to-month to long-term contract"  
+            ]
+        elif churn_probability > 0.4:  
+            st.warning("**⚠️ MEDIUM RISK - Proactive Engagement Needed**")  
+            recommendations = [  
+                "📧 **Email Campaign:** Send personalized service upgrade offers",  
+                "🎯 **Targeted Promotion:** 10-15% discount on annual plans", 
+                "📞 **Customer Survey:** Understand pain points and satisfaction levels",  
+                "🛠️ **Service Enhancement:** Recommend additional services based on usage patterns",  
+                "💳 **PaymentMethod:** Encourage automatic payment methods with small discount"  
+            ]
+        else:
+            st.success("**✅ LOW RISK - Maintain Engagement**") 
+            recommendations = [  
+                "🌟 **Loyalty Program:** Enroll in rewards program for long-term customers",  
+                "📨 **Regular Communication:** Monthly newsletter with tips and new features",  
+                "🎁 **Appreciation Gestures:** Occasional bonus services or credits",  
+                "📊 **Usage Insights:** Provide personalized usage reports and optimization tips",  
+                "🔄 **Cross-Sell:** Recommend complementary services based on current usage"  
+            ]
+        for i, rec in enumerate(recommendations, 1):  
+            st.markdown(f"{i}. {rec}")  
 
 # Financial Impact  
 st.markdown("   ")  
