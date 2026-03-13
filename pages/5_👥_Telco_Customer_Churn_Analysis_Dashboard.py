@@ -478,13 +478,14 @@ with col2:
     "Bank transfer (automatic)", "Credit card (automatic)"])
 
 col3, col4 = st.columns(2)
-st.markdown("**Services**")
 with col3:
+    st.markdown("**Services**")
     phone = st.selectbox("Phone Service", ["No", "Yes"])  
     multiple_lines = st.selectbox("Multiple Lines", ["No", "Yes", "No phone service"])  
     internet = st.selectbox("Internet Service", ["DSL", "Fiber optic", "No"]) 
     online_security = st.selectbox("Online Security", ["No", "Yes", "No internet service"]) 
 with col4:
+    st.markdown("**Services**")
     online_backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])  
     device_protection = st.selectbox("Device Protection", ["No", "Yes", "No internet service"])  
     tech_support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"]) 
