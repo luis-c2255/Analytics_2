@@ -498,8 +498,9 @@ with col2:
     min_value=0.0, max_value=10000.0, 
     value=monthly_charges * tenure, step=10.0) 
 
-st.markdown("# :red[Click to predict Churn]")
-if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
+with st.container(horizontal=True, horizontal_alignment="center"):
+    st.markdown("# :red[Click to predict Churn]")
+    if st.button("🔮 Predict Churn Probability", type="primary", width="content"):
         # Prepare input data
         input_data = pd.DataFrame({  
             'SeniorCitizen': [1 if senior == "Yes" else 0],  
